@@ -1,0 +1,284 @@
+==============================================================================
+        JIU-JITSU.ES | MANUAL FÁCIL PASO A PASO (SIN SABER PROGRAMAR)
+==============================================================================
+
+¡Bienvenido al manual de tu página web JIU-JITSU.ES!
+Este archivo está escrito en lenguaje sencillo, sin palabras complicadas, para
+que puedas manejar tu sitio web desde tu computadora y actualizarlo en internet
+siguiendo pasos cortos y claros.
+
+
+==============================================================================
+ÍNDICE DE ESTE MANUAL:
+==============================================================================
+  PARTE 1: Qué es cada archivo que tenés en tu carpeta.
+  PARTE 2: Cómo ver y probar la página en tu notebook.
+  PARTE 3: Cómo agregar una ACADEMIA que te llega por WhatsApp.
+  PARTE 4: Cómo funcionan y se actualizan los TORNEOS (Smoothcomp / IBJJF).
+  PARTE 5: Cómo subir tu web a INTERNET gratis (GitHub + Cloudflare Pages).
+  PARTE 6: Resumen rápido para tu día a día.
+
+
+==============================================================================
+PARTE 1: QUÉ ES CADA ARCHIVO QUE TENÉS EN TU CARPETA
+==============================================================================
+En tu carpeta "D:\Desktop\PAGINA WEB" tenés estos archivos. Es muy importante
+que estén siempre juntos en la misma carpeta:
+
+1. index.html
+   Es la página web en sí (los colores, el mapa, los botones, la calculadora de
+   peso y el formulario que te manda mensajes a tu WhatsApp +54 9 362 420-0040).
+
+2. academias.json
+   Es la lista donde están guardadas todas las academias de España (nombres,
+   direcciones, teléfonos, Instagram, web y ubicación en el mapa).
+
+3. academias.geojson
+   Es una copia de las academias preparada para programas de mapas. Se actualiza
+   sola cuando usás el asistente.
+
+4. torneos.json
+   Es la lista donde están guardados los próximos campeonatos de España.
+
+5. agregar_academia.py
+   Es tu "robot ayudante" para agregar academias nuevas sin tocar código.
+
+6. actualizar_smoothcomp.py
+   Es tu "robot ayudante" que limpia torneos viejos y busca torneos nuevos en
+   España automáticamente.
+
+7. agregar_torneo.py
+   Es otro ayudante por si algún día querés cargar un torneo a mano haciendo
+   simples preguntas.
+
+8. Carpeta ".github"
+   Es una carpetita especial que, cuando subas todo a internet (GitHub), hará
+   que los torneos se actualicen solos todos los lunes sin que prendas tu PC.
+
+9. LEEME.txt
+   Es este manual que estás leyendo ahora mismo.
+
+
+==============================================================================
+PARTE 2: CÓMO VER Y PROBAR LA PÁGINA EN TU NOTEBOOK
+==============================================================================
+Para ver tu página en tu computadora tal cual se verá en internet, seguí estos
+pasos:
+
+PASO 1: Encender la página
+--------------------------
+1. Hacé clic en el menú Inicio de Windows, escribí CMD y abrí el "Símbolo del
+   sistema" (la ventanita negra).
+2. Escribí esto (hacé Enter después de cada línea):
+
+   D:
+   cd "D:\Desktop\PAGINA WEB"
+   python -m http.server 8000
+
+3. Dejá esa ventana negra abierta (no la cierres mientras estés trabajando).
+
+PASO 2: Abrirla en Google Chrome
+--------------------------------
+1. Abrí Google Chrome y arriba en la barra de direcciones escribí:
+
+   http://localhost:8000
+
+2. ¡Listo! Ya estás viendo tu página web funcionando.
+
+¡TRUCO MUY IMPORTANTE!
+Cada vez que agregues una academia o un torneo nuevo, cuando vuelvas a Google
+Chrome tenés que apretar en el teclado:
+
+   Ctrl + F5   (las dos teclas juntas)
+
+¿Por qué? Porque Chrome suele guardar una "foto vieja" de la página en su
+memoria. Con Ctrl + F5 lo obligás a recargar todo de nuevo y ver tus cambios
+al instante.
+
+
+==============================================================================
+PARTE 3: CÓMO AGREGAR UNA ACADEMIA QUE TE LLEGA POR WHATSAPP
+==============================================================================
+Cuando el dueño de una academia entra a tu web y llena el formulario del botón
+"+ Añadir Academia", a vos te llega un mensaje a tu celular (+5493624200040)
+con todos los datos de esa escuela.
+
+Para sumarla a tu página sin tocar nada de programación, hacé esto:
+
+PASO 1: Copiar las coordenadas de Google Maps (toma 15 segundos)
+----------------------------------------------------------------
+1. Entrá a Google Maps (https://maps.google.com).
+2. Escribí la dirección que te mandó la academia en el WhatsApp.
+3. Hacé CLIC DERECHO exactamente sobre el globito rojo del local en el mapa.
+4. En el cartelito que se abre, el PRIMER RENGLÓN son dos números con punto
+   (por ejemplo: 40.4215, -3.6768).
+5. Hacé clic izquierdo encima de esos números y ya te quedan copiados.
+
+PASO 2: Usar el robot ayudante (agregar_academia.py)
+----------------------------------------------------
+1. Abrí una ventana negra de CMD en tu carpeta (o hacé doble clic sobre el
+   archivo "agregar_academia.py"). Si usás CMD, escribí:
+
+   D:
+   cd "D:\Desktop\PAGINA WEB"
+   python agregar_academia.py
+
+2. Copiá todo el mensaje de WhatsApp que te mandó la academia y PEGALO adentro
+   de la ventana negra (con clic derecho).
+3. Apretá la tecla ENTER dos veces seguidas.
+
+PASO 3: Responder las preguntas simples del ayudante
+----------------------------------------------------
+El programa ya habrá leído todo el WhatsApp por vos y te irá mostrando cada
+dato entre corchetes, por ejemplo: Nombre de la Academia [Gracie Retiro].
+
+1. Si el dato entre corchetes está bien, simplemente apretá ENTER sin escribir
+   nada. Si querés cambiar algo, escribilo y apretá ENTER.
+2. Cuando te pida "Coordenadas de Google Maps", pegá los dos números que
+   copiaste en el Paso 1 (ejemplo: 40.4215, -3.6768) y apretá ENTER.
+3. Cuando te pregunte "¿Este número tiene WhatsApp activo? (s/n)":
+   - Si el teléfono empieza con 6 o con 7 (en España son celulares), apretá
+     ENTER o escribí "s".
+   - Si el teléfono empieza con 9 (en España es teléfono fijo de línea),
+     escribí "n" y apretá ENTER (así la web pondrá botón de Llamada en vez de
+     WhatsApp).
+4. Cuando te pregunte "¿Es Academia Destacada Premium? (s/n)":
+   - Si la academia te pagó publicidad para salir destacada en dorado, escribí
+     "s" y dale ENTER.
+   - Si es gratis, escribí "n" (o dale ENTER directo).
+
+¡Y LISTO! El programa guarda la academia en todos los archivos automáticamente.
+Si vas a Chrome y apretás Ctrl + F5, ya la vas a ver en el mapa y en la lista.
+
+
+==============================================================================
+PARTE 4: CÓMO FUNCIONAN Y SE ACTUALIZAN LOS TORNEOS (SMOOTHCOMP / IBJJF)
+==============================================================================
+Tu página ahora tiene un sistema inteligente para los torneos. Funciona de tres
+maneras combinadas para que nunca te queden campeonatos viejos:
+
+1. OCULTA LOS TORNEOS VENCIDOS SOLA (TODOS LOS DÍAS):
+   La página web mira qué día es hoy en el calendario. Si un torneo era ayer,
+   la página lo esconde automáticamente sin que vos tengas que hacer nada.
+   Además, siempre ordena los torneos poniendo primero el que está más cerca
+   en el tiempo.
+
+2. ACTUALIZACIÓN AUTOMÁTICA CON SMOOTHCOMP:
+   Tenés el archivo "actualizar_smoothcomp.py".
+   - Si lo querés usar en tu notebook: abrí la consola CMD en tu carpeta y
+     escribí:
+     
+     python actualizar_smoothcomp.py
+     
+     Ese programa se conecta a internet, revisa la cartelera de Smoothcomp en
+     España, limpia los torneos que ya pasaron y deja actualizada la lista.
+   
+   - Cuando subas tu web a GitHub (ver Parte 5): gracias a la carpeta ".github"
+     que te incluí, un robot en internet ejecutará ese programa SOLO todos los
+     lunes a la mañana, sin que tengas que prender tu computadora.
+
+3. ¿QUÉ PASA SI QUIERO AGREGAR UN TORNEO A MANO?
+   Si un organizador te escribe por Instagram o WhatsApp y te pide publicar su
+   torneo, no hace falta tocar código:
+   - Hacé doble clic en el archivo "agregar_torneo.py" (o escribí en CMD:
+     python agregar_torneo.py).
+   - El programa te va a preguntar paso a paso:
+     * Nombre del torneo (ej. Copa Madrid BJJ)
+     * Fecha en formato Año-Mes-Día (ej. 2027-04-15) -> ¡Siempre poné primero
+       el año de 4 números, guion, mes de 2 números, guion, día de 2 números!
+     * Ciudad (ej. Madrid)
+     * Pabellón o recinto (ej. Pabellón Europa)
+     * Circuito (IBJJF, AJP Tour, ADCC o Open)
+     * Link de inscripción (pegás la dirección web del torneo)
+   - Al terminar de responder, el programa lo guarda y lo acomoda por fecha
+     automáticamente.
+
+
+==============================================================================
+PARTE 5: CÓMO SUBIR TU WEB A INTERNET GRATIS (GITHUB + CLOUDFLARE PAGES)
+==============================================================================
+Para que todo el mundo pueda entrar a "https://jiu-jitsu.es", vamos a usar dos
+servicios gratuitos:
+- GitHub: Es como un "pendrive en la nube" donde quedan guardados tus archivos.
+- Cloudflare Pages: Lee ese pendrive de GitHub y muestra tu página web en todo
+  el mundo gratis y a máxima velocidad.
+
+------------------------------------------------------------------------------
+ETAPA A: SUBIR TUS ARCHIVOS A GITHUB (Se hace una sola vez)
+------------------------------------------------------------------------------
+1. Entrá a https://github.com y creá una cuenta gratis (o iniciá sesión).
+2. Arriba a la derecha, tocá el signo "+" y elegí "New repository" (Nuevo
+   repositorio).
+3. En la casilla "Repository name" (Nombre del repositorio), escribí:
+   
+   jiu-jitsu-es
+
+4. Más abajo, dejá marcado "Public" (Público) y tocá el botón verde que dice
+   "Create repository" (Crear repositorio).
+5. En la pantalla siguiente, buscá un texto con letras azules que dice:
+   "uploading an existing file" (subir un archivo existente) y hacé clic ahí.
+6. Abrí la carpeta "D:\Desktop\PAGINA WEB" en tu computadora, seleccioná TODOS
+   los archivos (index.html, academias.json, academias.geojson, torneos.json,
+   agregar_academia.py, actualizar_smoothcomp.py, agregar_torneo.py, LEEME.txt
+   y la carpeta .github) y ARRASTRALOS con el mouse adentro del recuadro de
+   GitHub en el navegador.
+7. Esperá unos segundos a que terminen de subir y abajo de todo tocá el botón
+   verde "Commit changes" (Guardar cambios).
+
+------------------------------------------------------------------------------
+ETAPA B: CONECTAR CON CLOUDFLARE Y TU DOMINIO JIU-JITSU.ES (Una sola vez)
+------------------------------------------------------------------------------
+1. Entrá a tu cuenta de Cloudflare (https://dash.cloudflare.com).
+2. En el menú de la izquierda, hacé clic en "Workers & Pages".
+3. Tocá el botón azul "Create" (Crear), luego elegí la pestaña "Pages" y tocá
+   el botón "Connect to Git" (Conectar a Git).
+4. Elegí "GitHub", dale permiso cuando te pregunte y seleccioná de la lista tu
+   proyecto "jiu-jitsu-es". Tocá "Begin setup" (Comenzar configuración).
+5. Te va a mostrar unas casillas de configuración. Dejalas así:
+   - Project name: jiu-jitsu-es
+   - Production branch: main
+   - Framework preset: None (Ninguno)
+   - Build command: DEJALO VACÍO (no escribas nada)
+   - Build output directory: DEJALO VACÍO (no escribas nada)
+6. Tocá el botón azul "Save and Deploy" (Guardar y publicar).
+7. Esperá 30 segundos y Cloudflare te avisará que tu web ya está en línea.
+8. Para conectarle tu nombre "jiu-jitsu.es":
+   - Adentro de ese proyecto en Cloudflare Pages, tocá arriba la pestaña que
+     dice "Custom domains" (Dominios personalizados).
+   - Tocá el botón "Set up a custom domain".
+   - Escribí: jiu-jitsu.es y dale a "Continue" y luego a "Activate domain".
+   - ¡Listo! En unos minutos tu página ya estará funcionando en https://jiu-jitsu.es
+
+
+==============================================================================
+PARTE 6: RESUMEN RÁPIDO PARA TU DÍA A DÍA
+==============================================================================
+Una vez que ya hiciste la Parte 5 y tu web ya está en internet, ¿qué tenés que
+hacer el día que te llegue una academia nueva por WhatsApp?
+
+Solo estos 3 pasos que te llevan 2 minutos:
+
+1. En tu notebook:
+   Ejecutás "agregar_academia.py", pegás el mensaje de WhatsApp y las
+   coordenadas de Google Maps. (Eso actualiza los archivos en tu carpeta).
+
+2. En GitHub (https://github.com):
+   Entrás a tu repositorio "jiu-jitsu-es", tocás el botón "Add file" ->
+   "Upload files", arrastrás desde tu carpeta los archivos:
+   - academias.json
+   - academias.geojson
+   - index.html
+   Y tocás el botón verde "Commit changes".
+
+3. ¡Nada más!
+   Cloudflare detecta solo que subiste archivos nuevos a GitHub y en 30
+   segundos actualiza https://jiu-jitsu.es automáticamente.
+
+
+==============================================================================
+DATOS DE TU SITIO WEB PARA RECORDAR:
+==============================================================================
+- Web Oficial: https://jiu-jitsu.es
+- Instagram: @jiu_jitsu.es
+- Tu WhatsApp donde llegan las altas: +54 9 362 420-0040
+==============================================================================
