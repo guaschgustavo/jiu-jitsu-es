@@ -1,0 +1,724 @@
+[
+  {
+    "id": "bjj-alicante-08",
+    "slug": "climent-club-alicante",
+    "nombre": "Climent Club Alicante",
+    "ciudad": "Alicante",
+    "provincia": "Alicante",
+    "ciudad_slug": "alicante",
+    "direccion": "Calle Poeta Sansano 25, 03005 Alicante",
+    "codigo_postal": "03005",
+    "coordenadas": {
+      "lat": 38.356219,
+      "lng": -0.495128
+    },
+    "afiliacion": "Climent Club",
+    "head_coach": "Agustín y Jorge Climent",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "MMA",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 649 23 55 82",
+      "whatsapp": "34649235582",
+      "web": "https://climentclub.es",
+      "instagram": "@climentclub"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 230
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en Climent Club Alicante, academia referente de Jiu-Jitsu Brasileño (BJJ), Grappling y MMA en Alicante."
+  },
+  {
+    "id": "bjj-barcelona-02",
+    "slug": "templum-barcelona-bjj",
+    "nombre": "Templum Barcelona BJJ",
+    "ciudad": "Barcelona",
+    "provincia": "Barcelona",
+    "ciudad_slug": "barcelona",
+    "direccion": "Carrer d'Entença 113, 08015 Barcelona",
+    "codigo_postal": "08015",
+    "coordenadas": {
+      "lat": 41.380215,
+      "lng": 2.148102
+    },
+    "afiliacion": "Templum BCN",
+    "head_coach": "Yan Cabral",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "MMA",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 936 33 81 31",
+      "whatsapp": "",
+      "web": "https://templumbcn.com",
+      "instagram": "@templumbcn"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 198
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en Templum Barcelona BJJ (C/ Entença 113), centro de alto rendimiento de Jiu-Jitsu Brasileño y MMA en Barcelona."
+  },
+  {
+    "id": "bjj-madrid-01",
+    "slug": "mathias-ribeiro-team-madrid",
+    "nombre": "Mathias Ribeiro Team Madrid",
+    "ciudad": "Madrid",
+    "provincia": "Madrid",
+    "ciudad_slug": "madrid",
+    "direccion": "Calle Mota del Cuervo 10, 28043 Madrid",
+    "codigo_postal": "28043",
+    "coordenadas": {
+      "lat": 40.4658,
+      "lng": -3.6395
+    },
+    "afiliacion": "Mathias Ribeiro Team",
+    "head_coach": "Mathias Ribeiro (Faixa Preta)",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Kids",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 640 97 17 77",
+      "whatsapp": "34640971777",
+      "web": "https://mathiasribeiroteam.com",
+      "instagram": "@mathiasribeiroteam"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 142
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en Mathias Ribeiro Team Madrid (Hortaleza), academia de Jiu-Jitsu Brasileño (BJJ) y Grappling en Madrid."
+  },
+  {
+    "id": "bjj-madrid-lotus-1",
+    "slug": "lotus-club-madrid-bjj",
+    "nombre": "Lotus Club BJJ España (Madrid Principal)",
+    "ciudad": "Madrid",
+    "provincia": "Madrid",
+    "ciudad_slug": "madrid",
+    "direccion": "Calle de Agustín de Foxá 25, Bajo C, 28036 Madrid",
+    "codigo_postal": "28036",
+    "coordenadas": {
+      "lat": 40.47043,
+      "lng": -3.68576
+    },
+    "afiliacion": "Lotus Club",
+    "head_coach": "Sri Batista Marim (Faixa Preta 4º Grado)",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 634 46 72 96",
+      "whatsapp": "34634467296",
+      "web": "https://bjjmadrid.com",
+      "instagram": "@lotus_bjj_espana"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 87
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en Lotus Club BJJ España (Sede Principal Chamartín), academia de Jiu-Jitsu Brasileño y Grappling en Madrid."
+  },
+  {
+    "id": "bjj-madrid-lotus-2",
+    "slug": "lotus-club-metropolitano",
+    "nombre": "Lotus Club Metropolitano",
+    "ciudad": "Madrid",
+    "provincia": "Madrid",
+    "ciudad_slug": "madrid",
+    "direccion": "Calle de Aravaca 7, 28040 Madrid",
+    "codigo_postal": "28040",
+    "coordenadas": {
+      "lat": 40.4421,
+      "lng": -3.7124
+    },
+    "afiliacion": "Lotus Club",
+    "head_coach": "Sri Batista Marim",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "horarios_resumen": "Lunes a Sábado",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 634 46 72 96",
+      "whatsapp": "34634467296",
+      "web": "https://bjjmadrid.com",
+      "instagram": "@lotus_bjj_espana"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 54
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Filial de Lotus Club BJJ en la zona de Metropolitano, Madrid."
+  },
+  {
+    "id": "bjj-madrid-lotus-3",
+    "slug": "lotus-club-las-rozas",
+    "nombre": "Lotus Club Las Rozas (Prego House)",
+    "ciudad": "Las Rozas de Madrid",
+    "provincia": "Madrid",
+    "ciudad_slug": "las-rozas",
+    "direccion": "Calle Comunidad de Andalucía 33, Local 12, 28231 Las Rozas, Madrid",
+    "codigo_postal": "28231",
+    "coordenadas": {
+      "lat": 40.4915,
+      "lng": -3.8723
+    },
+    "afiliacion": "Lotus Club / Prego House",
+    "head_coach": "Juan Prego & Equipo Lotus",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Kids"
+    ],
+    "horarios_resumen": "Lunes a Sábado",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 649 37 26 17",
+      "whatsapp": "34649372617",
+      "web": "https://pregohouse.com",
+      "instagram": "@lotusbjjlasrozas"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 42
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Lotus Club BJJ en Prego House, Las Rozas de Madrid."
+  },
+  {
+    "id": "bjj-madrid-lotus-4",
+    "slug": "lotus-club-malasana",
+    "nombre": "Lotus Club Malasaña",
+    "ciudad": "Madrid",
+    "provincia": "Madrid",
+    "ciudad_slug": "madrid",
+    "direccion": "Plaza del Conde de Toreno 2, 28015 Madrid",
+    "codigo_postal": "28015",
+    "coordenadas": {
+      "lat": 40.4251,
+      "lng": -3.7082
+    },
+    "afiliacion": "Lotus Club",
+    "head_coach": "Rodrigo Paredes (Faixa Preta)",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "horarios_resumen": "Lunes a Viernes",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 641 70 99 39",
+      "whatsapp": "34641709939",
+      "web": "https://bjjmadrid.com",
+      "instagram": "@lotus_bjj_espana"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 38
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Lotus Club BJJ en el centro de Madrid (Malasaña)."
+  },
+  {
+    "id": "bjj-bilbao-lotus",
+    "slug": "aequalis-lotus-club-bilbao",
+    "nombre": "Aequalis - Lotus Club Bilbao",
+    "ciudad": "Mungia (Bilbao)",
+    "provincia": "Vizcaya",
+    "ciudad_slug": "bilbao",
+    "direccion": "Lauaxeta Olerkari Kalea 52A, 48100 Mungia, Bizkaia",
+    "codigo_postal": "48100",
+    "coordenadas": {
+      "lat": 43.3521,
+      "lng": -2.8465
+    },
+    "afiliacion": "Lotus Club",
+    "head_coach": "Xabi Rapado & Alvaro Gonzalez (Faixas Pretas)",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "horarios_resumen": "Lunes a Viernes",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 634 46 72 96",
+      "whatsapp": "",
+      "web": "https://bjjmadrid.com",
+      "instagram": "@lotus_bjj_espana"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 31
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Aequalis - Lotus Club filial en Mungia, Vizcaya (Bilbao)."
+  },
+  {
+    "id": "bjj-segovia-lotus",
+    "slug": "segosport-lotus-club-segovia",
+    "nombre": "SegoSport - Lotus Club Segovia",
+    "ciudad": "Segovia",
+    "provincia": "Segovia",
+    "ciudad_slug": "segovia",
+    "direccion": "Calle Romero 18, 40002 Segovia",
+    "codigo_postal": "40002",
+    "coordenadas": {
+      "lat": 40.9429,
+      "lng": -4.1201
+    },
+    "afiliacion": "Lotus Club",
+    "head_coach": "Román Velázquez Díaz (Faixa Preta)",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "horarios_resumen": "Lunes a Viernes",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 921 43 74 53",
+      "whatsapp": "",
+      "web": "https://bjjmadrid.com",
+      "instagram": "@lotus_bjj_espana"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 27
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "SegoSport - Lotus Club filial en Segovia."
+  },
+  {
+    "id": "bjj-alicante-lotus",
+    "slug": "equipo-blume-lotus-club-alicante",
+    "nombre": "Equipo Blume - Lotus Club Alicante",
+    "ciudad": "San Vicente del Raspeig (Alicante)",
+    "provincia": "Alicante",
+    "ciudad_slug": "alicante",
+    "direccion": "Carrer Artes Gráficas, 03690 San Vicente del Raspeig, Alicante",
+    "codigo_postal": "03690",
+    "coordenadas": {
+      "lat": 38.3971,
+      "lng": -0.5262
+    },
+    "afiliacion": "Lotus Club",
+    "head_coach": "Equipo Blume Lotus",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "horarios_resumen": "Lunes a Viernes",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 634 46 72 96",
+      "whatsapp": "",
+      "web": "https://bjjmadrid.com",
+      "instagram": "@lotus_bjj_espana"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 35
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Equipo Blume - Lotus Club filial en San Vicente del Raspeig, Alicante."
+  },
+  {
+    "id": "bjj-malaga-05",
+    "slug": "lilius-barnatt-martial-arts-lbma-malaga",
+    "nombre": "Lilius Barnatt Martial Arts (LBMA)",
+    "ciudad": "Torremolinos (Málaga)",
+    "provincia": "Málaga",
+    "ciudad_slug": "malaga",
+    "direccion": "Calle Antonio Alcaide Sánchez 3, El Pinillo, 29620 Torremolinos, Málaga",
+    "codigo_postal": "29620",
+    "coordenadas": {
+      "lat": 36.6138,
+      "lng": -4.5126
+    },
+    "afiliacion": "LBMA",
+    "head_coach": "Santeri Lilius",
+    "modalidades": [
+      "No-Gi",
+      "Gi",
+      "MMA",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 603 71 60 05",
+      "whatsapp": "34603716005",
+      "web": "https://liliusbarnatt.com",
+      "instagram": "@liliusbarnatt"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 94
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en Lilius Barnatt Martial Arts (LBMA), academia de BJJ, Grappling y MMA en Málaga."
+  },
+  {
+    "id": "bjj-valencia-03",
+    "slug": "gracie-barra-valencia-camins-al-grau",
+    "nombre": "Gracie Barra Valencia (Camins al Grau)",
+    "ciudad": "Valencia",
+    "provincia": "Valencia",
+    "ciudad_slug": "valencia",
+    "direccion": "Carrer del Mestre Valls 3, Camins al Grau, 46021 València",
+    "codigo_postal": "46021",
+    "coordenadas": {
+      "lat": 39.4665,
+      "lng": -0.3472
+    },
+    "afiliacion": "Gracie Barra",
+    "head_coach": "Instructor Certificado GB",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Defensa Personal",
+      "Kids"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 613 23 59 86",
+      "whatsapp": "34613235986",
+      "web": "https://graciebarravalenciagrau.com",
+      "instagram": "@gbvalenciagrau"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 89
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en Gracie Barra Camins al Grau, academia oficial de Jiu-Jitsu Brasileño en Valencia."
+  },
+  {
+    "id": "bjj-sevilla-04",
+    "slug": "gracie-barra-sevilla",
+    "nombre": "Gracie Barra Sevilla",
+    "ciudad": "Sevilla",
+    "provincia": "Sevilla",
+    "ciudad_slug": "sevilla",
+    "direccion": "Calle Virgen de Begoña 6, 41011 Sevilla",
+    "codigo_postal": "41011",
+    "coordenadas": {
+      "lat": 37.3752,
+      "lng": -6.0021
+    },
+    "afiliacion": "Gracie Barra",
+    "head_coach": "Prof. Nacho Lora",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Kids"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 677 30 54 80",
+      "whatsapp": "34677305480",
+      "web": "https://www.graciebarrasevilla.com",
+      "instagram": "@graciebarrasevilla"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 115
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Entrena en Gracie Barra Sevilla (C/ Virgen de Begoña 6), escuela premium de Jiu-Jitsu Brasileño en Sevilla."
+  },
+  {
+    "id": "bjj-bilbao-06",
+    "slug": "bjj-bilbao-cleyton-bastos",
+    "nombre": "BJJ Bilbao (Cleyton Bastos Team)",
+    "ciudad": "Leioa (Bilbao)",
+    "provincia": "Vizcaya",
+    "ciudad_slug": "bilbao",
+    "direccion": "Calle Langileria 16-A, 48940 Leioa, Bizkaia",
+    "codigo_postal": "48940",
+    "coordenadas": {
+      "lat": 43.3268,
+      "lng": -2.9892
+    },
+    "afiliacion": "Cleyton Bastos JJ Team",
+    "head_coach": "Cleyton Bastos",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 688 89 12 34",
+      "whatsapp": "34688891234",
+      "web": "https://bjjbilbao.com",
+      "instagram": "@bjjbilbao"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 63
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Entrena en BJJ Bilbao Academy (Leioa), escuela de Jiu-Jitsu Brasileño, Muay Thai y defensa personal en Bilbao."
+  },
+  {
+    "id": "bjj-zaragoza-07",
+    "slug": "fusion-bjj-zaragoza",
+    "nombre": "Fusión BJJ Zaragoza",
+    "ciudad": "Zaragoza",
+    "provincia": "Zaragoza",
+    "ciudad_slug": "zaragoza",
+    "direccion": "Calle de Santa Orosia 19, 50010 Zaragoza",
+    "codigo_postal": "50010",
+    "coordenadas": {
+      "lat": 41.6512,
+      "lng": -0.9034
+    },
+    "afiliacion": "Fusión BJJ / Bremgartner",
+    "head_coach": "Alberto Bremgartner",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Kids"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 604 57 21 15",
+      "whatsapp": "34604572115",
+      "web": "https://www.fusionbjj.es",
+      "instagram": "@fusionbjjzaragoza"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 51
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Entrena en Fusión BJJ Zaragoza (C/ Santa Orosia 19), academia de Jiu-Jitsu Brasileño y Grappling en Zaragoza."
+  },
+  {
+    "id": "bjj-baleares-01",
+    "slug": "art-of-flow-ibiza-academy",
+    "nombre": "Art of Flow Ibiza Academy",
+    "ciudad": "Ibiza",
+    "provincia": "Islas Baleares - Ibiza",
+    "ciudad_slug": "ibiza",
+    "direccion": "Carrer del Bisbe Abad y Lasierra 48, 07800 Eivissa, Illes Balears",
+    "codigo_postal": "07800",
+    "coordenadas": {
+      "lat": 38.9089,
+      "lng": 1.4323
+    },
+    "afiliacion": "Art of Flow / BJJ Ibiza",
+    "head_coach": "Head Coach Art of Flow",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Kids",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Sábado: Mañanas y Tardes",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 633 77 11 57",
+      "whatsapp": "34633771157",
+      "web": "https://artofflowibizaacademy.com",
+      "instagram": "@artofflowibiza"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 50
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Art of Flow Ibiza Academy, academia oficial de Jiu-Jitsu Brasileño y Grappling en Ibiza (Eivissa)."
+  },
+  {
+    "id": "bjj-baleares-02",
+    "slug": "az-jiu-jitsu-ibiza",
+    "nombre": "AZ Jiu Jitsu Ibiza",
+    "ciudad": "Ibiza (Santa Eulària des Riu)",
+    "provincia": "Islas Baleares - Ibiza",
+    "ciudad_slug": "ibiza",
+    "direccion": "Calle de la Iglesia 32, 07840 Santa Eulària des Riu, Ibiza",
+    "codigo_postal": "07840",
+    "coordenadas": {
+      "lat": 38.9845,
+      "lng": 1.5332
+    },
+    "afiliacion": "AZ Jiu Jitsu / AJP",
+    "head_coach": "Ángel Sánchez Soriano",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "horarios_resumen": "Lunes a Viernes",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 637 33 28 65",
+      "whatsapp": "34637332865",
+      "web": "",
+      "instagram": "@az_jiujitsu_ibiza"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 34
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "AZ Jiu Jitsu en Santa Eulària des Riu, Ibiza."
+  },
+  {
+    "id": "bjj-baleares-03",
+    "slug": "bjj-palma-mallorca",
+    "nombre": "BJJ Palma Mallorca",
+    "ciudad": "Palma de Mallorca",
+    "provincia": "Islas Baleares - Mallorca",
+    "ciudad_slug": "palma-mallorca",
+    "direccion": "Carrer Salvador Dalí 42, 07011 Palma, Illes Balears",
+    "codigo_postal": "07011",
+    "coordenadas": {
+      "lat": 39.5824,
+      "lng": 2.6321
+    },
+    "afiliacion": "BJJ Palma",
+    "head_coach": "Head Coach BJJ Palma",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Kids",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 601 56 99 44",
+      "whatsapp": "34601569944",
+      "web": "https://bjjpalma.com",
+      "instagram": "@bjjpalma"
+    },
+    "rating": {
+      "valor": 4.9,
+      "resenas_count": 78
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en BJJ Palma (C/ Salvador Dalí 42), escuela de Jiu-Jitsu Brasileño en Palma de Mallorca, Islas Baleares."
+  },
+  {
+    "id": "bjj-canarias-01",
+    "slug": "gracie-barra-tenerife",
+    "nombre": "Gracie Barra Tenerife",
+    "ciudad": "San Isidro (Tenerife)",
+    "provincia": "Islas Canarias - Santa Cruz de Tenerife",
+    "ciudad_slug": "tenerife",
+    "direccion": "Calle Hermano Pedro 38, San Isidro, 38611 Santa Cruz de Tenerife",
+    "codigo_postal": "38611",
+    "coordenadas": {
+      "lat": 28.0762,
+      "lng": -16.5583
+    },
+    "afiliacion": "Gracie Barra",
+    "head_coach": "Instructor Certificado GB",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Defensa Personal",
+      "Kids"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 666 58 77 23",
+      "whatsapp": "34666587723",
+      "web": "https://www.graciebarratenerife.com",
+      "instagram": "@graciebarratenerife"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 92
+    },
+    "verificada": true,
+    "destacada_premium": true,
+    "descripcion_seo": "Entrena en Gracie Barra Tenerife (San Isidro), academia oficial en Santa Cruz de Tenerife, Islas Canarias."
+  },
+  {
+    "id": "bjj-canarias-02",
+    "slug": "daniel-ladero-academy-gran-canaria",
+    "nombre": "Daniel Ladero Academy BJJ",
+    "ciudad": "Las Palmas de Gran Canaria",
+    "provincia": "Islas Canarias - Las Palmas de Gran Canaria",
+    "ciudad_slug": "gran-canaria",
+    "direccion": "Calle Lentisco 91, 35018 Las Palmas de Gran Canaria",
+    "codigo_postal": "35018",
+    "coordenadas": {
+      "lat": 28.0934,
+      "lng": -15.4482
+    },
+    "afiliacion": "Daniel Ladero BJJ",
+    "head_coach": "Daniel Ladero",
+    "modalidades": [
+      "Gi",
+      "No-Gi",
+      "Competición"
+    ],
+    "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes",
+    "clase_prueba_gratis": true,
+    "contacto": {
+      "telefono": "+34 620 85 76 84",
+      "whatsapp": "34620857684",
+      "web": "",
+      "instagram": "@danielladerobjj"
+    },
+    "rating": {
+      "valor": 5.0,
+      "resenas_count": 110
+    },
+    "verificada": true,
+    "destacada_premium": false,
+    "descripcion_seo": "Entrena en Daniel Ladero Academy, academia referente de Jiu-Jitsu Brasileño en Las Palmas de Gran Canaria."
+  }
+]

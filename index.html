@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JIU-JITSU.ES | Portal y Directorio Oficial de Academias BJJ y Grappling en España</title>
+    <meta name="description" content="Encuentra dónde entrenar Jiu-Jitsu Brasileño (BJJ) y Grappling en España. Directorio de academias verificadas, mapa interactivo, calendario de torneos IBJJF/AJP, guías técnicas y equipamiento.">
+    <link rel="canonical" href="https://jiu-jitsu.es/">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+        .font-heading { font-family: 'Oswald', sans-serif; letter-spacing: 0.03em; }
+        #map { height: 540px; width: 100%; border-radius: 0.75rem; z-index: 10; }
+        .leaflet-popup-content-wrapper { background: #1e293b; color: #f8fafc; border: 1px solid #334155; border-radius: 0.5rem; }
+        .leaflet-popup-tip { background: #1e293b; }
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="flex flex-col">
+                    <span class="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-white leading-none">
+                        JIU-JITSU<span class="text-[#0099ff]">.ES</span>
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.28em] text-slate-400 font-semibold mt-1">Comunidad Online</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                <a href="#directorio" class="hover:text-amber-400 transition">Academias</a>
+                <a href="#mapa-sec" class="hover:text-amber-400 transition">Mapa Interactivo</a>
+                <a href="#torneos" class="hover:text-amber-400 transition">Calendario Torneos</a>
+                <a href="#guias" class="hover:text-amber-400 transition">Guías BJJ</a>
+                <a href="#equipamiento" class="hover:text-amber-400 transition">Equipamiento</a>
+            </nav>
+
+            <button onclick="abrirModalAcademia(event)" class="px-4 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition shadow-lg shadow-amber-500/20 cursor-pointer">
+                + Añadir Academia
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative py-16 md:py-24 border-b border-slate-800/80 bg-gradient-to-b from-slate-900/60 to-slate-950">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-6">
+                🥋 El Tatami Digital de España
+            </span>
+            <h1 class="font-heading text-4xl sm:text-6xl font-bold uppercase text-white leading-tight mb-6">
+                Encuentra dónde entrenar <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500">Jiu-Jitsu Brasileño</span> y Grappling
+            </h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
+                Explora el mapa interactivo de academias verificadas por ciudad, consulta las tablas oficiales de peso IBJJF y mantente al día con los próximos torneos en España.
+            </p>
+
+            <!-- Buscador Rápido -->
+            <div class="max-w-3xl mx-auto bg-slate-900/90 p-3 rounded-2xl border border-slate-800 shadow-2xl flex flex-col sm:flex-row gap-3">
+                <input id="searchInput" type="text" placeholder="Buscar por ciudad, academia o equipo (ej. Madrid, Barcelona, Checkmat, Gracie)..." 
+                    class="flex-1 bg-slate-950 text-white px-4 py-3.5 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-sm">
+                <a href="#directorio" class="px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition flex items-center justify-center">
+                    Explorar Mapa
+                </a>
+            </div>
+
+            <!-- Filtros rápidos de Zona / Ciudad -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6">
+                <button onclick="filtrarPorTexto('')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-300 transition cursor-pointer">Todas</button>
+                <button onclick="filtrarPorProvincia('Islas Baleares')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">🏝️ Islas Baleares</button>
+                <button onclick="filtrarPorTexto('Ibiza')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">☀️ Ibiza</button>
+                <button onclick="filtrarPorProvincia('Islas Canarias')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">🌋 Islas Canarias</button>
+                <button onclick="filtrarPorTexto('Madrid')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">📍 Madrid</button>
+                <button onclick="filtrarPorTexto('Barcelona')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">📍 Barcelona</button>
+                <button onclick="filtrarPorTexto('Valencia')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">📍 Valencia</button>
+                <button onclick="filtrarPorTexto('Sevilla')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">📍 Sevilla</button>
+                <button onclick="filtrarPorTexto('Málaga')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">📍 Málaga</button>
+                <button onclick="filtrarPorTexto('Alicante')" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 transition cursor-pointer">📍 Alicante</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER PROFESORES -->
+    <section class="py-12 bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/10 border-b border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-3 inline-block">Para Profesores y Dueños de Academias</span>
+            <h2 class="font-heading text-2xl sm:text-4xl font-bold uppercase text-white mb-3">¿Tienes una escuela de BJJ o Grappling en España?</h2>
+            <p class="text-sm text-slate-400 max-w-2xl mx-auto mb-6">Registra tu academia gratis en JIU-JITSU.ES o solicita el sello ★ Academia Destacada para aparecer en primera posición en tu ciudad y recibir alumnos buscando clases de prueba cada semana.</p>
+            <button onclick="abrirModalAcademia(event)" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20 cursor-pointer">
+                + Registrar o Reclamar Ficha
+            </button>
+        </div>
+    </section>
+
+    <!-- DIRECTORIO + MAPA -->
+    <section id="directorio" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4" id="mapa-sec">
+            <div>
+                <h2 class="font-heading text-3xl font-bold uppercase text-white">Directorio y Mapa de Academias</h2>
+                <p class="text-slate-400 text-sm mt-1">Haz clic en cualquier tarjeta para volar a su ubicación exacta en el mapa.</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="filtrarModalidad('')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950 cursor-pointer">Todas</button>
+                <button onclick="filtrarModalidad('Gi')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 cursor-pointer">Kimono (Gi)</button>
+                <button onclick="filtrarModalidad('No-Gi')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 cursor-pointer">Grappling (No-Gi)</button>
+                <button onclick="filtrarModalidad('Kids')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 cursor-pointer">Infantil (Kids)</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-7 bg-slate-900 p-2 rounded-2xl border border-slate-800 shadow-xl">
+                <div id="map"></div>
+            </div>
+            <div id="academiasContainer" class="lg:col-span-5 space-y-4 max-h-[556px] overflow-y-auto pr-1"></div>
+        </div>
+    </section>
+
+    <!-- CALENDARIO TORNEOS -->
+    <section id="torneos" class="py-16 bg-slate-900/40 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-3 inline-block">📅 Temporada 2026 / 2027 · Circuitos Oficiales</span>
+                    <h2 class="font-heading text-3xl font-bold uppercase text-white">Próximos Torneos BJJ & Grappling en España</h2>
+                    <p class="text-slate-400 text-sm mt-1">Agenda actualizada automáticamente: los eventos pasados se ocultan y los próximos se ordenan por fecha.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="filtrarCircuitoTorneo('')" id="btnTorneoTodos" class="px-3 py-2 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950 cursor-pointer transition">Todos</button>
+                    <button onclick="filtrarCircuitoTorneo('IBJJF')" id="btnTorneoIBJJF" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 cursor-pointer transition">IBJJF</button>
+                    <button onclick="filtrarCircuitoTorneo('AJP')" id="btnTorneoAJP" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 cursor-pointer transition">AJP Tour</button>
+                    <button onclick="filtrarCircuitoTorneo('ADCC')" id="btnTorneoADCC" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 cursor-pointer transition">Smoothcomp / Nacionales</button>
+                    <a href="https://ibjjf.com/events/championships" target="_blank" rel="noopener" class="text-xs font-semibold bg-slate-950 hover:bg-slate-800 text-amber-400 px-3.5 py-2 rounded-lg border border-slate-800 transition flex items-center gap-1">
+                        IBJJF ↗
+                    </a>
+                    <a href="https://smoothcomp.com/es/events/upcoming" target="_blank" rel="noopener" class="text-xs font-semibold bg-slate-950 hover:bg-slate-800 text-amber-400 px-3.5 py-2 rounded-lg border border-slate-800 transition flex items-center gap-1">
+                        Smoothcomp ↗
+                    </a>
+                </div>
+            </div>
+            <div id="torneosContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- GUÍAS & PESOS IBJJF -->
+    <section id="guias" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-3 inline-block">⚖️ Herramienta Oficial BJJ</span>
+                <h2 class="font-heading text-3xl font-bold uppercase text-white">Calculadora y Tabla de Pesos IBJJF</h2>
+                <p class="text-slate-400 text-sm mt-1">Consulta los límites de peso oficiales (con Kimono y No-Gi) para torneos IBJJF y AJP.</p>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="cambiarTipoPeso('gi')" id="btnGi" class="px-4 py-2 rounded-lg text-xs font-bold bg-amber-500 text-slate-950 transition cursor-pointer">Categorías con Kimono (Gi)</button>
+                <button onclick="cambiarTipoPeso('nogi')" id="btnNoGi" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 transition cursor-pointer">Categorías No-Gi (Grappling)</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-8 bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                                <th class="py-3 px-4">Categoría (Adulto Masculino)</th>
+                                <th class="py-3 px-4">Peso Máximo (Gi)</th>
+                                <th class="py-3 px-4">Peso Máximo (No-Gi)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaPesosBody" class="divide-y divide-slate-800/60 text-sm text-slate-300"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 bg-slate-900 rounded-2xl border border-slate-800 p-6 shadow-xl">
+                <h3 class="font-heading text-xl font-bold text-white mb-2">Calculadora de Categoría</h3>
+                <p class="text-xs text-slate-400 mb-6">Ingresa tu peso actual con o sin kimono para saber en qué categoría competir.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Tu Peso (kg)</label>
+                        <input type="number" id="inputPesoUser" placeholder="Ej. 76" class="w-full bg-slate-950 text-white px-3.5 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Modalidad</label>
+                        <select id="selectModalidadCalc" class="w-full bg-slate-950 text-white px-3.5 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-sm">
+                            <option value="gi">Con Kimono (Gi)</option>
+                            <option value="nogi">Sin Kimono (No-Gi)</option>
+                        </select>
+                    </div>
+                    <button onclick="calcularCategoria()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20 cursor-pointer">
+                        Calcular Categoría Ideal
+                    </button>
+                    <div id="resultadoCalc" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 hidden mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EQUIPAMIENTO -->
+    <section id="equipamiento" class="py-16 bg-slate-900/40 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-3 inline-block">🛍️ Tienda y Afiliación</span>
+                <h2 class="font-heading text-3xl font-bold uppercase text-white">Equipamiento Recomendado para el Tatami</h2>
+                <p class="text-slate-400 text-sm mt-1">Comparativas y análisis de los mejores Gis, rashguards y accesorios para entrenar y competir.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-amber-500/50 transition">
+                    <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Kimono (Gi)</span>
+                    <h3 class="font-heading text-xl font-bold text-white mt-3 mb-2">Mejores Kimonos Calidad-Precio</h3>
+                    <p class="text-xs text-slate-400 mb-4">Guía de tejidos (Pearl Weave, Ripstop), encogimiento y normativas de homologación IBJJF.</p>
+                    <button onclick="abrirModalEquip('kimonos')" class="text-xs font-bold text-amber-400 hover:underline cursor-pointer bg-transparent border-0 p-0">Ver comparativa completa →</button>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-amber-500/50 transition">
+                    <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-blue-500/10 text-blue-400">No-Gi / Grappling</span>
+                    <h3 class="font-heading text-xl font-bold text-white mt-3 mb-2">Rashguards y Shorts de Competición</h3>
+                    <p class="text-xs text-slate-400 mb-4">Lycras homologadas por rangos de cinturón y bermudas elásticas antifricción para ADCC y No-Gi.</p>
+                    <button onclick="abrirModalEquip('nogi')" class="text-xs font-bold text-amber-400 hover:underline cursor-pointer bg-transparent border-0 p-0">Ver recomendaciones →</button>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-amber-500/50 transition">
+                    <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400">Accesorios BJJ</span>
+                    <h3 class="font-heading text-xl font-bold text-white mt-3 mb-2">Tape, Bucales y Mochilas Tácticas</h3>
+                    <p class="text-xs text-slate-400 mb-4">Protege tus dedos con esparadrapo deportivo y mantén tu equipo organizado con mochilas ventiladas.</p>
+                    <button onclick="abrirModalEquip('accesorios')" class="text-xs font-bold text-amber-400 hover:underline cursor-pointer bg-transparent border-0 p-0">Ver accesorios esenciales →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 py-12 border-t border-slate-900 text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="font-heading text-lg font-bold text-white">JIU-JITSU<span class="text-amber-500">.ES</span></span>
+                <p class="text-xs mt-1">© 2026 JIU-JITSU.ES · El portal de Jiu-Jitsu Brasileño y Grappling en España.</p>
+            </div>
+            <div class="flex gap-6 text-xs">
+                <a href="https://instagram.com/jiu_jitsu.es" target="_blank" rel="noopener" class="hover:text-amber-400">Instagram @jiu_jitsu.es</a>
+                <a href="#directorio" class="hover:text-amber-400">Mapa de Academias</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        const FALLBACK_ACADEMIAS = [{"id": "bjj-alicante-08", "slug": "climent-club-alicante", "nombre": "Climent Club Alicante", "ciudad": "Alicante", "provincia": "Alicante", "ciudad_slug": "alicante", "direccion": "Calle Poeta Sansano 25, 03005 Alicante", "codigo_postal": "03005", "coordenadas": {"lat": 38.356219, "lng": -0.495128}, "afiliacion": "Climent Club", "head_coach": "Agustín y Jorge Climent", "modalidades": ["Gi", "No-Gi", "MMA", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 649 23 55 82", "whatsapp": "34649235582", "web": "https://climentclub.es", "instagram": "@climentclub"}, "rating": {"valor": 4.9, "resenas_count": 230}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en Climent Club Alicante, academia referente de Jiu-Jitsu Brasileño (BJJ), Grappling y MMA en Alicante."}, {"id": "bjj-barcelona-02", "slug": "templum-barcelona-bjj", "nombre": "Templum Barcelona BJJ", "ciudad": "Barcelona", "provincia": "Barcelona", "ciudad_slug": "barcelona", "direccion": "Carrer d'Entença 113, 08015 Barcelona", "codigo_postal": "08015", "coordenadas": {"lat": 41.380215, "lng": 2.148102}, "afiliacion": "Templum BCN", "head_coach": "Yan Cabral", "modalidades": ["Gi", "No-Gi", "MMA", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 936 33 81 31", "whatsapp": "", "web": "https://templumbcn.com", "instagram": "@templumbcn"}, "rating": {"valor": 4.9, "resenas_count": 198}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en Templum Barcelona BJJ (C/ Entença 113), centro de alto rendimiento de Jiu-Jitsu Brasileño y MMA en Barcelona."}, {"id": "bjj-madrid-01", "slug": "mathias-ribeiro-team-madrid", "nombre": "Mathias Ribeiro Team Madrid", "ciudad": "Madrid", "provincia": "Madrid", "ciudad_slug": "madrid", "direccion": "Calle Mota del Cuervo 10, 28043 Madrid", "codigo_postal": "28043", "coordenadas": {"lat": 40.4658, "lng": -3.6395}, "afiliacion": "Mathias Ribeiro Team", "head_coach": "Mathias Ribeiro (Faixa Preta)", "modalidades": ["Gi", "No-Gi", "Kids", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 640 97 17 77", "whatsapp": "34640971777", "web": "https://mathiasribeiroteam.com", "instagram": "@mathiasribeiroteam"}, "rating": {"valor": 4.9, "resenas_count": 142}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en Mathias Ribeiro Team Madrid (Hortaleza), academia de Jiu-Jitsu Brasileño (BJJ) y Grappling en Madrid."}, {"id": "bjj-madrid-lotus-1", "slug": "lotus-club-madrid-bjj", "nombre": "Lotus Club BJJ España (Madrid Principal)", "ciudad": "Madrid", "provincia": "Madrid", "ciudad_slug": "madrid", "direccion": "Calle de Agustín de Foxá 25, Bajo C, 28036 Madrid", "codigo_postal": "28036", "coordenadas": {"lat": 40.47043, "lng": -3.68576}, "afiliacion": "Lotus Club", "head_coach": "Sri Batista Marim (Faixa Preta 4º Grado)", "modalidades": ["Gi", "No-Gi", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 634 46 72 96", "whatsapp": "34634467296", "web": "https://bjjmadrid.com", "instagram": "@lotus_bjj_espana"}, "rating": {"valor": 5.0, "resenas_count": 87}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en Lotus Club BJJ España (Sede Principal Chamartín), academia de Jiu-Jitsu Brasileño y Grappling en Madrid."}, {"id": "bjj-madrid-lotus-2", "slug": "lotus-club-metropolitano", "nombre": "Lotus Club Metropolitano", "ciudad": "Madrid", "provincia": "Madrid", "ciudad_slug": "madrid", "direccion": "Calle de Aravaca 7, 28040 Madrid", "codigo_postal": "28040", "coordenadas": {"lat": 40.4421, "lng": -3.7124}, "afiliacion": "Lotus Club", "head_coach": "Sri Batista Marim", "modalidades": ["Gi", "No-Gi"], "horarios_resumen": "Lunes a Sábado", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 634 46 72 96", "whatsapp": "34634467296", "web": "https://bjjmadrid.com", "instagram": "@lotus_bjj_espana"}, "rating": {"valor": 4.9, "resenas_count": 54}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Filial de Lotus Club BJJ en la zona de Metropolitano, Madrid."}, {"id": "bjj-madrid-lotus-3", "slug": "lotus-club-las-rozas", "nombre": "Lotus Club Las Rozas (Prego House)", "ciudad": "Las Rozas de Madrid", "provincia": "Madrid", "ciudad_slug": "las-rozas", "direccion": "Calle Comunidad de Andalucía 33, Local 12, 28231 Las Rozas, Madrid", "codigo_postal": "28231", "coordenadas": {"lat": 40.4915, "lng": -3.8723}, "afiliacion": "Lotus Club / Prego House", "head_coach": "Juan Prego & Equipo Lotus", "modalidades": ["Gi", "No-Gi", "Kids"], "horarios_resumen": "Lunes a Sábado", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 649 37 26 17", "whatsapp": "34649372617", "web": "https://pregohouse.com", "instagram": "@lotusbjjlasrozas"}, "rating": {"valor": 5.0, "resenas_count": 42}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Lotus Club BJJ en Prego House, Las Rozas de Madrid."}, {"id": "bjj-madrid-lotus-4", "slug": "lotus-club-malasana", "nombre": "Lotus Club Malasaña", "ciudad": "Madrid", "provincia": "Madrid", "ciudad_slug": "madrid", "direccion": "Plaza del Conde de Toreno 2, 28015 Madrid", "codigo_postal": "28015", "coordenadas": {"lat": 40.4251, "lng": -3.7082}, "afiliacion": "Lotus Club", "head_coach": "Rodrigo Paredes (Faixa Preta)", "modalidades": ["Gi", "No-Gi"], "horarios_resumen": "Lunes a Viernes", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 641 70 99 39", "whatsapp": "34641709939", "web": "https://bjjmadrid.com", "instagram": "@lotus_bjj_espana"}, "rating": {"valor": 4.9, "resenas_count": 38}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Lotus Club BJJ en el centro de Madrid (Malasaña)."}, {"id": "bjj-bilbao-lotus", "slug": "aequalis-lotus-club-bilbao", "nombre": "Aequalis - Lotus Club Bilbao", "ciudad": "Mungia (Bilbao)", "provincia": "Vizcaya", "ciudad_slug": "bilbao", "direccion": "Lauaxeta Olerkari Kalea 52A, 48100 Mungia, Bizkaia", "codigo_postal": "48100", "coordenadas": {"lat": 43.3521, "lng": -2.8465}, "afiliacion": "Lotus Club", "head_coach": "Xabi Rapado & Alvaro Gonzalez (Faixas Pretas)", "modalidades": ["Gi", "No-Gi"], "horarios_resumen": "Lunes a Viernes", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 634 46 72 96", "whatsapp": "", "web": "https://bjjmadrid.com", "instagram": "@lotus_bjj_espana"}, "rating": {"valor": 4.9, "resenas_count": 31}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Aequalis - Lotus Club filial en Mungia, Vizcaya (Bilbao)."}, {"id": "bjj-segovia-lotus", "slug": "segosport-lotus-club-segovia", "nombre": "SegoSport - Lotus Club Segovia", "ciudad": "Segovia", "provincia": "Segovia", "ciudad_slug": "segovia", "direccion": "Calle Romero 18, 40002 Segovia", "codigo_postal": "40002", "coordenadas": {"lat": 40.9429, "lng": -4.1201}, "afiliacion": "Lotus Club", "head_coach": "Román Velázquez Díaz (Faixa Preta)", "modalidades": ["Gi", "No-Gi"], "horarios_resumen": "Lunes a Viernes", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 921 43 74 53", "whatsapp": "", "web": "https://bjjmadrid.com", "instagram": "@lotus_bjj_espana"}, "rating": {"valor": 4.9, "resenas_count": 27}, "verificada": true, "destacada_premium": false, "descripcion_seo": "SegoSport - Lotus Club filial en Segovia."}, {"id": "bjj-alicante-lotus", "slug": "equipo-blume-lotus-club-alicante", "nombre": "Equipo Blume - Lotus Club Alicante", "ciudad": "San Vicente del Raspeig (Alicante)", "provincia": "Alicante", "ciudad_slug": "alicante", "direccion": "Carrer Artes Gráficas, 03690 San Vicente del Raspeig, Alicante", "codigo_postal": "03690", "coordenadas": {"lat": 38.3971, "lng": -0.5262}, "afiliacion": "Lotus Club", "head_coach": "Equipo Blume Lotus", "modalidades": ["Gi", "No-Gi"], "horarios_resumen": "Lunes a Viernes", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 634 46 72 96", "whatsapp": "", "web": "https://bjjmadrid.com", "instagram": "@lotus_bjj_espana"}, "rating": {"valor": 5.0, "resenas_count": 35}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Equipo Blume - Lotus Club filial en San Vicente del Raspeig, Alicante."}, {"id": "bjj-malaga-05", "slug": "lilius-barnatt-martial-arts-lbma-malaga", "nombre": "Lilius Barnatt Martial Arts (LBMA)", "ciudad": "Torremolinos (Málaga)", "provincia": "Málaga", "ciudad_slug": "malaga", "direccion": "Calle Antonio Alcaide Sánchez 3, El Pinillo, 29620 Torremolinos, Málaga", "codigo_postal": "29620", "coordenadas": {"lat": 36.6138, "lng": -4.5126}, "afiliacion": "LBMA", "head_coach": "Santeri Lilius", "modalidades": ["No-Gi", "Gi", "MMA", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 603 71 60 05", "whatsapp": "34603716005", "web": "https://liliusbarnatt.com", "instagram": "@liliusbarnatt"}, "rating": {"valor": 5.0, "resenas_count": 94}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en Lilius Barnatt Martial Arts (LBMA), academia de BJJ, Grappling y MMA en Málaga."}, {"id": "bjj-valencia-03", "slug": "gracie-barra-valencia-camins-al-grau", "nombre": "Gracie Barra Valencia (Camins al Grau)", "ciudad": "Valencia", "provincia": "Valencia", "ciudad_slug": "valencia", "direccion": "Carrer del Mestre Valls 3, Camins al Grau, 46021 València", "codigo_postal": "46021", "coordenadas": {"lat": 39.4665, "lng": -0.3472}, "afiliacion": "Gracie Barra", "head_coach": "Instructor Certificado GB", "modalidades": ["Gi", "No-Gi", "Defensa Personal", "Kids"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 613 23 59 86", "whatsapp": "34613235986", "web": "https://graciebarravalenciagrau.com", "instagram": "@gbvalenciagrau"}, "rating": {"valor": 5.0, "resenas_count": 89}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en Gracie Barra Camins al Grau, academia oficial de Jiu-Jitsu Brasileño en Valencia."}, {"id": "bjj-sevilla-04", "slug": "gracie-barra-sevilla", "nombre": "Gracie Barra Sevilla", "ciudad": "Sevilla", "provincia": "Sevilla", "ciudad_slug": "sevilla", "direccion": "Calle Virgen de Begoña 6, 41011 Sevilla", "codigo_postal": "41011", "coordenadas": {"lat": 37.3752, "lng": -6.0021}, "afiliacion": "Gracie Barra", "head_coach": "Prof. Nacho Lora", "modalidades": ["Gi", "No-Gi", "Kids"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 677 30 54 80", "whatsapp": "34677305480", "web": "https://www.graciebarrasevilla.com", "instagram": "@graciebarrasevilla"}, "rating": {"valor": 4.9, "resenas_count": 115}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Entrena en Gracie Barra Sevilla (C/ Virgen de Begoña 6), escuela premium de Jiu-Jitsu Brasileño en Sevilla."}, {"id": "bjj-bilbao-06", "slug": "bjj-bilbao-cleyton-bastos", "nombre": "BJJ Bilbao (Cleyton Bastos Team)", "ciudad": "Leioa (Bilbao)", "provincia": "Vizcaya", "ciudad_slug": "bilbao", "direccion": "Calle Langileria 16-A, 48940 Leioa, Bizkaia", "codigo_postal": "48940", "coordenadas": {"lat": 43.3268, "lng": -2.9892}, "afiliacion": "Cleyton Bastos JJ Team", "head_coach": "Cleyton Bastos", "modalidades": ["Gi", "No-Gi", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 688 89 12 34", "whatsapp": "34688891234", "web": "https://bjjbilbao.com", "instagram": "@bjjbilbao"}, "rating": {"valor": 4.9, "resenas_count": 63}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Entrena en BJJ Bilbao Academy (Leioa), escuela de Jiu-Jitsu Brasileño, Muay Thai y defensa personal en Bilbao."}, {"id": "bjj-zaragoza-07", "slug": "fusion-bjj-zaragoza", "nombre": "Fusión BJJ Zaragoza", "ciudad": "Zaragoza", "provincia": "Zaragoza", "ciudad_slug": "zaragoza", "direccion": "Calle de Santa Orosia 19, 50010 Zaragoza", "codigo_postal": "50010", "coordenadas": {"lat": 41.6512, "lng": -0.9034}, "afiliacion": "Fusión BJJ / Bremgartner", "head_coach": "Alberto Bremgartner", "modalidades": ["Gi", "No-Gi", "Kids"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 604 57 21 15", "whatsapp": "34604572115", "web": "https://www.fusionbjj.es", "instagram": "@fusionbjjzaragoza"}, "rating": {"valor": 4.9, "resenas_count": 51}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Entrena en Fusión BJJ Zaragoza (C/ Santa Orosia 19), academia de Jiu-Jitsu Brasileño y Grappling en Zaragoza."}, {"id": "bjj-baleares-01", "slug": "art-of-flow-ibiza-academy", "nombre": "Art of Flow Ibiza Academy", "ciudad": "Ibiza", "provincia": "Islas Baleares - Ibiza", "ciudad_slug": "ibiza", "direccion": "Carrer del Bisbe Abad y Lasierra 48, 07800 Eivissa, Illes Balears", "codigo_postal": "07800", "coordenadas": {"lat": 38.9089, "lng": 1.4323}, "afiliacion": "Art of Flow / BJJ Ibiza", "head_coach": "Head Coach Art of Flow", "modalidades": ["Gi", "No-Gi", "Kids", "Competición"], "horarios_resumen": "Lunes a Sábado: Mañanas y Tardes", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 633 77 11 57", "whatsapp": "34633771157", "web": "https://artofflowibizaacademy.com", "instagram": "@artofflowibiza"}, "rating": {"valor": 5.0, "resenas_count": 50}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Art of Flow Ibiza Academy, academia oficial de Jiu-Jitsu Brasileño y Grappling en Ibiza (Eivissa)."}, {"id": "bjj-baleares-02", "slug": "az-jiu-jitsu-ibiza", "nombre": "AZ Jiu Jitsu Ibiza", "ciudad": "Ibiza (Santa Eulària des Riu)", "provincia": "Islas Baleares - Ibiza", "ciudad_slug": "ibiza", "direccion": "Calle de la Iglesia 32, 07840 Santa Eulària des Riu, Ibiza", "codigo_postal": "07840", "coordenadas": {"lat": 38.9845, "lng": 1.5332}, "afiliacion": "AZ Jiu Jitsu / AJP", "head_coach": "Ángel Sánchez Soriano", "modalidades": ["Gi", "No-Gi"], "horarios_resumen": "Lunes a Viernes", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 637 33 28 65", "whatsapp": "34637332865", "web": "", "instagram": "@az_jiujitsu_ibiza"}, "rating": {"valor": 4.9, "resenas_count": 34}, "verificada": true, "destacada_premium": false, "descripcion_seo": "AZ Jiu Jitsu en Santa Eulària des Riu, Ibiza."}, {"id": "bjj-baleares-03", "slug": "bjj-palma-mallorca", "nombre": "BJJ Palma Mallorca", "ciudad": "Palma de Mallorca", "provincia": "Islas Baleares - Mallorca", "ciudad_slug": "palma-mallorca", "direccion": "Carrer Salvador Dalí 42, 07011 Palma, Illes Balears", "codigo_postal": "07011", "coordenadas": {"lat": 39.5824, "lng": 2.6321}, "afiliacion": "BJJ Palma", "head_coach": "Head Coach BJJ Palma", "modalidades": ["Gi", "No-Gi", "Kids", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 601 56 99 44", "whatsapp": "34601569944", "web": "https://bjjpalma.com", "instagram": "@bjjpalma"}, "rating": {"valor": 4.9, "resenas_count": 78}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en BJJ Palma (C/ Salvador Dalí 42), escuela de Jiu-Jitsu Brasileño en Palma de Mallorca, Islas Baleares."}, {"id": "bjj-canarias-01", "slug": "gracie-barra-tenerife", "nombre": "Gracie Barra Tenerife", "ciudad": "San Isidro (Tenerife)", "provincia": "Islas Canarias - Santa Cruz de Tenerife", "ciudad_slug": "tenerife", "direccion": "Calle Hermano Pedro 38, San Isidro, 38611 Santa Cruz de Tenerife", "codigo_postal": "38611", "coordenadas": {"lat": 28.0762, "lng": -16.5583}, "afiliacion": "Gracie Barra", "head_coach": "Instructor Certificado GB", "modalidades": ["Gi", "No-Gi", "Defensa Personal", "Kids"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 666 58 77 23", "whatsapp": "34666587723", "web": "https://www.graciebarratenerife.com", "instagram": "@graciebarratenerife"}, "rating": {"valor": 5.0, "resenas_count": 92}, "verificada": true, "destacada_premium": true, "descripcion_seo": "Entrena en Gracie Barra Tenerife (San Isidro), academia oficial en Santa Cruz de Tenerife, Islas Canarias."}, {"id": "bjj-canarias-02", "slug": "daniel-ladero-academy-gran-canaria", "nombre": "Daniel Ladero Academy BJJ", "ciudad": "Las Palmas de Gran Canaria", "provincia": "Islas Canarias - Las Palmas de Gran Canaria", "ciudad_slug": "gran-canaria", "direccion": "Calle Lentisco 91, 35018 Las Palmas de Gran Canaria", "codigo_postal": "35018", "coordenadas": {"lat": 28.0934, "lng": -15.4482}, "afiliacion": "Daniel Ladero BJJ", "head_coach": "Daniel Ladero", "modalidades": ["Gi", "No-Gi", "Competición"], "horarios_resumen": "Lunes a Viernes: Mañanas y Tardes", "clase_prueba_gratis": true, "contacto": {"telefono": "+34 620 85 76 84", "whatsapp": "34620857684", "web": "", "instagram": "@danielladerobjj"}, "rating": {"valor": 5.0, "resenas_count": 110}, "verificada": true, "destacada_premium": false, "descripcion_seo": "Entrena en Daniel Ladero Academy, academia referente de Jiu-Jitsu Brasileño en Las Palmas de Gran Canaria."}];
+        let academiasData = [];
+        let map;
+        let markersLayer;
+        let filtroModalidadActual = '';
+
+        async function iniciarPortal() {
+            map = L.map('map').setView([40.2, -3.7], 6);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+            markersLayer = L.layerGroup().addTo(map);
+
+            try {
+                const res = await fetch('./academias.json');
+                if (!res.ok) throw new Error('Usando datos embebidos');
+                academiasData = await res.json();
+            } catch (e) {
+                academiasData = FALLBACK_ACADEMIAS;
+            }
+
+            renderizarAcademias(academiasData);
+            document.getElementById('searchInput').addEventListener('input', aplicarFiltros);
+        }
+
+        function renderizarAcademias(lista) {
+            const container = document.getElementById('academiasContainer');
+            container.innerHTML = '';
+            markersLayer.clearLayers();
+
+            if (lista.length === 0) {
+                container.innerHTML = '<div class="p-6 bg-slate-900 rounded-xl border border-slate-800 text-center text-slate-400 text-sm">No se encontraron academias con ese criterio.</div>';
+                return;
+            }
+
+            lista.forEach(academia => {
+                const marker = L.marker([academia.coordenadas.lat, academia.coordenadas.lng])
+                    .bindPopup(`
+                        <div class="p-1">
+                            <strong class="text-amber-400 block text-sm">${academia.nombre}</strong>
+                            <span class="text-xs text-slate-300 block mt-0.5">${academia.direccion}</span>
+                            <span class="text-[11px] text-slate-400 block mt-1">Equipo: ${academia.afiliacion}</span>
+                        </div>
+                    `);
+                markersLayer.addLayer(marker);
+
+                const card = document.createElement('div');
+                card.className = `p-5 rounded-xl bg-slate-900 border ${academia.destacada_premium ? 'border-amber-500/60' : 'border-slate-800'} hover:border-amber-400 transition cursor-pointer`;
+                card.onclick = () => {
+                    map.flyTo([academia.coordenadas.lat, academia.coordenadas.lng], 15, { duration: 1.2 });
+                    marker.openPopup();
+                };
+
+                const badgesModalidades = academia.modalidades.map(m => 
+                    `<span class="px-2 py-0.5 text-[10px] rounded bg-slate-800/90 text-slate-300">${m}</span>`
+                ).join(' ');
+
+                const igHandle = (academia.contacto.instagram || '').replace('@', '').trim();
+                const btnWeb = academia.contacto.web ? `<a href="${academia.contacto.web}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Visitar Web Oficial" class="px-2 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-[11px] font-medium text-slate-200 transition">🌐 Web</a>` : '';
+                const btnIg = igHandle ? `<a href="https://instagram.com/${igHandle}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Instagram @${igHandle}" class="px-2 py-1 rounded bg-slate-800/80 hover:bg-pink-500/20 hover:text-pink-300 text-[11px] font-medium text-slate-300 transition">IG</a>` : '';
+                const btnWa = academia.contacto.whatsapp 
+                    ? `<a href="https://wa.me/${academia.contacto.whatsapp}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Escribir por WhatsApp (${academia.contacto.telefono})" class="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-[11px] font-semibold text-emerald-400 transition">WhatsApp ↗</a>`
+                    : (academia.contacto.telefono ? `<a href="tel:${academia.contacto.telefono.replace(/\s+/g, '')}" onclick="event.stopPropagation()" class="px-2 py-1 rounded bg-slate-800/80 text-[11px] font-medium text-slate-300 hover:text-white transition">📞 ${academia.contacto.telefono}</a>` : '');
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <div>
+                            ${academia.destacada_premium ? '<span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500 text-slate-950 mb-1.5 inline-block">★ Destacada</span>' : ''}
+                            <h3 class="font-heading text-lg font-bold text-white leading-snug">${academia.nombre}</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">📍 ${academia.direccion}</p>
+                        </div>
+                        <span class="text-xs font-bold bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-amber-400 shrink-0">★ ${academia.rating.valor}</span>
+                    </div>
+                    <p class="text-xs text-slate-300 mt-2"><strong>Filial:</strong> ${academia.afiliacion} · <strong>Coach:</strong> ${academia.head_coach}</p>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-3 pt-3 border-t border-slate-800/80">
+                        <div class="flex flex-wrap gap-1">${badgesModalidades}</div>
+                        <div class="flex items-center gap-1.5 shrink-0">${btnWeb}${btnIg}${btnWa}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function normalizarTexto(str) {
+            return (str || '').toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function aplicarFiltros() {
+            const rawTexto = document.getElementById('searchInput').value.trim();
+            const texto = normalizarTexto(rawTexto);
+            const filtradas = academiasData.filter(a => {
+                const campos = [
+                    a.nombre,
+                    a.ciudad,
+                    a.provincia,
+                    a.ciudad_slug,
+                    a.direccion,
+                    a.afiliacion,
+                    a.head_coach,
+                    a.descripcion_seo
+                ].map(normalizarTexto).join(' ');
+                const coincideTexto = !texto || campos.includes(texto);
+                const coincideModalidad = !filtroModalidadActual || a.modalidades.includes(filtroModalidadActual);
+                return coincideTexto && coincideModalidad;
+            });
+            renderizarAcademias(filtradas);
+
+            if (filtradas.length > 0 && map) {
+                if (!texto && !filtroModalidadActual) {
+                    map.setView([40.2, -3.7], 6);
+                } else {
+                    const bounds = L.latLngBounds(filtradas.map(a => [a.coordenadas.lat, a.coordenadas.lng]));
+                    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+                }
+            }
+        }
+
+        function filtrarPorTexto(ciudad) {
+            document.getElementById('searchInput').value = ciudad;
+            aplicarFiltros();
+        }
+
+        function filtrarModalidad(mod) {
+            filtroModalidadActual = mod;
+            aplicarFiltros();
+        }
+
+        function filtrarPorProvincia(provincia) {
+            document.getElementById('searchInput').value = provincia;
+            aplicarFiltros();
+        }
+
+        // TORNEOS CON FECHA ISO (YYYY-MM-DD), AUTO-FILTRADO DE VENCIDOS Y ORDENACIÓN CRONOLÓGICA
+        const FALLBACK_TORNEOS = [{"id": "sc-green-capital-2026", "nombre": "Green Capital 2026 (Nordfighter)", "fecha": "2026-11-14", "ciudad": "Vitoria-Gasteiz", "recinto": "Polideportivo Vitoria-Gasteiz, Álava", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-vinyols-challenge-fall-2026", "nombre": "Vinyols Challenge Fall 2026", "fecha": "2026-11-14", "ciudad": "Vinyols i els Arcs (Tarragona)", "recinto": "Pavelló Municipal Vinyols i els Arcs", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-european-cup-guadalajara-2026", "nombre": "European Cup 2026 / Gi - No Gi / Kids", "fecha": "2026-11-15", "ciudad": "Guadalajara", "recinto": "Palacio Multiusos de Guadalajara", "circuito": "AEBJJ / FIJJD", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-bjjpro-zaragoza-2026", "nombre": "BJJPRO Zaragoza 2026 | Oso Duro (D-BJJ)", "fecha": "2026-11-15", "ciudad": "Zaragoza", "recinto": "Polideportivo Municipal Siglo XXI", "circuito": "D-BJJ / Oso Duro", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-europe-cup-valencia-2026", "nombre": "Europe Cup BJJ 2026 (Spain BJJ Tour)", "fecha": "2026-11-21", "ciudad": "Valencia", "recinto": "Pabellón Municipal de Valencia (FIJJD)", "circuito": "AEBJJ / FIJJD", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-open-cantabria-2026", "nombre": "Open Cantabria 2026 | Oso Duro (D-BJJ)", "fecha": "2026-11-21", "ciudad": "Soto de la Marina (Cantabria)", "recinto": "Polideportivo Soto de la Marina", "circuito": "D-BJJ / Oso Duro", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-aranha-interclub-2026", "nombre": "Aranha Interclub 2026 (Niños & Adultos)", "fecha": "2026-11-28", "ciudad": "Barcelona", "recinto": "Sede Aranha BJJ Barcelona", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "torneo-madrid-autumn-2026", "nombre": "Madrid Autumn International Open IBJJF Championship", "fecha": "2026-11-28", "ciudad": "Madrid", "recinto": "Pabellón Deportivo Europa (Leganés)", "circuito": "IBJJF", "modalidades": ["Gi", "No-Gi"], "enlace": "https://ibjjf.com/events/championships"}, {"id": "sc-spain-bjj-cup-sevilla-2026", "nombre": "Spain BJJ Cup Gi & No-Gi 2026 (Spain BJJ Tour)", "fecha": "2026-12-05", "ciudad": "Sevilla", "recinto": "Centro Deportivo Sevilla (FIJJD)", "circuito": "AEBJJ / FIJJD", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-grand-slam-baiona-2026", "nombre": "Grand Slam Baiona | D-BJJ", "fecha": "2026-12-05", "ciudad": "Baiona (Pontevedra)", "recinto": "Pabellón Municipal de Deportes de Baiona", "circuito": "D-BJJ / Oso Duro", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-bcn-challenge-winter-2026", "nombre": "BCN Challenge Winter 2026", "fecha": "2026-12-05", "ciudad": "El Papiol (Barcelona)", "recinto": "Pavelló Poliesportiu Municipal El Papiol", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-wn-pro-opens-madrid-2026", "nombre": "WN Pro Opens - Madrid", "fecha": "2026-12-06", "ciudad": "Alcobendas (Madrid)", "recinto": "Polideportivo Alcobendas, Madrid", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-campeonato-espana-adcc-2026", "nombre": "Campeonato de España ADCC", "fecha": "2026-12-12", "ciudad": "La Nucía (Alicante)", "recinto": "Ciutat Esportiva Camilo Cano (La Nucía)", "circuito": "ADCC", "modalidades": ["No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-kimura-cup-zaragoza-2026", "nombre": "Kimura Cup Zaragoza 2026", "fecha": "2026-12-12", "ciudad": "Zaragoza", "recinto": "Pabellón Deportivo Zaragoza (Tour 26/27)", "circuito": "Kimura Cup", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-all-stars-bjj-madrid-2026", "nombre": "All Stars BJJ Madrid", "fecha": "2026-12-13", "ciudad": "Madrid", "recinto": "Pabellón Deportivo Madrid", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-nacional-euskadi-2026", "nombre": "Nacional de Euskadi 2026 | Oso Duro", "fecha": "2026-12-13", "ciudad": "Zamudio (Vizcaya - Euskadi)", "recinto": "Polideportivo Zamudio", "circuito": "D-BJJ / Oso Duro", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-ibiza-bjj-cup-2026", "nombre": "Ibiza BJJ Cup Gi & No-Gi 2026 (Spain BJJ Tour)", "fecha": "2026-12-19", "ciudad": "Santa Eulària des Riu (Ibiza)", "recinto": "Polideportivo Municipal Santa Eulària, Ibiza (FIJJD)", "circuito": "AEBJJ / FIJJD", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-gsls-albacete-open-2026", "nombre": "GSLS Albacete International Open", "fecha": "2026-12-19", "ciudad": "Albacete", "recinto": "Pabellón Universitario de Albacete", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-dojjo-open-altea-2027", "nombre": "Dojjo Open Challenge Altea", "fecha": "2027-01-09", "ciudad": "Altea (Alicante)", "recinto": "Palau dels Esports Vila d'Altea", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-cataluna-bjj-cup-2027", "nombre": "Cataluña BJJ Cup Gi & No-Gi 2027 (Spain BJJ Tour)", "fecha": "2027-01-09", "ciudad": "Castelldefels (Barcelona)", "recinto": "Poliesportiu Municipal Can Vinader (FIJJD)", "circuito": "AEBJJ / FIJJD", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-euskadi-bjj-cup-2027", "nombre": "Euskadi BJJ Cup Gi & No-Gi 2027 (Spain BJJ Tour)", "fecha": "2027-01-30", "ciudad": "Legutio (Álava - Euskadi)", "recinto": "Polideportivo Municipal de Legutio (FIJJD)", "circuito": "AEBJJ / FIJJD", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-kimura-cup-madrid-2027", "nombre": "Kimura Cup Madrid 2027", "fecha": "2027-01-31", "ciudad": "Arganda del Rey (Madrid)", "recinto": "Ciudad Deportiva Príncipe Felipe (Arganda del Rey)", "circuito": "Kimura Cup", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-polaris-open-madrid-2027", "nombre": "Polaris Open Spain - Madrid", "fecha": "2027-02-20", "ciudad": "Madrid", "recinto": "Centro Deportivo Amorós, Madrid", "circuito": "Polaris / Smoothcomp", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "sc-open-villanueva-rio-segura-2027", "nombre": "Open de Villanueva del Río Segura (Liga BJJ)", "fecha": "2027-02-20", "ciudad": "Villanueva del Río Segura (Murcia)", "recinto": "Pabellón Municipal Villanueva del Río Segura", "circuito": "Smoothcomp", "modalidades": ["Gi", "No-Gi", "Kids"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "torneo-spain-national-ajp-2027", "nombre": "AJP Tour Spain National Jiu-Jitsu Pro", "fecha": "2027-02-20", "ciudad": "Valencia", "recinto": "Velódromo Luis Puig", "circuito": "AJP Tour", "modalidades": ["Gi", "No-Gi"], "enlace": "https://ajptour.com/en/events/upcoming"}, {"id": "torneo-madrid-spring-ibjjf-2027", "nombre": "Madrid Spring International Open IBJJF Championship", "fecha": "2027-03-27", "ciudad": "Madrid", "recinto": "Polideportivo Municipal Gallur", "circuito": "IBJJF", "modalidades": ["Gi", "No-Gi"], "enlace": "https://ibjjf.com/events/championships"}, {"id": "sc-abierto-leon-dbjj-2027", "nombre": "Abierto de León | D-BJJ 2027", "fecha": "2027-04-24", "ciudad": "León", "recinto": "Palacio de los Deportes de León", "circuito": "D-BJJ / Oso Duro", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}, {"id": "torneo-barcelona-open-ibjjf-2027", "nombre": "Barcelona International Open IBJJF Championship", "fecha": "2027-05-15", "ciudad": "Barcelona", "recinto": "Complex Esportiu Municipal Mar Bella", "circuito": "IBJJF", "modalidades": ["Gi", "No-Gi"], "enlace": "https://ibjjf.com/events/championships"}, {"id": "sc-grappling-industries-madrid-2027", "nombre": "Grappling Industries Madrid (Round Robin)", "fecha": "2027-05-22", "ciudad": "Madrid", "recinto": "Pabellón Deportivo Madrid", "circuito": "Grappling Industries", "modalidades": ["Gi", "No-Gi"], "enlace": "https://smoothcomp.com/es/events/upcoming"}];
+        let torneosData = [];
+        let filtroCircuitoActual = '';
+
+        function formatearFechaISO(fechaISO) {
+            if (!fechaISO || !/^\d{4}-\d{2}-\d{2}$/.test(fechaISO)) return fechaISO;
+            const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            const [anio, mes, dia] = fechaISO.split('-').map(Number);
+            return `${String(dia).padStart(2, '0')} ${meses[mes - 1]} ${anio}`;
+        }
+
+        function obtenerHoyISO() {
+            const hoy = new Date();
+            const anio = hoy.getFullYear();
+            const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+            const dia = String(hoy.getDate()).padStart(2, '0');
+            return `${anio}-${mes}-${dia}`;
+        }
+
+        async function cargarTorneos() {
+            try {
+                const res = await fetch('./torneos.json');
+                if (!res.ok) throw new Error('Usando fallback torneos');
+                torneosData = await res.json();
+            } catch(e) {
+                torneosData = FALLBACK_TORNEOS;
+            }
+            aplicarFiltroTorneos();
+        }
+
+        function filtrarCircuitoTorneo(circuito) {
+            filtroCircuitoActual = circuito;
+            const botones = [
+                { id: 'btnTorneoTodos', val: '' },
+                { id: 'btnTorneoIBJJF', val: 'IBJJF' },
+                { id: 'btnTorneoAJP', val: 'AJP' },
+                { id: 'btnTorneoADCC', val: 'ADCC' }
+            ];
+            botones.forEach(b => {
+                const el = document.getElementById(b.id);
+                if (!el) return;
+                if (b.val === circuito) {
+                    el.className = "px-3 py-2 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950 cursor-pointer transition";
+                } else {
+                    el.className = "px-3 py-2 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 hover:border-amber-500 text-slate-300 cursor-pointer transition";
+                }
+            });
+            aplicarFiltroTorneos();
+        }
+
+        function aplicarFiltroTorneos() {
+            const hoyISO = obtenerHoyISO();
+            const vigentes = torneosData
+                .filter(t => !t.fecha || t.fecha >= hoyISO)
+                .filter(t => {
+                    if (!filtroCircuitoActual) return true;
+                    if (filtroCircuitoActual === 'ADCC') {
+                        const c = t.circuito.toUpperCase();
+                        return c.includes('ADCC') || c.includes('AEBJJ') || c.includes('KIMURA') || c.includes('D-BJJ') || c.includes('SMOOTHCOMP') || c.includes('POLARIS') || c.includes('GRAPPLING');
+                    }
+                    return t.circuito.toUpperCase().includes(filtroCircuitoActual.toUpperCase());
+                })
+                .sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''));
+
+            renderizarTorneos(vigentes);
+        }
+
+        function renderizarTorneos(lista) {
+            const container = document.getElementById('torneosContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (lista.length === 0) {
+                container.innerHTML = '<div class="col-span-full p-6 bg-slate-900 rounded-xl border border-slate-800 text-center text-slate-400 text-sm">No hay próximos torneos programados para este filtro.</div>';
+                return;
+            }
+
+            lista.forEach(t => {
+                const badges = t.modalidades.map(m => `<span class="px-2 py-0.5 text-[11px] rounded bg-slate-800 text-slate-300 font-medium">${m}</span>`).join(' ');
+                const fechaLegible = formatearFechaISO(t.fecha);
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-amber-500/50 transition flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold uppercase px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">${t.circuito}</span>
+                            <span class="text-xs font-semibold text-slate-300" title="Fecha ISO: ${t.fecha}">📅 ${fechaLegible}</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-2">${t.nombre}</h3>
+                        <p class="text-xs text-slate-400 mb-4">📍 ${t.ciudad} · ${t.recinto}</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                        <div class="flex gap-1">${badges}</div>
+                        <a href="${t.enlace}" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300 transition">Calendario Oficial ↗</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // PESOS IBJJF
+        const pesosGi = [
+            { cat: "Rooster (Gallo)", max: "57.50 kg / 126.5 lbs" },
+            { cat: "Light Feather (Pluma)", max: "64.00 kg / 141.0 lbs" },
+            { cat: "Feather (Pena)", max: "70.00 kg / 154.5 lbs" },
+            { cat: "Light (Leve)", max: "76.00 kg / 168.0 lbs" },
+            { cat: "Middle (Médio)", max: "82.30 kg / 181.5 lbs" },
+            { cat: "Medium Heavy (Meio Pesado)", max: "88.30 kg / 195.0 lbs" },
+            { cat: "Heavy (Pesado)", max: "94.30 kg / 207.5 lbs" },
+            { cat: "Super Heavy (Super Pesado)", max: "100.50 kg / 221.5 lbs" },
+            { cat: "Ultra Heavy (Pesadíssimo)", max: "Sin límite (+100.5 kg)" }
+        ];
+
+        const pesosNoGi = [
+            { cat: "Rooster (Gallo)", max: "55.50 kg / 122.5 lbs" },
+            { cat: "Light Feather (Pluma)", max: "61.50 kg / 135.5 lbs" },
+            { cat: "Feather (Pena)", max: "67.50 kg / 149.0 lbs" },
+            { cat: "Light (Leve)", max: "73.50 kg / 162.0 lbs" },
+            { cat: "Middle (Médio)", max: "79.50 kg / 175.5 lbs" },
+            { cat: "Medium Heavy (Meio Pesado)", max: "85.50 kg / 188.5 lbs" },
+            { cat: "Heavy (Pesado)", max: "91.50 kg / 202.0 lbs" },
+            { cat: "Super Heavy (Super Pesado)", max: "97.50 kg / 215.0 lbs" },
+            { cat: "Ultra Heavy (Pesadíssimo)", max: "Sin límite (+97.5 kg)" }
+        ];
+
+        function renderizarTablaPesos(tipo) {
+            const tbody = document.getElementById('tablaPesosBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            const datos = tipo === 'gi' ? pesosGi : pesosNoGi;
+            datos.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-white">${p.cat}</td>
+                    <td class="py-3 px-4">${tipo === 'gi' ? p.max : '-'}</td>
+                    <td class="py-3 px-4">${tipo === 'nogi' ? p.max : '-'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function cambiarTipoPeso(tipo) {
+            const btnGi = document.getElementById('btnGi');
+            const btnNoGi = document.getElementById('btnNoGi');
+            if (tipo === 'gi') {
+                btnGi.className = "px-4 py-2 rounded-lg text-xs font-bold bg-amber-500 text-slate-950 transition cursor-pointer";
+                btnNoGi.className = "px-4 py-2 rounded-lg text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 transition cursor-pointer";
+            } else {
+                btnNoGi.className = "px-4 py-2 rounded-lg text-xs font-bold bg-amber-500 text-slate-950 transition cursor-pointer";
+                btnGi.className = "px-4 py-2 rounded-lg text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 transition cursor-pointer";
+            }
+            renderizarTablaPesos(tipo);
+        }
+
+        function calcularCategoria() {
+            const peso = parseFloat(document.getElementById('inputPesoUser').value);
+            const mod = document.getElementById('selectModalidadCalc').value;
+            const resDiv = document.getElementById('resultadoCalc');
+            
+            if (!peso || isNaN(peso)) {
+                resDiv.innerHTML = '<span class="text-red-400">Por favor, ingresa un peso válido en kilogramos.</span>';
+                resDiv.classList.remove('hidden');
+                return;
+            }
+
+            const limites = mod === 'gi' ? [
+                { nombre: "Rooster", max: 57.5 },
+                { nombre: "Light Feather", max: 64.0 },
+                { nombre: "Feather", max: 70.0 },
+                { nombre: "Light", max: 76.0 },
+                { nombre: "Middle", max: 82.3 },
+                { nombre: "Medium Heavy", max: 88.3 },
+                { nombre: "Heavy", max: 94.3 },
+                { nombre: "Super Heavy", max: 100.5 }
+            ] : [
+                { nombre: "Rooster", max: 55.5 },
+                { nombre: "Light Feather", max: 61.5 },
+                { nombre: "Feather", max: 67.5 },
+                { nombre: "Light", max: 73.5 },
+                { nombre: "Middle", max: 79.5 },
+                { nombre: "Medium Heavy", max: 85.5 },
+                { nombre: "Heavy", max: 91.5 },
+                { nombre: "Super Heavy", max: 97.5 }
+            ];
+
+            let categoriaEncontrada = "Ultra Heavy (Sin límite)";
+            for (let l of limites) {
+                if (peso <= l.max) {
+                    categoriaEncontrada = l.nombre + ` (Límite: ${l.max} kg)`;
+                    break;
+                }
+            }
+
+            resDiv.innerHTML = `<strong class="text-amber-400 block mb-1">Tu categoría ideal (${mod.toUpperCase()}):</strong> <span class="text-white text-sm font-bold">${categoriaEncontrada}</span><span class="block text-[11px] text-slate-400 mt-1">*Recuerda que en competición oficial IBJJF se pesa con el kimono puesto.</span>`;
+            resDiv.classList.remove('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => { 
+            iniciarPortal(); 
+            cargarTorneos(); 
+            renderizarTablaPesos('gi');
+        });
+    </script>
+
+    <!-- MODAL AÑADIR ACADEMIA -->
+    <div id="modalAcademia" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 relative shadow-2xl m-4 max-h-[92vh] overflow-y-auto">
+            <button onclick="cerrarModalAcademia()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold cursor-pointer">&times;</button>
+            <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-2.5 inline-block">Alta en el Directorio Nacional</span>
+            <h3 class="font-heading text-2xl font-bold text-white mb-1">Añadir o Reclamar Academia</h3>
+            <p class="text-xs text-slate-400 mb-5">Completa los datos de tu escuela para aparecer en el mapa interactivo de JIU-JITSU.ES.</p>
+
+            <form onsubmit="enviarFormularioAcademia(event)" class="space-y-3.5 text-left">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre de la Academia *</label>
+                    <input type="text" id="formNombre" required placeholder="Ej. Gracie Jiu-Jitsu Retiro" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Ciudad *</label>
+                        <input type="text" id="formCiudad" required placeholder="Ej. Madrid" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Equipo / Afiliación</label>
+                        <input type="text" id="formAfiliacion" placeholder="Ej. Checkmat / Lotus Club" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Head Coach y Graduación *</label>
+                    <input type="text" id="formCoach" required placeholder="Ej. Prof. Carlos Martínez (Faixa Preta 2º Grado)" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Dirección Completa *</label>
+                    <input type="text" id="formDireccion" required placeholder="Calle y número, código postal, ciudad" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">WhatsApp / Teléfono *</label>
+                        <input type="tel" id="formWhatsapp" required placeholder="Ej. +34 600 12 34 56" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Instagram</label>
+                        <input type="text" id="formInstagram" placeholder="Ej. @miacademia_bjj" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Página Web Oficial</label>
+                    <input type="url" id="formWeb" placeholder="Ej. https://miacademiabjj.com" class="w-full bg-slate-950 text-white px-3.5 py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-amber-500 text-xs">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20 mt-2 cursor-pointer">
+                    Enviar Solicitud por WhatsApp ↗
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function abrirModalAcademia(e) {
+            e.preventDefault();
+            document.getElementById('modalAcademia').classList.remove('hidden');
+        }
+        function cerrarModalAcademia() {
+            document.getElementById('modalAcademia').classList.add('hidden');
+        }
+        function enviarFormularioAcademia(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('formNombre').value.trim();
+            const ciudad = document.getElementById('formCiudad').value.trim();
+            const afiliacion = document.getElementById('formAfiliacion').value.trim() || 'No especificada';
+            const coach = document.getElementById('formCoach').value.trim();
+            const direccion = document.getElementById('formDireccion').value.trim();
+            const whatsapp = document.getElementById('formWhatsapp').value.trim();
+            const instagram = document.getElementById('formInstagram').value.trim() || 'No especificado';
+            const web = document.getElementById('formWeb').value.trim() || 'No especificada';
+
+            const mensaje = `🥋 *SOLICITUD DE ALTA / RECLAMO - JIU-JITSU.ES*\n\n` +
+                `*Academia:* ${nombre}\n` +
+                `*Ciudad:* ${ciudad}\n` +
+                `*Equipo / Filial:* ${afiliacion}\n` +
+                `*Head Coach:* ${coach}\n` +
+                `*Dirección:* ${direccion}\n` +
+                `*WhatsApp / Tel:* ${whatsapp}\n` +
+                `*Instagram:* ${instagram}\n` +
+                `*Web Oficial:* ${web}`;
+
+            const urlWa = `https://wa.me/5493624200040?text=${encodeURIComponent(mensaje)}`;
+            window.open(urlWa, '_blank');
+
+            e.target.reset();
+            cerrarModalAcademia();
+        }
+    </script>
+
+    <!-- MODAL EQUIPAMIENTO DETALLE -->
+    <div id="modalEquipamiento" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl p-6 relative shadow-2xl m-4">
+            <button onclick="cerrarModalEquip()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold cursor-pointer">&times;</button>
+            <span id="modalEquipTag" class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-3 inline-block">Equipamiento BJJ</span>
+            <h3 id="modalEquipTitulo" class="font-heading text-2xl font-bold text-white mb-3">Título de Equipamiento</h3>
+            <div id="modalEquipContenido" class="text-xs text-slate-300 space-y-3 mb-6 max-h-[60vh] overflow-y-auto pr-2"></div>
+            <button onclick="cerrarModalEquip()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/25 cursor-pointer">
+                Entendido / Cerrar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const infoEquipamiento = {
+            'kimonos': {
+                tag: 'Kimono (Gi) / Homologado IBJJF',
+                titulo: 'Mejores Kimonos Calidad-Precio para BJJ',
+                html: `
+                    <p>Para entrenar y competir en torneos oficiales de la IBJJF o AJP en España, tu kimono debe cumplir con normativas estrictas de gramaje y medidas en solapas y mangas.</p>
+                    <h4 class="text-white font-bold mt-2">1. Tipos de Tejido:</h4>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong>Pearl Weave (Tejido Perla):</strong> El estándar de la industria. Ligero, resistente y transpirable. Ideal para verano y entrenamientos diarios.</li>
+                        <li><strong>Gold Weave:</strong> Más pesado y denso; excelente durabilidad, aunque retiene más calor.</li>
+                        <li><strong>Ripstop:</strong> Utilizado principalmente en los pantalones por su alta resistencia al desgarro y secado rápido.</li>
+                    </ul>
+                    <h4 class="text-white font-bold mt-2">2. Marcas Recomendadas en Europa:</h4>
+                    <p>Fuji Sports, Kingz Kimonos, Tatami Fightwear y Venum ofrecen las mejores relaciones de durabilidad y precio para cinturones blancos y avanzados.</p>
+                `
+            },
+            'nogi': {
+                tag: 'No-Gi / Grappling & ADCC',
+                titulo: 'Rashguards y Shorts de Competición',
+                html: `
+                    <p>En las modalidades de No-Gi y Grappling, la vestimenta debe ser ajustada para evitar agarres ilegales de los dedos y quemaduras por fricción en el tatami.</p>
+                    <h4 class="text-white font-bold mt-2">1. Normativa IBJJF No-Gi:</h4>
+                    <p>Las lycras (rashguards) deben ser de manga corta o larga y tener al menos un 10% del color correspondiente a tu rango de cinturón (Blanco, Azul, Morado, Marrón o Negro), o ser completamente negras/blancas en ciertos torneos abiertos.</p>
+                    <h4 class="text-white font-bold mt-2">2. Bermudas (Boardshorts):</h4>
+                    <p>Deben carecer de bolsillos con cremallera o cierres metálicos rígidos que puedan lesionar a tu compañero de entrenamiento.</p>
+                `
+            },
+            'accesorios': {
+                tag: 'Accesorios Esenciales',
+                titulo: 'Tape, Bucales y Mochilas Tácticas',
+                html: `
+                    <p>Los pequeños accesorios marcan una diferencia enorme en tu práctica diaria de artes marciales.</p>
+                    <ul class="list-disc pl-4 space-y-2">
+                        <li><strong>Finger Tape (Esparadrapo):</strong> Imprescindible para vendar las articulaciones de los dedos y prevenir lesiones crónicas por agarres de solapa. Se recomienda tape de óxido de zinc de alta adherencia.</li>
+                        <li><strong>Protectores Bucales:</strong> Los protectores termosellables de doble capa protegen tu dentadura contra impactos accidentales durante los scrums y derribos.</li>
+                        <li><strong>Mochilas Ventiladas:</strong> Almacenar un kimono húmedo después de entrenar genera bacterias y mal olor. Las mochilas con compartimentos de malla o ventilación lateral son esenciales.</li>
+                    </ul>
+                `
+            }
+        };
+
+        function abrirModalEquip(tipo) {
+            const data = infoEquipamiento[tipo];
+            if (!data) return;
+            document.getElementById('modalEquipTag').innerText = data.tag;
+            document.getElementById('modalEquipTitulo').innerText = data.titulo;
+            document.getElementById('modalEquipContenido').innerHTML = data.html;
+            document.getElementById('modalEquipamiento').classList.remove('hidden');
+        }
+
+        function cerrarModalEquip() {
+            document.getElementById('modalEquipamiento').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
