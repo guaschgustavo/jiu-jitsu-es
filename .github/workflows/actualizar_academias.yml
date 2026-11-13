@@ -1,0 +1,35 @@
+name: Actualizar Academias BJJ España (OSM)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 1 * *'
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-academias:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Ejecutar scraper de OpenStreetMap
+        run: python actualizar_academias_osm.py
+
+      - name: Guardar cambios en academias.json y academias.geojson
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add academias.json academias.geojson
+          git diff --staged --quiet || (git commit -m "chore: actualizar academias BJJ España desde OSM" && git push)
