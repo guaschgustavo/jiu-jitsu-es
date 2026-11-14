@@ -720,5 +720,38 @@
     "verificada": true,
     "destacada_premium": false,
     "descripcion_seo": "Entrena en Daniel Ladero Academy, academia referente de Jiu-Jitsu Brasileño en Las Palmas de Gran Canaria."
+  },
+  {
+    "nombre": "Brazilian Jiu-Jitsu",
+    "ciudad": "Lérida",
+    "region": "Otras",
+    "direccion": "Brazilian Jiu-Jitsu, 26, Avinguda del Pla d'Urgell, la Bordeta, Lérida, Segriá, Lérida, Cataluña, 25001, España",
+    "lat": 41.6011762,
+    "lng": 0.6450739,
+    "web": "",
+    "telefono": "",
+    "fuente": "OpenStreetMap"
+  },
+  {
+    "nombre": "Lotus Club BJJ Madrid",
+    "ciudad": "Madrid",
+    "region": "Madrid",
+    "direccion": "Lotus Club BJJ Madrid, 25, Bajo C, Calle de Agustín de Foxá, Castilla, Chamartín, Madrid, Comunidad de Madrid, 28036, España",
+    "lat": 40.4704265,
+    "lng": -3.6857607,
+    "web": "",
+    "telefono": "+34 653 74 44 37",
+    "fuente": "OpenStreetMap"
+  },
+  {
+    "nombre": "Gracie Barra",
+    "ciudad": "Zumaia",
+    "region": "Otras",
+    "direccion": "Gracie Barra, 14, Ardantzabidea auzoa, Ardantzabidea, Zumaia, Guipúzcoa, País Vasco, 20750, España",
+    "lat": 43.297838,
+    "lng": -2.258707,
+    "web": "https://www.graciebarrazumaia.com/centro-gracie-barra-zumaia/home",
+    "telefono": "",
+    "fuente": "OpenStreetMap"
   }
 ]
