@@ -37,7 +37,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=European+Cup+2026&countries=ES"
+    "enlace": "https://spainbjjtour.smoothcomp.com/es/events/upcoming"
   },
   {
     "id": "sc-bjjpro-zaragoza-2026",
@@ -50,7 +50,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/event/35227"
+    "enlace": "https://dbjj.smoothcomp.com/es/event/35227"
   },
   {
     "id": "sc-europe-cup-valencia-2026",
@@ -77,7 +77,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/event/35538"
+    "enlace": "https://dbjj.smoothcomp.com/es/event/35538"
   },
   {
     "id": "sc-aranha-interclub-2026",
@@ -118,7 +118,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/event/34441"
+    "enlace": "https://spainbjjtour.smoothcomp.com/es/event/34441"
   },
   {
     "id": "sc-grand-slam-baiona-2026",
@@ -169,7 +169,7 @@
     "modalidades": [
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/event/35745"
+    "enlace": "https://adcc-spain.smoothcomp.com/es/event/35745"
   },
   {
     "id": "sc-kimura-cup-zaragoza-2026",
@@ -183,7 +183,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/event/35155"
+    "enlace": "https://kimuracup.smoothcomp.com/es/event/35155"
   },
   {
     "id": "sc-all-stars-bjj-madrid-2026",
@@ -209,7 +209,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/event/35539"
+    "enlace": "https://dbjj.smoothcomp.com/es/event/35539"
   },
   {
     "id": "sc-ibiza-bjj-cup-2026",
@@ -291,7 +291,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/event/35753"
+    "enlace": "https://kimuracup.smoothcomp.com/es/event/35753"
   },
   {
     "id": "sc-polaris-open-madrid-2027",
@@ -383,6 +383,97 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/event/34939"
+    "enlace": "https://grapplingindustries.smoothcomp.com/es/event/34939"
+  },
+  {
+    "id": "sc-auto-33194",
+    "nombre": "European Cup 2026 \\/ Gi - No Gi \\/ Kids",
+    "fecha": "2026-11-15",
+    "ciudad": "Guadalajara",
+    "recinto": "Guadalajara (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/33194"
+  },
+  {
+    "id": "sc-auto-35592",
+    "nombre": "TROBADES DEL JUDO CASTELLÓ",
+    "fecha": "2026-11-21",
+    "ciudad": "Castellón del la Plana",
+    "recinto": "Castellón del la Plana (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/35592"
+  },
+  {
+    "id": "sc-auto-35755",
+    "nombre": "SANDA FIGHTERS PROMESAS 2026",
+    "fecha": "2026-12-12",
+    "ciudad": "Montemayor (Córdoba)",
+    "recinto": "Montemayor (Córdoba) (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/35755"
+  },
+  {
+    "id": "sc-auto-34104",
+    "nombre": "DOJJO OPEN ALTEA",
+    "fecha": "2027-01-09",
+    "ciudad": "Altea",
+    "recinto": "Altea (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://isbjja.smoothcomp.com/es/event/34104"
+  },
+  {
+    "id": "sc-auto-35839",
+    "nombre": "IFK European Championship 2027",
+    "fecha": "2027-02-05",
+    "ciudad": "Santa Susana, Barcelona",
+    "recinto": "Santa Susana, Barcelona (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/35839"
+  },
+  {
+    "id": "sc-auto-36243",
+    "nombre": "OPEN VILLANUEVA DEL RIO SEGURA",
+    "fecha": "2027-02-20",
+    "ciudad": "Murcia",
+    "recinto": "Murcia (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/36243"
+  },
+  {
+    "id": "sc-auto-28923",
+    "nombre": "WORLD MMA CHAMPIONSHIPS 2027",
+    "fecha": "2027-05-08",
+    "ciudad": "Torrevieja",
+    "recinto": "Torrevieja (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/28923"
   }
 ]
