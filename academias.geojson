@@ -63,6 +63,153 @@
         "telefono": "",
         "fuente": "OpenStreetMap"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1355017,
+          41.3834102
+        ]
+      },
+      "properties": {
+        "nombre": "Jiu-jitsu School",
+        "ciudad": "Barcelona",
+        "region": "Cataluña",
+        "direccion": "Jiu-jitsu School, Carrer d'Evarist Arnús, les Corts, Barcelona, Barcelonés, Barcelona, Cataluña, 08028, España",
+        "lat": 41.3834102,
+        "lng": 2.1355017,
+        "web": "",
+        "telefono": "",
+        "fuente": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.156878,
+          41.399808
+        ]
+      },
+      "properties": {
+        "nombre": "Tenth Planet - Jiu jitsu",
+        "ciudad": "Barcelona",
+        "region": "Cataluña",
+        "direccion": "Tenth Planet - Jiu jitsu, Carrer de Sant Pere Màrtir, la Vila de Gràcia, Gràcia, Barcelona, Barcelonés, Barcelona, Cataluña, 08012, España",
+        "lat": 41.399808,
+        "lng": 2.156878,
+        "web": "https://bio.site/10pbcn",
+        "telefono": "",
+        "fuente": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2231014,
+          41.4431602
+        ]
+      },
+      "properties": {
+        "nombre": "Academia Badalona Jiu-jitsu",
+        "ciudad": "Badalona",
+        "region": "Cataluña",
+        "direccion": "Academia Badalona Jiu-jitsu, Carrer de Juan Valera, la Salut, Districte 4, Badalona, Barcelonés, Barcelona, Cataluña, 08914, España",
+        "lat": 41.4431602,
+        "lng": 2.2231014,
+        "web": "",
+        "telefono": "",
+        "fuente": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2429004,
+          41.9315535
+        ]
+      },
+      "properties": {
+        "nombre": "Baobab Fleca, S.L.",
+        "ciudad": "Vic",
+        "region": "Cataluña",
+        "direccion": "Baobab Fleca, S.L., 28, Carrer del Bisbe Font Andreu, el Sucre, Sentfores, Vic, Osona, Barcelona, Cataluña, 08500, España",
+        "lat": 41.9315535,
+        "lng": 2.2429004,
+        "web": "",
+        "telefono": "+34 93 135 90 46",
+        "fuente": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.4382303,
+          39.4823786
+        ]
+      },
+      "properties": {
+        "nombre": "Fight Ground Jiu-Jitsu Academy",
+        "ciudad": "Quart de Poblet",
+        "region": "Comunidad Valenciana",
+        "direccion": "Fight Ground Jiu-Jitsu Academy, Calle Aparejador Antonio Monzó, Molí d'Animeta, Quart de Poblet, L'Horta Sud, Valencia, Comunidad Valenciana, 46930, España",
+        "lat": 39.4823786,
+        "lng": -0.4382303,
+        "web": "",
+        "telefono": "+34 651 48 48 34",
+        "fuente": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.5519904,
+          37.0268777
+        ]
+      },
+      "properties": {
+        "nombre": "Asociación de Jiu-Jitsu Antequerana",
+        "ciudad": "Antequera",
+        "region": "Andalucía",
+        "direccion": "Asociación de Jiu-Jitsu Antequerana, 42, Calle Ciudad de Salamanca, Antequera, Málaga, Andalucía, 29200, España",
+        "lat": 37.0268777,
+        "lng": -4.5519904,
+        "web": "",
+        "telefono": "",
+        "fuente": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.6061397,
+          36.0165191
+        ]
+      },
+      "properties": {
+        "nombre": "Roger Gracie Academy",
+        "ciudad": "Tarifa",
+        "region": "Andalucía",
+        "direccion": "Roger Gracie Academy, Calle Braille, 13 de Enero, Tarifa, Campo de Gibraltar, Cádiz, Andalucía, 11380, España",
+        "lat": 36.0165191,
+        "lng": -5.6061397,
+        "web": "",
+        "telefono": "+34673234196",
+        "fuente": "OpenStreetMap"
+      }
     }
   ]
 }
