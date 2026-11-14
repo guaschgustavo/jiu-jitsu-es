@@ -490,22 +490,25 @@
             const nombreLimpio = encodeURIComponent(t.nombre);
             const circuito = (t.circuito || '').toUpperCase();
 
-            if (url && !url.endsWith('/upcoming') && !url.endsWith('/championships')) {
+            // 1. Si ya tiene link directo a la ficha (/event/12345) o subdominio propio (ej. dbjj.smoothcomp.com), va directo
+            if (url.includes('/event/') || (url.includes('.smoothcomp.com') && !url.includes('//smoothcomp.com'))) {
                 return url;
             }
 
+            // 2. Si es de Smoothcomp pero genérico, forzar SIEMPRE &countries=ES para que no geolocalice en Argentina
             if (url.includes('smoothcomp.com') || circuito.includes('SMOOTHCOMP') || circuito.includes('AEBJJ') || circuito.includes('D-BJJ') || circuito.includes('KIMURA') || circuito.includes('ADCC')) {
-                return `https://smoothcomp.com/es/events/upcoming?search=${nombreLimpio}`;
+                return `https://smoothcomp.com/es/events/upcoming?search=${nombreLimpio}&countries=ES`;
             }
 
+            // 3. IBJJF y AJP
             if (circuito.includes('IBJJF') || url.includes('ibjjf.com')) {
                 return `https://www.google.com/search?q=${encodeURIComponent('site:ibjjf.com ' + t.nombre)}&btnI=1`;
             }
             if (circuito.includes('AJP') || url.includes('ajptour.com')) {
-                return `https://ajptour.com/en/events/upcoming?search=${nombreLimpio}`;
+                return `https://ajptour.com/en/events/upcoming`;
             }
 
-            return url || `https://smoothcomp.com/es/events/upcoming?search=${nombreLimpio}`;
+            return url || `https://smoothcomp.com/es/events/upcoming?search=${nombreLimpio}&countries=ES`;
         }
 
         function renderizarTorneos(lista) {
