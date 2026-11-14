@@ -280,6 +280,27 @@
             document.getElementById('searchInput').addEventListener('input', aplicarFiltros);
         }
 
+        function enfocarTarjetaAcademia(cardId, bajarEnMovil = false) {
+            const card = document.getElementById(cardId);
+            const container = document.getElementById('academiasContainer');
+            if (!card || !container) return;
+
+            // Desplazar la lista de tarjetas hasta dejar la academia arriba a la vista
+            const offsetTop = card.offsetTop - container.offsetTop - 8;
+            container.scrollTo({ top: offsetTop, behavior: 'smooth' });
+
+            // Si está en celular y tocó la ventanita del mapa, bajar la pantalla hacia la tarjeta
+            if (bajarEnMovil && window.innerWidth < 1024) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            // Resaltar visualmente la tarjeta seleccionada durante 2 segundos
+            card.classList.add('ring-2', 'ring-amber-400', 'bg-slate-800/90');
+            setTimeout(() => {
+                card.classList.remove('ring-2', 'ring-amber-400', 'bg-slate-800/90');
+            }, 2200);
+        }
+
         function renderizarAcademias(lista) {
             const container = document.getElementById('academiasContainer');
             container.innerHTML = '';
@@ -290,22 +311,35 @@
                 return;
             }
 
-            lista.forEach(academia => {
+            lista.forEach((academia, idx) => {
+                const cardId = `card-academia-${academia.id || idx}`;
+
                 const marker = L.marker([academia.coordenadas.lat, academia.coordenadas.lng])
                     .bindPopup(`
-                        <div class="p-1">
+                        <div class="p-1 cursor-pointer" onclick="enfocarTarjetaAcademia('${cardId}', true)" title="Ir a la ficha de contacto">
                             <strong class="text-amber-400 block text-sm">${academia.nombre}</strong>
                             <span class="text-xs text-slate-300 block mt-0.5">${academia.direccion}</span>
                             <span class="text-[11px] text-slate-400 block mt-1">Equipo: ${academia.afiliacion}</span>
+                            <span class="text-[11px] text-amber-400 font-semibold block mt-1.5 underline">Ver contacto y redes ↓</span>
                         </div>
                     `);
+
+                // Al tocar el pin en el mapa, posar la lista de la derecha sobre su tarjeta
+                marker.on('click', () => {
+                    enfocarTarjetaAcademia(cardId, false);
+                });
+
                 markersLayer.addLayer(marker);
 
                 const card = document.createElement('div');
-                card.className = `p-5 rounded-xl bg-slate-900 border ${academia.destacada_premium ? 'border-amber-500/60' : 'border-slate-800'} hover:border-amber-400 transition cursor-pointer`;
+                card.id = cardId;
+                card.className = `p-5 rounded-xl bg-slate-900 border ${academia.destacada_premium ? 'border-amber-500/60' : 'border-slate-800'} hover:border-amber-400 transition duration-300 cursor-pointer`;
                 card.onclick = () => {
                     map.flyTo([academia.coordenadas.lat, academia.coordenadas.lng], 15, { duration: 1.2 });
                     marker.openPopup();
+                    if (window.innerWidth < 1024) {
+                        document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                 };
 
                 const badgesModalidades = academia.modalidades.map(m => 
