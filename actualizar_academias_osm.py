@@ -2,9 +2,17 @@ import json
 import os
 import requests
 
-OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+OVERPASS_SERVERS = [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+]
 ARCHIVO_JSON = "academias.json"
 ARCHIVO_GEOJSON = "academias.geojson"
+
+HEADERS = {
+    "User-Agent": "JiuJitsuEsDirectory/1.0 (https://jiu-jitsu.es)",
+    "Accept": "application/json",
+}
 
 # Consulta Overpass QL para toda España (ISO3166-1 = ES)
 overpass_query = """
@@ -96,11 +104,26 @@ def generar_geojson(academias):
   return {"type": "FeatureCollection", "features": features}
 
 
+def consultar_overpass():
+  ultimo_error = None
+  for url in OVERPASS_SERVERS:
+    try:
+      print(f"Consultando servidor: {url}...")
+      resp = requests.post(
+          url, data={"data": overpass_query}, headers=HEADERS, timeout=90
+      )
+      resp.raise_for_status()
+      return resp.json().get("elements", [])
+    except Exception as e:
+      print(f"Fallo en {url}: {e}")
+      ultimo_error = e
+  raise ultimo_error
+
+
 def main():
   academias = cargar_existentes()
   print(f"Academias previas cargadas: {len(academias)}")
 
-  # Índice de control para evitar duplicados (por nombre normalizado o coordenada cercana)
   vistos = set()
   for ac in academias:
     nombre = str(ac.get("nombre") or ac.get("name") or "").lower().strip()
@@ -108,10 +131,7 @@ def main():
     lng = ac.get("lng") or ac.get("lon") or ac.get("longitude") or 0
     vistos.add(f"{nombre}_{round(float(lat), 3)}_{round(float(lng), 3)}")
 
-  print("Consultando OpenStreetMap para España...")
-  resp = requests.post(OVERPASS_URL, data={"data": overpass_query}, timeout=90)
-  resp.raise_for_status()
-  elementos = resp.json().get("elements", [])
+  elementos = consultar_overpass()
 
   nuevas = 0
   for el in elementos:
