@@ -6,6 +6,60 @@
     <title>JIU-JITSU.ES | Portal y Directorio Oficial de Academias BJJ y Grappling en España</title>
     <meta name="description" content="Encuentra dónde entrenar Jiu-Jitsu Brasileño (BJJ) y Grappling en España. Directorio de academias verificadas, mapa interactivo, calendario de torneos IBJJF/AJP, guías técnicas y equipamiento.">
     <link rel="canonical" href="https://jiu-jitsu.es/">
+    <!-- Open Graph / WhatsApp / Instagram Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="JIU-JITSU.ES">
+    <meta property="og:title" content="JIU-JITSU.ES | Directorio de Academias y Calendario de Torneos BJJ en España">
+    <meta property="og:description" content="Explora el mapa interactivo con más de 100 academias verificadas de Jiu-Jitsu Brasileño y Grappling en España, calendario oficial de torneos y calculadora de pesos IBJJF.">
+    <meta property="og:url" content="https://jiu-jitsu.es/">
+
+    <!-- Schema.org JSON-LD Base (WebSite + Organization + FAQ SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://jiu-jitsu.es/#website",
+          "url": "https://jiu-jitsu.es/",
+          "name": "JIU-JITSU.ES",
+          "description": "Portal y Directorio Oficial de Academias de Jiu-Jitsu Brasileño (BJJ) y Grappling en España",
+          "inLanguage": "es-ES"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://jiu-jitsu.es/#organization",
+          "name": "JIU-JITSU.ES",
+          "url": "https://jiu-jitsu.es/",
+          "sameAs": [
+            "https://instagram.com/jiu_jitsu.es"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Dónde entrenar Jiu-Jitsu Brasileño (BJJ) y Grappling en España?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En el mapa interactivo de JIU-JITSU.ES puedes encontrar más de 100 academias verificadas de BJJ y Grappling en Madrid, Barcelona, Valencia, Málaga, Sevilla, Alicante, Bilbao, Zaragoza, Islas Baleares (Mallorca e Ibiza) e Islas Canarias, con acceso directo a su WhatsApp y clase de prueba."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuáles son los próximos torneos de BJJ y Grappling en España?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El calendario oficial de JIU-JITSU.ES se actualiza semanalmente con todos los campeonatos de España de los circuitos IBJJF, AJP Tour, Smoothcomp, Spain BJJ Tour (AEBJJ/FIJJD), ADCC Spain, Kimura Cup y D-BJJ Oso Duro."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -808,5 +862,88 @@
             document.getElementById('modalEquipamiento').classList.add('hidden');
         }
     </script>
+    <!-- Inyector Dinámico de Schema.org para Academias y Torneos -->
+    <script>
+        function inyectarSchemaSEO() {
+            const listaAcademias = (academiasData && academiasData.length) ? academiasData : FALLBACK_ACADEMIAS;
+            const listaTorneos = (torneosData && torneosData.length) ? torneosData : FALLBACK_TORNEOS;
+
+            const itemListAcademias = {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "Directorio de Academias de Jiu-Jitsu Brasileño en España",
+                "numberOfItems": listaAcademias.length,
+                "itemListElement": listaAcademias.slice(0, 100).map((ac, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                        "@type": "SportsActivityLocation",
+                        "name": ac.nombre,
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": ac.direccion,
+                            "addressLocality": ac.ciudad,
+                            "addressRegion": ac.provincia,
+                            "postalCode": ac.codigo_postal || "",
+                            "addressCountry": "ES"
+                        },
+                        "geo": {
+                            "@type": "GeoCoordinates",
+                            "latitude": ac.coordenadas.lat,
+                            "longitude": ac.coordenadas.lng
+                        },
+                        "telephone": (ac.contacto && ac.contacto.telefono) ? ac.contacto.telefono : undefined,
+                        "url": (ac.contacto && ac.contacto.web) ? ac.contacto.web : "https://jiu-jitsu.es/#directorio"
+                    }
+                }))
+            };
+
+            const eventosBJJ = {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "Calendario de Torneos de BJJ y Grappling en España",
+                "itemListElement": listaTorneos.map((t, idx) => ({
+                    "@type": "ListItem",
+                    "position": idx + 1,
+                    "item": {
+                        "@type": "SportsEvent",
+                        "name": t.nombre,
+                        "startDate": t.fecha,
+                        "eventStatus": "https://schema.org/EventScheduled",
+                        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                        "location": {
+                            "@type": "Place",
+                            "name": t.recinto || t.ciudad,
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": t.ciudad,
+                                "addressCountry": "ES"
+                            }
+                        },
+                        "organizer": {
+                            "@type": "Organization",
+                            "name": t.circuito
+                        },
+                        "url": obtenerEnlaceDirectoTorneo(t)
+                    }
+                }))
+            };
+
+            const s1 = document.createElement('script');
+            s1.type = 'application/ld+json';
+            s1.text = JSON.stringify(itemListAcademias);
+            document.head.appendChild(s1);
+
+            const s2 = document.createElement('script');
+            s2.type = 'application/ld+json';
+            s2.text = JSON.stringify(eventosBJJ);
+            document.head.appendChild(s2);
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(inyectarSchemaSEO, 800);
+        });
+    </script>
+    
 </body>
 </html>
