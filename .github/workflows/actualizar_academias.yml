@@ -31,5 +31,5 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add academias.json academias.geojson
+          git add academias.json academias.geojson index.html
           git diff --staged --quiet || (git commit -m "chore: actualizar academias BJJ España desde OSM" && git push)
