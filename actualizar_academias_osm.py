@@ -5,7 +5,6 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-SMOOTHCOMP_ACADEMIES_URL = "https://smoothcomp.com/es/academies"
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
 ARCHIVO_JSON = "academias.json"
 ARCHIVO_GEOJSON = "academias.geojson"
@@ -15,6 +14,7 @@ HEADERS = {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     ),
+    "Accept": "application/json, text/html;q=0.9,*/*;q=0.8",
     "Accept-Language": "es-ES,es;q=0.9",
 }
 
@@ -23,7 +23,6 @@ NOMINATIM_HEADERS = {
     "Accept-Language": "es",
 }
 
-# Cache de coordenadas por ciudad para no repetir llamadas innecesarias a Nominatim
 CACHE_CIUDADES = {}
 
 
@@ -120,7 +119,6 @@ def detectar_region(texto_completo):
 
 
 def geocodificar(nombre, ciudad):
-  # 1. Intentar primero buscar el nombre exacto de la academia en España
   clave_cache = f"{nombre.lower()}_{ciudad.lower()}"
   if clave_cache in CACHE_CIUDADES:
     return CACHE_CIUDADES[clave_cache]
@@ -174,9 +172,9 @@ def generar_geojson(academias):
 
 def obtener_academias_smoothcomp():
   encontradas = []
-  # Recorre las primeras páginas filtradas por país España (country=ES)
-  for page in range(1, 15):
-    url = f"{SMOOTHCOMP_ACADEMIES_URL}?country=ES&page={page}"
+  # URL oficial en singular: /es/academy
+  for page in range(1, 20):
+    url = f"https://smoothcomp.com/es/academy?country=ES&page={page}"
     print(f"Consultando Smoothcomp página {page}...")
     try:
       resp = requests.get(url, headers=HEADERS, timeout=20)
@@ -184,28 +182,29 @@ def obtener_academias_smoothcomp():
         print(f"  -> HTTP {resp.status_code}, deteniendo paginación.")
         break
     except Exception as e:
-      print(f"  -> Error de conexión: {e}")
+      print(f"  -> Error: {e}")
       break
 
     soup = BeautifulSoup(resp.text, "html.parser")
-    tarjetas = soup.select(
-        ".academy-card, .panel-academy, a[href*='/academies/']"
-    )
+    enlaces = soup.select("a[href*='/academy/']")
 
     items_pagina = 0
-    for tag in tarjetas:
+    vistos_pag = set()
+    for tag in enlaces:
       href = tag.get("href") or ""
-      if "/academies/" not in href or href.endswith("/academies/"):
+      # Filtrar enlaces individuales de academias (ej. /es/academy/12345)
+      if not re.search(r"/academy/\d+", href):
         continue
-
-      texto = " ".join(tag.get_text(" ", strip=True).split())
-      if not texto or len(texto) < 3:
+      if href in vistos_pag:
         continue
+      vistos_pag.add(href)
 
-      # Limpiar nombre y posible ciudad del texto de la tarjeta
-      nombre = texto.split("Spain")[0].split("España")[0].strip()
-      if len(nombre) > 80:
-        nombre = nombre[:80].strip()
+      # Buscar texto en la tarjeta contenedora si existe
+      contenedor = tag.find_parent(["div", "tr", "li"]) or tag
+      texto = " ".join(contenedor.get_text(" ", strip=True).split())
+      nombre = " ".join(tag.get_text(" ", strip=True).split())
+      if not nombre or len(nombre) < 2:
+        continue
 
       link = (
           href
@@ -219,12 +218,94 @@ def obtener_academias_smoothcomp():
       })
       items_pagina += 1
 
-    print(f"  -> Enlaces detectados en página {page}: {items_pagina}")
+    print(f"  -> Academias detectadas en página {page}: {items_pagina}")
     if items_pagina == 0:
       break
     time.sleep(1)
 
   return encontradas
+
+
+def buscar_nominatim_ampliado(nombres_existentes):
+  terminos = [
+      "Jiu Jitsu Madrid",
+      "Jiu Jitsu Barcelona",
+      "Jiu Jitsu Valencia",
+      "Jiu Jitsu Sevilla",
+      "Jiu Jitsu Málaga",
+      "Jiu Jitsu Alicante",
+      "Jiu Jitsu Bilbao",
+      "Jiu Jitsu Zaragoza",
+      "Jiu Jitsu Murcia",
+      "Jiu Jitsu Palma",
+      "Jiu Jitsu Ibiza",
+      "Jiu Jitsu Tenerife",
+      "Jiu Jitsu Las Palmas",
+      "Gracie Barra",
+      "Checkmat",
+      "Alliance Jiu Jitsu",
+      "Atos Jiu Jitsu",
+      "Roger Gracie",
+      "Carlson Gracie",
+      "GFTeam",
+      "Lotus Club",
+      "Nova Uniao",
+  ]
+  extras = []
+  for termino in terminos:
+    try:
+      resp = requests.get(
+          NOMINATIM_URL,
+          params={
+              "q": termino,
+              "format": "jsonv2",
+              "countrycodes": "es",
+              "addressdetails": 1,
+              "extratags": 1,
+              "limit": 50,
+          },
+          headers=NOMINATIM_HEADERS,
+          timeout=12,
+      )
+      time.sleep(1.1)
+      if resp.status_code != 200:
+        continue
+      for item in resp.json():
+        nombre = item.get("name")
+        if not nombre or nombre.lower().strip() in nombres_existentes:
+          continue
+        nombres_existentes.add(nombre.lower().strip())
+        addr = item.get("address", {})
+        ciudad = (
+            addr.get("city")
+            or addr.get("town")
+            or addr.get("village")
+            or "España"
+        )
+        display_name = item.get("display_name", "")
+        extratags = item.get("extratags") or {}
+        web = (
+            extratags.get("website")
+            or extratags.get("contact:website")
+            or extratags.get("contact:instagram")
+            or ""
+        )
+        extras.append({
+            "nombre": nombre,
+            "ciudad": ciudad,
+            "region": detectar_region(display_name),
+            "direccion": display_name,
+            "lat": float(item["lat"]),
+            "lng": float(item["lon"]),
+            "web": web,
+            "telefono": (
+                extratags.get("phone") or extratags.get("contact:phone") or ""
+            ),
+            "fuente": "OpenStreetMap",
+        })
+    except Exception:
+      continue
+  return extras
 
 
 def main():
@@ -236,6 +317,7 @@ def main():
       for ac in academias
   }
 
+  # 1. Extraer desde Smoothcomp (/es/academy?country=ES)
   crudo = obtener_academias_smoothcomp()
   print(f"Total bruto extraído de Smoothcomp: {len(crudo)}")
 
@@ -245,10 +327,9 @@ def main():
     if not nombre or nombre.lower().strip() in nombres_existentes:
       continue
 
-    # Intentar extraer ciudad si aparece después de una coma o palabra clave
     ciudad = ""
     match_ciudad = re.search(
-        r"(Madrid|Barcelona|Valencia|Sevilla|Málaga|Alicante|Bilbao|Zaragoza|Murcia|Palma|Ibiza|Tenerife|Las Palmas|Granada|Cádiz|Vigo|Coruña|Gijón|Oviedo|Santander|Pamplona|Valladolid|Marbella|Elche)",
+        r"(Madrid|Barcelona|Valencia|Sevilla|Málaga|Alicante|Bilbao|Zaragoza|Murcia|Palma|Ibiza|Tenerife|Las Palmas|Granada|Cádiz|Vigo|Coruña|Gijón|Oviedo|Santander|Pamplona|Valladolid|Marbella|Elche|Badalona|Sabadell|Terrassa)",
         item["texto_completo"],
         re.I,
     )
@@ -274,7 +355,15 @@ def main():
         "fuente": "Smoothcomp",
     })
     nuevas += 1
-    print(f"  + Agregada: {nombre} ({ciudad or 'España'})")
+    print(f"  + Smoothcomp: {nombre} ({ciudad or 'España'})")
+
+  # 2. Completar con búsquedas directas por equipos y ciudades en OpenStreetMap
+  print("Buscando equipos y ciudades en OpenStreetMap...")
+  extras_osm = buscar_nominatim_ampliado(nombres_existentes)
+  for ac in extras_osm:
+    academias.append(ac)
+    nuevas += 1
+    print(f"  + OSM: {ac['nombre']} ({ac['ciudad']})")
 
   with open(ARCHIVO_JSON, "w", encoding="utf-8") as f:
     json.dump(academias, f, ensure_ascii=False, indent=2)
