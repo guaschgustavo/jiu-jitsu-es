@@ -3,44 +3,34 @@ import os
 import time
 import requests
 
-OVERPASS_SERVERS = [
-    "https://overpass-api.de/api/interpreter",
-    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-    "https://overpass.kumi.systems/api/interpreter",
-]
+NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
 ARCHIVO_JSON = "academias.json"
 ARCHIVO_GEOJSON = "academias.geojson"
 
 HEADERS = {
-    "User-Agent": "JiuJitsuEsDirectory/1.0 (https://jiu-jitsu.es)",
-    "Accept": "application/json",
+    "User-Agent": "JiuJitsuEsDirectory/1.0 (contacto@jiu-jitsu.es)",
+    "Accept-Language": "es",
 }
 
-# Coordenadas aproximadas (lat, lng, radio_en_metros) de las principales zonas de España
-ZONAS_ESPANA = [
-    ("Madrid", 40.4168, -3.7038, 45000),
-    ("Barcelona", 41.3851, 2.1734, 45000),
-    ("Valencia", 39.4699, -0.3763, 40000),
-    ("Alicante", 38.3452, -0.4810, 45000),
-    ("Sevilla", 37.3891, -5.9845, 40000),
-    ("Málaga", 36.7213, -4.4214, 50000),
-    ("Granada", 37.1773, -3.5986, 35000),
-    ("Cádiz", 36.5271, -6.2886, 45000),
-    ("Murcia", 37.9922, -1.1307, 40000),
-    ("Zaragoza", 41.6488, -0.8891, 35000),
-    ("Bilbao", 43.2630, -2.9350, 40000),
-    ("San Sebastián", 43.3183, -1.9812, 30000),
-    ("Vitoria", 42.8467, -2.6716, 25000),
-    ("A Coruña", 43.3623, -8.4115, 40000),
-    ("Vigo", 42.2406, -8.7207, 35000),
-    ("Gijón / Oviedo", 43.4600, -5.7500, 35000),
-    ("Santander", 43.4623, -3.8099, 30000),
-    ("Pamplona", 42.8125, -1.6458, 30000),
-    ("Valladolid", 41.6523, -4.7245, 30000),
-    ("Palma de Mallorca", 39.5696, 2.6502, 45000),
-    ("Ibiza", 38.9067, 1.4206, 25000),
-    ("Las Palmas de Gran Canaria", 28.1235, -15.4363, 40000),
-    ("Santa Cruz de Tenerife", 28.4636, -16.2518, 45000),
+TERMINOS_BUSQUEDA = [
+    "Brazilian Jiu Jitsu España",
+    "BJJ España",
+    "Jiu Jitsu Brasileño España",
+    "Gracie Barra España",
+    "Checkmat España",
+    "Alliance Jiu Jitsu España",
+    "Carlson Gracie España",
+    "Atos Jiu Jitsu España",
+    "Academia BJJ Madrid",
+    "Academia BJJ Barcelona",
+    "Academia BJJ Valencia",
+    "Academia BJJ Sevilla",
+    "Academia BJJ Málaga",
+    "Academia BJJ Alicante",
+    "Academia BJJ Bilbao",
+    "Academia BJJ Zaragoza",
+    "Academia BJJ Mallorca",
+    "Academia BJJ Canarias",
 ]
 
 
@@ -55,30 +45,54 @@ def cargar_existentes():
       return []
 
 
-def detectar_region(zona, ciudad):
-  texto = f"{zona} {ciudad}".lower()
+def detectar_region(texto_completo):
+  texto = texto_completo.lower()
   mapa_regiones = {
       "madrid": "Madrid",
       "barcelona": "Cataluña",
+      "girona": "Cataluña",
+      "tarragona": "Cataluña",
+      "lleida": "Cataluña",
       "valencia": "Comunidad Valenciana",
       "alicante": "Comunidad Valenciana",
+      "castell": "Comunidad Valenciana",
       "sevilla": "Andalucía",
       "málaga": "Andalucía",
+      "malaga": "Andalucía",
       "granada": "Andalucía",
       "cádiz": "Andalucía",
+      "cadiz": "Andalucía",
+      "córdoba": "Andalucía",
+      "cordoba": "Andalucía",
+      "almería": "Andalucía",
+      "almeria": "Andalucía",
       "palma": "Islas Baleares",
       "ibiza": "Islas Baleares",
+      "eivissa": "Islas Baleares",
+      "mallorca": "Islas Baleares",
+      "menorca": "Islas Baleares",
+      "baleares": "Islas Baleares",
       "palmas": "Islas Canarias",
       "tenerife": "Islas Canarias",
+      "canarias": "Islas Canarias",
       "bilbao": "País Vasco",
-      "sebastián": "País Vasco",
+      "bizkaia": "País Vasco",
+      "vizcaya": "País Vasco",
+      "san sebasti": "País Vasco",
+      "donostia": "País Vasco",
+      "gipuzkoa": "País Vasco",
       "vitoria": "País Vasco",
       "zaragoza": "Aragón",
       "murcia": "Región de Murcia",
       "coruña": "Galicia",
       "vigo": "Galicia",
+      "pontevedra": "Galicia",
+      "asturias": "Asturias",
       "gijón": "Asturias",
+      "oviedo": "Asturias",
+      "cantabria": "Cantabria",
       "santander": "Cantabria",
+      "navarra": "Navarra",
       "pamplona": "Navarra",
       "valladolid": "Castilla y León",
   }
@@ -103,29 +117,6 @@ def generar_geojson(academias):
   return {"type": "FeatureCollection", "features": features}
 
 
-def consultar_zona(lat, lng, radio):
-  query = f"""
-    [out:json][timeout:25];
-    (
-      node["sport"~"brazilian_jiu_jitsu|bjj|jiu-jitsu",i](around:{radio},{lat},{lng});
-      way["sport"~"brazilian_jiu_jitsu|bjj|jiu-jitsu",i](around:{radio},{lat},{lng});
-      node["name"~"Brazilian Jiu|BJJ|Jiu-Jitsu Brasile|Jiu Jitsu Brasile",i](around:{radio},{lat},{lng});
-      way["name"~"Brazilian Jiu|BJJ|Jiu-Jitsu Brasile|Jiu Jitsu Brasile",i](around:{radio},{lat},{lng});
-    );
-    out center tags;
-    """
-  for url in OVERPASS_SERVERS:
-    try:
-      resp = requests.post(
-          url, data={"data": query}, headers=HEADERS, timeout=30
-      )
-      if resp.status_code == 200:
-        return resp.json().get("elements", [])
-    except Exception:
-      continue
-  return []
-
-
 def main():
   academias = cargar_existentes()
   print(f"Academias previas cargadas: {len(academias)}")
@@ -138,56 +129,75 @@ def main():
     vistos.add(f"{nombre}_{round(float(lat), 3)}_{round(float(lng), 3)}")
 
   nuevas = 0
-  for zona, lat_c, lng_c, radio in ZONAS_ESPANA:
-    print(f"Buscando en {zona}...")
-    elementos = consultar_zona(lat_c, lng_c, radio)
-    for el in elementos:
-      tags = el.get("tags", {})
-      nombre = tags.get("name")
+  for termino in TERMINOS_BUSQUEDA:
+    print(f"Buscando: {termino}...")
+    params = {
+        "q": termino,
+        "format": "jsonv2",
+        "countrycodes": "es",
+        "addressdetails": 1,
+        "extratags": 1,
+        "limit": 50,
+    }
+    try:
+      resp = requests.get(
+          NOMINATIM_URL, params=params, headers=HEADERS, timeout=15
+      )
+      print(f"  -> HTTP {resp.status_code}")
+      if resp.status_code != 200:
+        continue
+      resultados = resp.json()
+    except Exception as e:
+      print(f"  -> Error: {e}")
+      continue
+
+    for item in resultados:
+      nombre = item.get("name")
       if not nombre:
         continue
 
-      lat = el.get("lat") or el.get("center", {}).get("lat")
-      lng = el.get("lon") or el.get("center", {}).get("lon")
-      if not lat or not lng:
-        continue
-
-      clave = (
-          f"{nombre.lower().strip()}_{round(float(lat), 3)}_{round(float(lng), 3)}"
-      )
+      lat = float(item["lat"])
+      lng = float(item["lon"])
+      clave = f"{nombre.lower().strip()}_{round(lat, 3)}_{round(lng, 3)}"
       if clave in vistos:
         continue
       vistos.add(clave)
 
-      calle = tags.get("addr:street", "")
-      numero = tags.get("addr:housenumber", "")
-      ciudad = tags.get("addr:city") or tags.get("addr:town") or zona
-      cp = tags.get("addr:postcode", "")
-      direccion = ", ".join(
-          filter(None, [f"{calle} {numero}".strip(), cp, ciudad])
+      addr = item.get("address", {})
+      ciudad = (
+          addr.get("city")
+          or addr.get("town")
+          or addr.get("village")
+          or addr.get("municipality")
+          or "España"
       )
+      display_name = item.get("display_name", "")
+      extratags = item.get("extratags") or {}
 
       web = (
-          tags.get("website")
-          or tags.get("contact:website")
-          or tags.get("contact:instagram")
-          or tags.get("instagram")
+          extratags.get("website")
+          or extratags.get("contact:website")
+          or extratags.get("contact:instagram")
           or ""
       )
 
       academias.append({
           "nombre": nombre,
           "ciudad": ciudad,
-          "region": detectar_region(zona, ciudad),
-          "direccion": direccion if direccion else "Ver ubicación en mapa",
-          "lat": float(lat),
-          "lng": float(lng),
+          "region": detectar_region(display_name),
+          "direccion": display_name,
+          "lat": lat,
+          "lng": lng,
           "web": web,
-          "telefono": tags.get("phone") or tags.get("contact:phone") or "",
+          "telefono": (
+              extratags.get("phone") or extratags.get("contact:phone") or ""
+          ),
           "fuente": "OpenStreetMap",
       })
       nuevas += 1
-    time.sleep(1)  # Pausa corta para no saturar el servidor
+      print(f"  + Agregada: {nombre} ({ciudad})")
+
+    time.sleep(1.2)  # Política oficial de Nominatim: máx 1 petición/segundo
 
   with open(ARCHIVO_JSON, "w", encoding="utf-8") as f:
     json.dump(academias, f, ensure_ascii=False, indent=2)
