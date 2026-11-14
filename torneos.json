@@ -10,7 +10,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Green+Capital+2026+%28Nordfighter%29"
+    "enlace": "https://smoothcomp.com/es/event/35054"
   },
   {
     "id": "sc-vinyols-challenge-fall-2026",
@@ -23,7 +23,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Vinyols+Challenge+Fall+2026"
+    "enlace": "https://smoothcomp.com/es/event/33733"
   },
   {
     "id": "sc-european-cup-guadalajara-2026",
@@ -37,7 +37,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=European+Cup+2026+%2F+Gi+-+No+Gi+%2F+Kids"
+    "enlace": "https://smoothcomp.com/es/events/upcoming?search=European+Cup+2026&countries=ES"
   },
   {
     "id": "sc-bjjpro-zaragoza-2026",
@@ -50,7 +50,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=BJJPRO+Zaragoza+2026+%7C+Oso+Duro+%28D-BJJ%29"
+    "enlace": "https://smoothcomp.com/es/event/35227"
   },
   {
     "id": "sc-europe-cup-valencia-2026",
@@ -64,7 +64,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Europe+Cup+BJJ+2026+%28Spain+BJJ+Tour%29"
+    "enlace": "https://spainbjjtour.smoothcomp.com/es/event/34652"
   },
   {
     "id": "sc-open-cantabria-2026",
@@ -77,7 +77,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Open+Cantabria+2026+%7C+Oso+Duro+%28D-BJJ%29"
+    "enlace": "https://smoothcomp.com/es/event/35538"
   },
   {
     "id": "sc-aranha-interclub-2026",
@@ -91,7 +91,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Aranha+Interclub+2026+%28Ni%C3%B1os+%26+Adultos%29"
+    "enlace": "https://smoothcomp.com/es/event/35795"
   },
   {
     "id": "torneo-madrid-autumn-2026",
@@ -104,7 +104,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://www.google.com/search?q=site%3Aibjjf.com+Madrid+Autumn+International+Open+IBJJF+Championship&btnI=1"
+    "enlace": "https://ibjjf.com/events/championships"
   },
   {
     "id": "sc-spain-bjj-cup-sevilla-2026",
@@ -118,7 +118,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Spain+BJJ+Cup+Gi+%26+No-Gi+2026+%28Spain+BJJ+Tour%29"
+    "enlace": "https://smoothcomp.com/es/event/34441"
   },
   {
     "id": "sc-grand-slam-baiona-2026",
@@ -131,7 +131,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Grand+Slam+Baiona+%7C+D-BJJ"
+    "enlace": "https://dbjj.smoothcomp.com/es/event/34473"
   },
   {
     "id": "sc-bcn-challenge-winter-2026",
@@ -144,7 +144,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=BCN+Challenge+Winter+2026"
+    "enlace": "https://smoothcomp.com/es/event/32650"
   },
   {
     "id": "sc-wn-pro-opens-madrid-2026",
@@ -157,7 +157,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=WN+Pro+Opens+-+Madrid"
+    "enlace": "https://smoothcomp.com/es/event/36330"
   },
   {
     "id": "sc-campeonato-espana-adcc-2026",
@@ -169,7 +169,7 @@
     "modalidades": [
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Campeonato+de+Espa%C3%B1a+ADCC"
+    "enlace": "https://smoothcomp.com/es/event/35745"
   },
   {
     "id": "sc-kimura-cup-zaragoza-2026",
@@ -183,7 +183,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Kimura+Cup+Zaragoza+2026"
+    "enlace": "https://smoothcomp.com/es/event/35155"
   },
   {
     "id": "sc-all-stars-bjj-madrid-2026",
@@ -196,7 +196,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=All+Stars+BJJ+Madrid"
+    "enlace": "https://allstarsbjj.smoothcomp.com/es/event/33644"
   },
   {
     "id": "sc-nacional-euskadi-2026",
@@ -209,7 +209,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Nacional+de+Euskadi+2026+%7C+Oso+Duro"
+    "enlace": "https://smoothcomp.com/es/event/35539"
   },
   {
     "id": "sc-ibiza-bjj-cup-2026",
@@ -223,7 +223,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Ibiza+BJJ+Cup+Gi+%26+No-Gi+2026+%28Spain+BJJ+Tour%29"
+    "enlace": "https://spainbjjtour.smoothcomp.com/es/event/34443"
   },
   {
     "id": "sc-gsls-albacete-open-2026",
@@ -236,7 +236,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=GSLS+Albacete+International+Open"
+    "enlace": "https://gsl-spain.smoothcomp.com/es/event/33821"
   },
   {
     "id": "sc-dojjo-open-altea-2027",
@@ -249,7 +249,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Dojjo+Open+Challenge+Altea"
+    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Dojjo+Open+Challenge+Altea&countries=ES"
   },
   {
     "id": "sc-cataluna-bjj-cup-2027",
@@ -263,7 +263,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Catalu%C3%B1a+BJJ+Cup+Gi+%26+No-Gi+2027+%28Spain+BJJ+Tour%29"
+    "enlace": "https://spainbjjtour.smoothcomp.com/es/event/34442"
   },
   {
     "id": "sc-euskadi-bjj-cup-2027",
@@ -277,7 +277,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Euskadi+BJJ+Cup+Gi+%26+No-Gi+2027+%28Spain+BJJ+Tour%29"
+    "enlace": "https://spainbjjtour.smoothcomp.com/es/event/35049"
   },
   {
     "id": "sc-kimura-cup-madrid-2027",
@@ -291,7 +291,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Kimura+Cup+Madrid+2027"
+    "enlace": "https://smoothcomp.com/es/event/35753"
   },
   {
     "id": "sc-polaris-open-madrid-2027",
@@ -304,7 +304,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Polaris+Open+Spain+-+Madrid"
+    "enlace": "https://polaris.smoothcomp.com/es/event/36137"
   },
   {
     "id": "sc-open-villanueva-rio-segura-2027",
@@ -318,7 +318,7 @@
       "No-Gi",
       "Kids"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Open+de+Villanueva+del+R%C3%ADo+Segura+%28Liga+BJJ%29"
+    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Villanueva+del+Rio+Segura&countries=ES"
   },
   {
     "id": "torneo-spain-national-ajp-2027",
@@ -331,7 +331,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://ajptour.com/en/events/upcoming?search=AJP+Tour+Spain+National+Jiu-Jitsu+Pro"
+    "enlace": "https://ajptour.com/en/events/upcoming"
   },
   {
     "id": "torneo-madrid-spring-ibjjf-2027",
@@ -344,7 +344,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://www.google.com/search?q=site%3Aibjjf.com+Madrid+Spring+International+Open+IBJJF+Championship&btnI=1"
+    "enlace": "https://ibjjf.com/events/championships"
   },
   {
     "id": "sc-abierto-leon-dbjj-2027",
@@ -357,7 +357,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Abierto+de+Le%C3%B3n+%7C+D-BJJ+2027"
+    "enlace": "https://smoothcomp.com/es/event/35370"
   },
   {
     "id": "torneo-barcelona-open-ibjjf-2027",
@@ -370,7 +370,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://www.google.com/search?q=site%3Aibjjf.com+Barcelona+International+Open+IBJJF+Championship&btnI=1"
+    "enlace": "https://ibjjf.com/events/championships"
   },
   {
     "id": "sc-grappling-industries-madrid-2027",
@@ -383,6 +383,6 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/events/upcoming?search=Grappling+Industries+Madrid+%28Round+Robin%29"
+    "enlace": "https://smoothcomp.com/es/event/34939"
   }
 ]
