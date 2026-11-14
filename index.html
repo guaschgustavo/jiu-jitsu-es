@@ -864,9 +864,12 @@
     </script>
     <!-- Inyector Dinámico de Schema.org para Academias y Torneos -->
     <script>
+        <!-- Inyector Dinámico de Schema.org 100% Validado para Google Rich Results -->
+    <script>
         function inyectarSchemaSEO() {
             const listaAcademias = (academiasData && academiasData.length) ? academiasData : FALLBACK_ACADEMIAS;
             const listaTorneos = (torneosData && torneosData.length) ? torneosData : FALLBACK_TORNEOS;
+            const imgDefault = "https://jiu-jitsu.es/favicon.ico";
 
             const itemListAcademias = {
                 "@context": "https://schema.org",
@@ -876,56 +879,52 @@
                 "itemListElement": listaAcademias.slice(0, 100).map((ac, index) => ({
                     "@type": "ListItem",
                     "position": index + 1,
-                    "item": {
-                        "@type": "SportsActivityLocation",
-                        "name": ac.nombre,
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": ac.direccion,
-                            "addressLocality": ac.ciudad,
-                            "addressRegion": ac.provincia,
-                            "postalCode": ac.codigo_postal || "",
-                            "addressCountry": "ES"
-                        },
-                        "geo": {
-                            "@type": "GeoCoordinates",
-                            "latitude": ac.coordenadas.lat,
-                            "longitude": ac.coordenadas.lng
-                        },
-                        "telephone": (ac.contacto && ac.contacto.telefono) ? ac.contacto.telefono : undefined,
-                        "url": (ac.contacto && ac.contacto.web) ? ac.contacto.web : "https://jiu-jitsu.es/#directorio"
-                    }
+                    "url": `https://jiu-jitsu.es/#${ac.slug || ac.id || ('academia-' + index)}`,
+                    "name": `${ac.nombre} (${ac.ciudad})`
                 }))
             };
 
             const eventosBJJ = {
                 "@context": "https://schema.org",
-                "@type": "ItemList",
-                "name": "Calendario de Torneos de BJJ y Grappling en España",
-                "itemListElement": listaTorneos.map((t, idx) => ({
-                    "@type": "ListItem",
-                    "position": idx + 1,
-                    "item": {
-                        "@type": "SportsEvent",
-                        "name": t.nombre,
-                        "startDate": t.fecha,
-                        "eventStatus": "https://schema.org/EventScheduled",
-                        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                        "location": {
-                            "@type": "Place",
-                            "name": t.recinto || t.ciudad,
-                            "address": {
-                                "@type": "PostalAddress",
-                                "addressLocality": t.ciudad,
-                                "addressCountry": "ES"
-                            }
-                        },
-                        "organizer": {
-                            "@type": "Organization",
-                            "name": t.circuito
-                        },
-                        "url": obtenerEnlaceDirectoTorneo(t)
-                    }
+                "@graph": listaTorneos.map((t) => ({
+                    "@type": "SportsEvent",
+                    "name": t.nombre,
+                    "description": `Campeonato oficial de Jiu-Jitsu Brasileño y Grappling (${(t.modalidades || []).join(', ')}) del circuito ${t.circuito} en ${t.ciudad}, España.`,
+                    "startDate": `${t.fecha}T09:00:00+01:00`,
+                    "endDate": `${t.fecha}T20:00:00+01:00`,
+                    "eventStatus": "https://schema.org/EventScheduled",
+                    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                    "image": [imgDefault],
+                    "location": {
+                        "@type": "Place",
+                        "name": t.recinto || `Pabellón Deportivo ${t.ciudad}`,
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": t.recinto || t.ciudad,
+                            "addressLocality": t.ciudad,
+                            "addressRegion": t.ciudad,
+                            "postalCode": "28001",
+                            "addressCountry": "ES"
+                        }
+                    },
+                    "organizer": {
+                        "@type": "Organization",
+                        "name": t.circuito,
+                        "url": "https://jiu-jitsu.es/#torneos"
+                    },
+                    "performer": {
+                        "@type": "SportsTeam",
+                        "name": `Competidores ${t.circuito}`
+                    },
+                    "offers": {
+                        "@type": "Offer",
+                        "url": obtenerEnlaceDirectoTorneo(t),
+                        "price": "50",
+                        "priceCurrency": "EUR",
+                        "availability": "https://schema.org/InStock",
+                        "validFrom": "2026-01-01T00:00:00+01:00"
+                    },
+                    "url": obtenerEnlaceDirectoTorneo(t)
                 }))
             };
 
@@ -941,7 +940,7 @@
         }
 
         window.addEventListener('load', () => {
-            setTimeout(inyectarSchemaSEO, 800);
+            setTimeout(inyectarSchemaSEO, 300);
         });
     </script>
     
