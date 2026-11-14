@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jiu-jitsu.es/sitemap.xml
