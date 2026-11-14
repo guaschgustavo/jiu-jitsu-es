@@ -1,10 +1,9 @@
-name: Actualizar Calendario de Torneos BJJ
+name: Actualizar Torneos BJJ España (Smoothcomp)
 
 on:
   schedule:
-    # Se ejecuta automáticamente todos los lunes a las 08:00 UTC
-    - cron: '0 8 * * 1'
-  workflow_dispatch: # Permite ejecutarlo manualmente con 1 clic desde GitHub
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,7 +12,7 @@ jobs:
   actualizar-torneos:
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar código del repositorio
+      - name: Descargar repositorio
         uses: actions/checkout@v4
 
       - name: Configurar Python
@@ -21,12 +20,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Ejecutar script de actualización y limpieza de torneos vencidos
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4
+
+      - name: Ejecutar scraper de Smoothcomp
         run: python actualizar_smoothcomp.py
 
-      - name: Guardar cambios automáticamente en el repositorio
+      - name: Guardar cambios en torneos.json e index.html
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action Bot"
           git add torneos.json index.html
-          git diff --staged --quiet || (git commit -m "Auto-actualización semanal de calendario de torneos BJJ" && git push)
+          git diff --staged --quiet || git commit -m "Auto-update: Torneos BJJ con enlaces directos"
+          git push
