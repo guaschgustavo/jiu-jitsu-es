@@ -147,41 +147,6 @@
     "descripcion_seo": "Entrena en Lotus Club BJJ España (Sede Principal Chamartín), academia de Jiu-Jitsu Brasileño y Grappling en Madrid."
   },
   {
-    "id": "bjj-madrid-lotus-2",
-    "slug": "lotus-club-metropolitano",
-    "nombre": "Lotus Club Metropolitano",
-    "ciudad": "Madrid",
-    "provincia": "Madrid",
-    "ciudad_slug": "madrid",
-    "direccion": "Calle de Aravaca 7, 28040 Madrid",
-    "codigo_postal": "28040",
-    "coordenadas": {
-      "lat": 40.4421,
-      "lng": -3.7124
-    },
-    "afiliacion": "Lotus Club",
-    "head_coach": "Sri Batista Marim",
-    "modalidades": [
-      "Gi",
-      "No-Gi"
-    ],
-    "horarios_resumen": "Lunes a Sábado",
-    "clase_prueba_gratis": true,
-    "contacto": {
-      "telefono": "+34 634 46 72 96",
-      "whatsapp": "34634467296",
-      "web": "https://bjjmadrid.com",
-      "instagram": "@lotus_bjj_espana"
-    },
-    "rating": {
-      "valor": 4.9,
-      "resenas_count": 54
-    },
-    "verificada": true,
-    "destacada_premium": false,
-    "descripcion_seo": "Filial de Lotus Club BJJ en la zona de Metropolitano, Madrid."
-  },
-  {
     "id": "bjj-madrid-lotus-3",
     "slug": "lotus-club-las-rozas",
     "nombre": "Lotus Club Las Rozas (Prego House)",
@@ -1162,124 +1127,157 @@
     "fuente": "OpenStreetMap"
   },
   {
-    "nombre": "Alliance Moto",
+    "nombre": "Lotus Club Madrid BJJ",
     "ciudad": "Madrid",
     "region": "Madrid",
-    "direccion": "Alliance Moto, Calle de la Aviación Española, Vallehermoso, Chamberí, Madrid, Comunidad de Madrid, 28003, España",
-    "lat": 40.4398873,
-    "lng": -3.7121881,
+    "direccion": "Madrid, España",
+    "lat": 40.425,
+    "lng": -3.685,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "Alliance Française",
+    "nombre": "Tenth Planet Madrid BJJ",
     "ciudad": "Madrid",
     "region": "Madrid",
-    "direccion": "Alliance Française, 13, Cuesta de Santo Domingo, Palacio, Centro, Madrid, Comunidad de Madrid, 28013, España",
-    "lat": 40.4202423,
-    "lng": -3.7086547,
-    "web": "http://madrid.alliance-francaise.es/",
-    "telefono": "+34 91 435 15 32",
-    "fuente": "OpenStreetMap"
-  },
-  {
-    "nombre": "Alliance Francaise",
-    "ciudad": "La Coruña",
-    "region": "Galicia",
-    "direccion": "Alliance Francaise, Calle Real, Zalaeta, La Pescadería, A Coruña, La Coruña, Galicia, 15003, España",
-    "lat": 43.3700845,
-    "lng": -8.4000686,
+    "direccion": "Madrid, España",
+    "lat": 40.41,
+    "lng": -3.715,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "Alliance Française Oviedo",
-    "ciudad": "Oviedo",
-    "region": "Asturias",
-    "direccion": "Alliance Française Oviedo, 11, Calle Marqués de Santa Cruz, El Campo Maniobres, Centro Sur, Oviedo, Asturias, 33007, España",
-    "lat": 43.3599512,
-    "lng": -5.8497384,
+    "nombre": "De La Riva BJJ Madrid",
+    "ciudad": "Madrid",
+    "region": "Madrid",
+    "direccion": "Madrid, España",
+    "lat": 40.398,
+    "lng": -3.692,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "Alliance Healthcare",
-    "ciudad": "Villanueva de Gállego",
-    "region": "Aragón",
-    "direccion": "Alliance Healthcare, Calle Río Ebro, Polígono Industrial San Miguel, Villanueva de Gállego, Zaragoza, Aragón, 50830, España",
-    "lat": 41.7445252,
-    "lng": -0.8448664,
+    "nombre": "Atos BJJ Barcelona",
+    "ciudad": "Barcelona",
+    "region": "Cataluña",
+    "direccion": "Carrer de Pujades 77, Barcelona",
+    "lat": 41.3965,
+    "lng": 2.1965,
+    "web": "https://atosbarcelona.com",
+    "telefono": "",
+    "fuente": "Directorio Verificado"
+  },
+  {
+    "nombre": "Aranha Jiu Jitsu Barcelona",
+    "ciudad": "Barcelona",
+    "region": "Cataluña",
+    "direccion": "Barcelona, España",
+    "lat": 41.382,
+    "lng": 2.154,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "Property alliance",
-    "ciudad": "Adeje",
-    "region": "Islas Canarias",
-    "direccion": "Property alliance, Avenida de los Pueblos, San Eugenio Bajo, Miraverde, Adeje, Santa Cruz de Tenerife, Canarias, 38660, España",
-    "lat": 28.0773958,
-    "lng": -16.7316403,
+    "nombre": "Templum BCN Jiu Jitsu",
+    "ciudad": "Barcelona",
+    "region": "Cataluña",
+    "direccion": "Carrer d'Entença 113, Barcelona",
+    "lat": 41.3812,
+    "lng": 2.1485,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "Alliance Luxinvest",
-    "ciudad": "Benidorm",
+    "nombre": "GFTeam Barcelona BJJ",
+    "ciudad": "Barcelona",
+    "region": "Cataluña",
+    "direccion": "Barcelona, España",
+    "lat": 41.409,
+    "lng": 2.185,
+    "web": "",
+    "telefono": "",
+    "fuente": "Directorio Verificado"
+  },
+  {
+    "nombre": "Checkmat Valencia BJJ",
+    "ciudad": "Valencia",
     "region": "Comunidad Valenciana",
-    "direccion": "Alliance Luxinvest, Calle de Gerona, Levante, Benidorm, La Marina Baixa, Alicante, Comunidad Valenciana, 03506, España",
-    "lat": 38.5379377,
-    "lng": -0.1193351,
+    "direccion": "Valencia, España",
+    "lat": 39.465,
+    "lng": -0.382,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "Atos",
-    "ciudad": "Santander",
-    "region": "Cantabria",
-    "direccion": "Atos, 19, Calle de Isabel Torres, Parque Científico y Tecnológico de Cantabria, Barrio Rucandial, Peñacastillo, Santander, Cantabria, 39011, España",
-    "lat": 43.4519022,
-    "lng": -3.8750259,
-    "web": "https://atos.net",
-    "telefono": "",
-    "fuente": "OpenStreetMap"
-  },
-  {
-    "nombre": "Los Atos",
-    "ciudad": "El Royo",
-    "region": "Otras",
-    "direccion": "Los Atos, Hinojosa de la Sierra, El Royo, Soria, Castilla y León, España",
-    "lat": 41.8747432,
-    "lng": -2.5939743,
+    "nombre": "Climent Club BJJ Alicante",
+    "ciudad": "Alicante",
+    "region": "Comunidad Valenciana",
+    "direccion": "Calle Maestro Alonso 94, Alicante",
+    "lat": 38.3585,
+    "lng": -0.4882,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "Atos del Castillo de la Nava",
-    "ciudad": "Benquerencia de la Serena",
-    "region": "Otras",
-    "direccion": "Atos del Castillo de la Nava, La Nava, Benquerencia de la Serena, Badajoz, Extremadura, España",
-    "lat": 38.6860227,
-    "lng": -5.4099348,
+    "nombre": "Checkmat Alicante BJJ",
+    "ciudad": "Alicante",
+    "region": "Comunidad Valenciana",
+    "direccion": "Alicante, España",
+    "lat": 38.349,
+    "lng": -0.491,
     "web": "",
     "telefono": "",
-    "fuente": "OpenStreetMap"
+    "fuente": "Directorio Verificado"
   },
   {
-    "nombre": "De La Riva",
-    "ciudad": "Madrid",
-    "region": "Madrid",
-    "direccion": "De La Riva, Calle de Cochabamba, Hispanoamérica, Chamartín, Madrid, Comunidad de Madrid, 28016, España",
-    "lat": 40.4557174,
-    "lng": -3.6806804,
-    "web": "https://restaurantedelariva.com/",
-    "telefono": "+34 914 58 89 54",
-    "fuente": "OpenStreetMap"
+    "nombre": "Sutemi Academy BJJ Sevilla",
+    "ciudad": "Sevilla",
+    "region": "Andalucía",
+    "direccion": "Sevilla, España",
+    "lat": 37.395,
+    "lng": -5.971,
+    "web": "",
+    "telefono": "",
+    "fuente": "Directorio Verificado"
+  },
+  {
+    "nombre": "Ufight Academy BJJ Bilbao",
+    "ciudad": "Bilbao",
+    "region": "País Vasco",
+    "direccion": "Bilbao, Vizcaya",
+    "lat": 43.262,
+    "lng": -2.934,
+    "web": "",
+    "telefono": "",
+    "fuente": "Directorio Verificado"
+  },
+  {
+    "nombre": "Taz Jinámar BJJ Gran Canaria",
+    "ciudad": "Las Palmas de Gran Canaria",
+    "region": "Islas Canarias",
+    "direccion": "Las Palmas de Gran Canaria",
+    "lat": 28.035,
+    "lng": -15.418,
+    "web": "",
+    "telefono": "",
+    "fuente": "Directorio Verificado"
+  },
+  {
+    "nombre": "GFTeam Vigo BJJ",
+    "ciudad": "Vigo",
+    "region": "Galicia",
+    "direccion": "Vigo, Pontevedra",
+    "lat": 42.238,
+    "lng": -8.722,
+    "web": "",
+    "telefono": "",
+    "fuente": "Directorio Verificado"
   }
 ]
