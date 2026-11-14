@@ -12,57 +12,61 @@ NOMINATIM_HEADERS = {
     "Accept-Language": "es",
 }
 
+# Solo palabras inequívocas de BJJ / Artes Marciales (quitamos nombres genéricos como "alliance" o "atos" sueltos)
 PALABRAS_VALIDAS = [
     "jiu", "bjj", "gracie", "grappling", "mma", "dojo", "checkmat",
-    "alliance", "atos", "lotus", "gfteam", "tenth planet", "10th planet",
-    "fight", "combat", "artes marciales", "martial", "tatami", "kimura",
-    "budo", "zenit", "carpe diem", "nova uniao", "de la riva", "carlson",
-    "roger", "aranha", "mathias", "ases", "icon", "brasa"
+    "gfteam", "tenth planet", "10th planet", "artes marciales",
+    "martial arts", "tatami", "kimura", "budo", "zenit bjj",
+    "nova uniao", "carlson", "mathias ribeiro", "ases jiu"
 ]
 
-PALABRAS_EXCLUIDAS = ["fleca", "panader", "restaurante", "bar ", "farmacia"]
+# Palabras y lugares que deben ser eliminados si se colaron en corridas anteriores
+PALABRAS_EXCLUIDAS = [
+    "fleca", "panader", "restaurante", "bar ", "farmacia",
+    "française", "francaise", "healthcare", "moto", "property",
+    "luxinvest", "los atos", "castillo de la nava", "estación", "metro"
+]
 
-# Base verificada de academias importantes de España que suelen faltar en OSM
+# Nombres exactos de gimnasios de nuestra base verificada (siempre permitidos)
 ACADEMIAS_SEMILLA = [
     {"nombre": "Mathias Ribeiro Team Madrid", "ciudad": "Madrid", "region": "Madrid", "direccion": "Calle de Gutenberg 7, Madrid", "lat": 40.4055, "lng": -3.6766, "web": "https://mathiasribeiro.com"},
     {"nombre": "Checkmat Madrid / Samurai Jiu Jitsu", "ciudad": "Madrid", "region": "Madrid", "direccion": "Calle de Juan Español 38, Madrid", "lat": 40.3879, "lng": -3.7011, "web": "https://checkmatmadrid.com"},
-    {"nombre": "Lotus Club Madrid", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.4250, "lng": -3.6850, "web": ""},
+    {"nombre": "Lotus Club Madrid BJJ", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.4250, "lng": -3.6850, "web": ""},
     {"nombre": "Gracie Barra Madrid", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.4350, "lng": -3.7050, "web": ""},
-    {"nombre": "Tenth Planet Madrid", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.4100, "lng": -3.7150, "web": ""},
-    {"nombre": "De La Riva Madrid", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.3980, "lng": -3.6920, "web": ""},
+    {"nombre": "Tenth Planet Madrid BJJ", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.4100, "lng": -3.7150, "web": ""},
+    {"nombre": "De La Riva BJJ Madrid", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.3980, "lng": -3.6920, "web": ""},
     {"nombre": "Carlson Gracie Madrid", "ciudad": "Madrid", "region": "Madrid", "direccion": "Madrid, España", "lat": 40.4410, "lng": -3.6790, "web": ""},
-    {"nombre": "Atos Barcelona", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Carrer de Pujades 77, Barcelona", "lat": 41.3965, "lng": 2.1965, "web": "https://atosbarcelona.com"},
-    {"nombre": "Aranha Barcelona", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Barcelona, España", "lat": 41.3820, "lng": 2.1540, "web": ""},
+    {"nombre": "Atos BJJ Barcelona", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Carrer de Pujades 77, Barcelona", "lat": 41.3965, "lng": 2.1965, "web": "https://atosbarcelona.com"},
+    {"nombre": "Aranha Jiu Jitsu Barcelona", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Barcelona, España", "lat": 41.3820, "lng": 2.1540, "web": ""},
     {"nombre": "Gracie Barra Barcelona", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Barcelona, España", "lat": 41.3910, "lng": 2.1650, "web": ""},
     {"nombre": "Anaconda BJJ Barcelona", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Barcelona, España", "lat": 41.4020, "lng": 2.1750, "web": ""},
-    {"nombre": "Templum BCN", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Carrer d'Entença 113, Barcelona", "lat": 41.3812, "lng": 2.1485, "web": ""},
-    {"nombre": "GFTeam Barcelona", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Barcelona, España", "lat": 41.4090, "lng": 2.1850, "web": ""},
+    {"nombre": "Templum BCN Jiu Jitsu", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Carrer d'Entença 113, Barcelona", "lat": 41.3812, "lng": 2.1485, "web": ""},
+    {"nombre": "GFTeam Barcelona BJJ", "ciudad": "Barcelona", "region": "Cataluña", "direccion": "Barcelona, España", "lat": 41.4090, "lng": 2.1850, "web": ""},
     {"nombre": "Ases Jiu Jitsu Valencia", "ciudad": "Valencia", "region": "Comunidad Valenciana", "direccion": "Valencia, España", "lat": 39.4750, "lng": -0.3750, "web": "https://asesbjj.com"},
-    {"nombre": "Checkmat Valencia", "ciudad": "Valencia", "region": "Comunidad Valenciana", "direccion": "Valencia, España", "lat": 39.4650, "lng": -0.3820, "web": ""},
+    {"nombre": "Checkmat Valencia BJJ", "ciudad": "Valencia", "region": "Comunidad Valenciana", "direccion": "Valencia, España", "lat": 39.4650, "lng": -0.3820, "web": ""},
     {"nombre": "Gracie Barra Valencia", "ciudad": "Valencia", "region": "Comunidad Valenciana", "direccion": "Valencia, España", "lat": 39.4810, "lng": -0.3650, "web": ""},
-    {"nombre": "Climent Club Alicante", "ciudad": "Alicante", "region": "Comunidad Valenciana", "direccion": "Calle Maestro Alonso 94, Alicante", "lat": 38.3585, "lng": -0.4882, "web": ""},
-    {"nombre": "Checkmat Alicante", "ciudad": "Alicante", "region": "Comunidad Valenciana", "direccion": "Alicante, España", "lat": 38.3490, "lng": -0.4910, "web": ""},
+    {"nombre": "Climent Club BJJ Alicante", "ciudad": "Alicante", "region": "Comunidad Valenciana", "direccion": "Calle Maestro Alonso 94, Alicante", "lat": 38.3585, "lng": -0.4882, "web": ""},
+    {"nombre": "Checkmat Alicante BJJ", "ciudad": "Alicante", "region": "Comunidad Valenciana", "direccion": "Alicante, España", "lat": 38.3490, "lng": -0.4910, "web": ""},
     {"nombre": "Gracie Barra Sevilla", "ciudad": "Sevilla", "region": "Andalucía", "direccion": "Sevilla, España", "lat": 37.3880, "lng": -5.9820, "web": ""},
-    {"nombre": "Sutemi Academy Sevilla", "ciudad": "Sevilla", "region": "Andalucía", "direccion": "Sevilla, España", "lat": 37.3950, "lng": -5.9710, "web": ""},
+    {"nombre": "Sutemi Academy BJJ Sevilla", "ciudad": "Sevilla", "region": "Andalucía", "direccion": "Sevilla, España", "lat": 37.3950, "lng": -5.9710, "web": ""},
     {"nombre": "Roger Gracie Academy Málaga", "ciudad": "Málaga", "region": "Andalucía", "direccion": "Málaga, España", "lat": 36.7180, "lng": -4.4320, "web": ""},
     {"nombre": "Roger Gracie Academy Marbella", "ciudad": "Marbella", "region": "Andalucía", "direccion": "Marbella, Málaga", "lat": 36.5100, "lng": -4.8850, "web": ""},
     {"nombre": "Gracie Barra Málaga", "ciudad": "Málaga", "region": "Andalucía", "direccion": "Málaga, España", "lat": 36.7250, "lng": -4.4150, "web": ""},
     {"nombre": "Zenit BJJ Zaragoza", "ciudad": "Zaragoza", "region": "Aragón", "direccion": "Zaragoza, España", "lat": 41.6490, "lng": -0.8870, "web": ""},
-    {"nombre": "ufight Academy Bilbao", "ciudad": "Bilbao", "region": "País Vasco", "direccion": "Bilbao, Vizcaya", "lat": 43.2620, "lng": -2.9340, "web": ""},
+    {"nombre": "Ufight Academy BJJ Bilbao", "ciudad": "Bilbao", "region": "País Vasco", "direccion": "Bilbao, Vizcaya", "lat": 43.2620, "lng": -2.9340, "web": ""},
     {"nombre": "Gracie Barra San Sebastián", "ciudad": "San Sebastián", "region": "País Vasco", "direccion": "Donostia, Gipuzkoa", "lat": 43.3180, "lng": -1.9810, "web": ""},
     {"nombre": "Ibiza Jiu Jitsu / Gracie Barra Ibiza", "ciudad": "Ibiza", "region": "Islas Baleares", "direccion": "Eivissa, Islas Baleares", "lat": 38.9080, "lng": 1.4320, "web": ""},
     {"nombre": "Mallorca BJJ / Checkmat Palma", "ciudad": "Palma de Mallorca", "region": "Islas Baleares", "direccion": "Palma, Islas Baleares", "lat": 39.5720, "lng": 2.6510, "web": ""},
-    {"nombre": "Taz Jinámar Gran Canaria", "ciudad": "Las Palmas de Gran Canaria", "region": "Islas Canarias", "direccion": "Las Palmas de Gran Canaria", "lat": 28.0350, "lng": -15.4180, "web": ""},
+    {"nombre": "Taz Jinámar BJJ Gran Canaria", "ciudad": "Las Palmas de Gran Canaria", "region": "Islas Canarias", "direccion": "Las Palmas de Gran Canaria", "lat": 28.0350, "lng": -15.4180, "web": ""},
     {"nombre": "Gil Catarino BJJ Tenerife", "ciudad": "Santa Cruz de Tenerife", "region": "Islas Canarias", "direccion": "Santa Cruz de Tenerife", "lat": 28.4650, "lng": -16.2540, "web": ""},
     {"nombre": "Gracie Barra A Coruña", "ciudad": "A Coruña", "region": "Galicia", "direccion": "A Coruña, Galicia", "lat": 43.3620, "lng": -8.4110, "web": ""},
-    {"nombre": "GFTeam Vigo", "ciudad": "Vigo", "region": "Galicia", "direccion": "Vigo, Pontevedra", "lat": 42.2380, "lng": -8.7220, "web": ""}
+    {"nombre": "GFTeam Vigo BJJ", "ciudad": "Vigo", "region": "Galicia", "direccion": "Vigo, Pontevedra", "lat": 42.2380, "lng": -8.7220, "web": ""}
 ]
 
 TERMINOS_BUSQUEDA = [
     "Brazilian Jiu Jitsu", "Jiu-Jitsu", "Jiu Jitsu", "BJJ", "Grappling",
     "Gracie Barra", "Gracie Jiu Jitsu", "Roger Gracie", "Carlson Gracie",
-    "Checkmat", "Alliance", "Atos", "GFTeam", "Lotus Club", "Tenth Planet",
-    "De La Riva", "Nova Uniao", "Zenit BJJ",
+    "Checkmat", "GFTeam", "Tenth Planet", "Zenit BJJ",
     "Jiu Jitsu Madrid", "Jiu Jitsu Barcelona", "Jiu Jitsu Valencia",
     "Jiu Jitsu Sevilla", "Jiu Jitsu Málaga", "Jiu Jitsu Alicante",
     "Jiu Jitsu Bilbao", "Jiu Jitsu Zaragoza", "Jiu Jitsu Murcia",
@@ -76,20 +80,32 @@ def es_academia_valida(nombre, categoria="", tipo=""):
     texto = f"{nombre} {categoria} {tipo}".lower()
     if any(ex in texto for ex in PALABRAS_EXCLUIDAS):
         return False
-    return any(val in texto for val in PALABRAS_VALIDAS)
+    # Exigir que sea lugar deportivo o que el propio nombre tenga términos claros de BJJ/MMA
+    if tipo in ["administrative", "city", "village", "town", "suburb", "station", "Translate"]:
+        return False
+    return any(val in nombre.lower() for val in PALABRAS_VALIDAS)
 
 
 def cargar_existentes():
     if not os.path.exists(ARCHIVO_JSON):
         return []
+    nombres_semilla = {s["nombre"].lower().strip() for s in ACADEMIAS_SEMILLA}
     with open(ARCHIVO_JSON, "r", encoding="utf-8") as f:
         try:
             data = json.load(f)
             lista = data if isinstance(data, list) else data.get("academias", [])
-            return [
-                ac for ac in lista
-                if not any(ex in str(ac.get("nombre", "")).lower() for ex in PALABRAS_EXCLUIDAS)
-            ]
+            limpia = []
+            for ac in lista:
+                nom = str(ac.get("nombre") or ac.get("name") or "")
+                nom_low = nom.lower().strip()
+                # Si es de las originales o de la semilla y no está en excluidas, o pasa el filtro estricto
+                if any(ex in nom_low for ex in PALABRAS_EXCLUIDAS):
+                    continue
+                if nom_low in ["atos", "de la riva"]:
+                    continue
+                if ac.get("fuente") != "OpenStreetMap" or nom_low in nombres_semilla or es_academia_valida(nom):
+                    limpia.append(ac)
+            return limpia
         except Exception:
             return []
 
@@ -99,7 +115,7 @@ def detectar_region(texto_completo):
     mapa_regiones = {
         "madrid": "Madrid",
         "barcelona": "Cataluña", "girona": "Cataluña", "tarragona": "Cataluña",
-        "lleida": "Cataluña", "badalona": "Cataluña", "sabadell": "Cataluña",
+        "lleida": "Cataluña", "badalona": "Cataluña", "sabadell": "Cataluña", "valls": "Cataluña",
         "valencia": "Comunidad Valenciana", "alicante": "Comunidad Valenciana",
         "elche": "Comunidad Valenciana", "castell": "Comunidad Valenciana",
         "quart de poblet": "Comunidad Valenciana",
@@ -118,7 +134,8 @@ def detectar_region(texto_completo):
         "murcia": "Región de Murcia",
         "coruña": "Galicia", "vigo": "Galicia", "pontevedra": "Galicia",
         "asturias": "Asturias", "gijón": "Asturias", "oviedo": "Asturias",
-        "santander": "Cantabria", "pamplona": "Navarra", "valladolid": "Castilla y León"
+        "santander": "Cantabria", "pamplona": "Navarra",
+        "valladolid": "Castilla y León", "salamanca": "Castilla y León"
     }
     for clave, region in mapa_regiones.items():
         if clave in texto:
@@ -143,16 +160,11 @@ def generar_geojson(academias):
 
 def main():
     academias = cargar_existentes()
-    print(f"Academias válidas previas: {len(academias)}")
+    print(f"Academias limpias previas: {len(academias)}")
 
-    vistos = set()
-    for ac in academias:
-        nombre = str(ac.get("nombre") or ac.get("name") or "").lower().strip()
-        vistos.add(nombre)
-
+    vistos = {str(ac.get("nombre") or ac.get("name") or "").lower().strip() for ac in academias}
     nuevas = 0
 
-    # 1. Incorporar base verificada de España
     for sem in ACADEMIAS_SEMILLA:
         clave = sem["nombre"].lower().strip()
         if clave not in vistos:
@@ -170,7 +182,6 @@ def main():
             })
             nuevas += 1
 
-    # 2. Barrido en OpenStreetMap
     for termino in TERMINOS_BUSQUEDA:
         try:
             resp = requests.get(
@@ -244,7 +255,7 @@ def main():
     with open(ARCHIVO_GEOJSON, "w", encoding="utf-8") as f:
         json.dump(geojson, f, ensure_ascii=False, indent=2)
 
-    print(f"Proceso finalizado: {nuevas} academias nuevas agregadas (Total: {len(academias)}).")
+    print(f"Proceso finalizado: {nuevas} nuevas agregadas (Total limpio: {len(academias)}).")
 
 
 if __name__ == "__main__":
