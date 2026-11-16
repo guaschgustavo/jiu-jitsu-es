@@ -50,7 +50,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://dbjj.smoothcomp.com/es/event/35227"
+    "enlace": "https://dbjj.smoothcomp.com/es/events/upcoming"
   },
   {
     "id": "sc-europe-cup-valencia-2026",
@@ -384,19 +384,6 @@
       "No-Gi"
     ],
     "enlace": "https://grapplingindustries.smoothcomp.com/es/event/34939"
-  },
-  {
-    "id": "sc-auto-33194",
-    "nombre": "European Cup 2026 \\/ Gi - No Gi \\/ Kids",
-    "fecha": "2026-11-15",
-    "ciudad": "Guadalajara",
-    "recinto": "Guadalajara (Smoothcomp Oficial)",
-    "circuito": "Smoothcomp",
-    "modalidades": [
-      "Gi",
-      "No-Gi"
-    ],
-    "enlace": "https://smoothcomp.com/es/event/33194"
   },
   {
     "id": "sc-auto-35592",
