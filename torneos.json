@@ -77,7 +77,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://dbjj.smoothcomp.com/es/event/35538"
+    "enlace": "https://dbjj.smoothcomp.com/es/events/upcoming"
   },
   {
     "id": "sc-aranha-interclub-2026",
@@ -157,7 +157,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://smoothcomp.com/es/event/36330"
+    "enlace": "https://smoothcomp.com/es/events/upcoming?search=WN+Pro+Opens+Madrid&countries=ES"
   },
   {
     "id": "sc-campeonato-espana-adcc-2026",
@@ -386,19 +386,6 @@
     "enlace": "https://grapplingindustries.smoothcomp.com/es/event/34939"
   },
   {
-    "id": "sc-auto-35592",
-    "nombre": "TROBADES DEL JUDO CASTELLÓ",
-    "fecha": "2026-11-21",
-    "ciudad": "Castellón del la Plana",
-    "recinto": "Castellón del la Plana (Smoothcomp Oficial)",
-    "circuito": "Smoothcomp",
-    "modalidades": [
-      "Gi",
-      "No-Gi"
-    ],
-    "enlace": "https://smoothcomp.com/es/event/35592"
-  },
-  {
     "id": "sc-auto-35755",
     "nombre": "SANDA FIGHTERS PROMESAS 2026",
     "fecha": "2026-12-12",
@@ -449,6 +436,45 @@
       "No-Gi"
     ],
     "enlace": "https://smoothcomp.com/es/event/36243"
+  },
+  {
+    "id": "sc-auto-36550",
+    "nombre": "KIMURA CUP SALOU 2027",
+    "fecha": "2027-02-27",
+    "ciudad": "Salou - Tarragona",
+    "recinto": "Salou - Tarragona (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://kimuracup.smoothcomp.com/es/event/36550"
+  },
+  {
+    "id": "sc-auto-35896",
+    "nombre": "TACTICAL SUBMISSION",
+    "fecha": "2027-04-10",
+    "ciudad": "Llinars del Vallès",
+    "recinto": "Llinars del Vallès (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/35896"
+  },
+  {
+    "id": "sc-auto-36595",
+    "nombre": "KIMURA CUP ALICANTE 2027",
+    "fecha": "2027-05-02",
+    "ciudad": "Mutxamel - Alicante",
+    "recinto": "Mutxamel - Alicante (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://kimuracup.smoothcomp.com/es/event/36595"
   },
   {
     "id": "sc-auto-28923",
