@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academias de Jiu-Jitsu Brasileño (BJJ) en Madrid | Mapa y Clases</title>
+  <meta name="description" content="Encuentra dónde entrenar Jiu-Jitsu Brasileño (BJJ) y Grappling en Madrid y alrededores. Mapa interactivo, academias verificadas, horarios y próximos torneos.">
+  <link rel="canonical" href="https://jiu-jitsu.es/madrid/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Academias de Jiu-Jitsu Brasileño en Madrid", "url": "https://jiu-jitsu.es/madrid/", "numberOfItems": 15, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Lotus Club BJJ España (Madrid Principal)", "url": "https://bjjmadrid.com"}, {"@type": "ListItem", "position": 2, "name": "Lotus Club Las Rozas (Prego House)", "url": "https://pregohouse.com"}, {"@type": "ListItem", "position": 3, "name": "Lotus Club Malasaña", "url": "https://bjjmadrid.com"}, {"@type": "ListItem", "position": 4, "name": "Lotus Club BJJ Madrid", "url": "https://www.google.com/maps/search/?api=1&query=Lotus+Club+BJJ+Madrid+Madrid+Espa%C3%B1a"}, {"@type": "ListItem", "position": 5, "name": "Checkmat Madrid / Samurai Jiu Jitsu", "url": "https://checkmatmadrid.com"}, {"@type": "ListItem", "position": 6, "name": "Mathias Ribeiro Team Madrid", "url": "https://mathiasribeiro.com"}, {"@type": "ListItem", "position": 7, "name": "Checkmat Madrid / Samurai", "url": "https://checkmatmadrid.com"}, {"@type": "ListItem", "position": 8, "name": "Lotus Club Madrid BJJ", "url": "https://www.instagram.com/lotusclubmadrid/"}, {"@type": "ListItem", "position": 9, "name": "Tenth Planet Madrid BJJ", "url": "https://www.instagram.com/10thplanetmadrid/"}, {"@type": "ListItem", "position": 10, "name": "De La Riva BJJ Madrid", "url": "https://www.instagram.com/delarivamadrid/"}, {"@type": "ListItem", "position": 11, "name": "Carlson Gracie Madrid", "url": "https://www.instagram.com/carlsongraciemadrid/"}, {"@type": "ListItem", "position": 12, "name": "GFTeam Madrid BJJ", "url": "https://www.instagram.com/gfteammadrid/"}, {"@type": "ListItem", "position": 13, "name": "Roger Gracie Academy Madrid", "url": "https://www.instagram.com/rogergraciemadrid/"}, {"@type": "ListItem", "position": 14, "name": "Gracie Barra Alcobendas", "url": "https://www.instagram.com/gbalcobendas/"}, {"@type": "ListItem", "position": 15, "name": "Atos Jiu-Jitsu Móstoles", "url": "https://www.instagram.com/atosmadrid/"}]}</script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-950/90 sticky top-0 z-50 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-black tracking-tight text-white">JIU-JITSU<span class="text-sky-400">.ES</span></a>
+      <nav class="flex items-center gap-4 text-xs sm:text-sm font-semibold text-slate-300">
+        <a href="/" class="hover:text-amber-400 transition">Directorio España</a>
+        <a href="/#torneos" class="hover:text-amber-400 transition">Torneos</a>
+        <a href="/#calculadora" class="hover:text-amber-400 transition">Pesos IBJJF</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 flex-1 w-full">
+    <nav class="text-xs text-slate-400 mb-4">
+      <a href="/" class="hover:text-amber-400">Inicio</a> / <span class="text-slate-200">Academias BJJ en Madrid</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-3">
+      Academias de Jiu-Jitsu Brasileño (BJJ) en <span class="text-amber-400">Madrid</span>
+    </h1>
+    <p class="text-slate-400 text-sm sm:text-base max-w-3xl mb-8">
+      Encuentra dónde entrenar Gi, No-Gi y Grappling en Madrid y su área metropolitana. Actualmente listamos <strong class="text-white">15 academias verificadas</strong> con ubicación exacta y contacto directo.
+    </p>
+
+    <section class="mb-10">
+      <div id="mapa-ciudad" class="w-full h-80 sm:h-96 rounded-2xl border border-slate-800 z-10"></div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-5">Listado de Academias en Madrid</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 5.0</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Lotus Club BJJ España (Madrid Principal)</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Sri Batista Marim (Faixa Preta 4º Grado)</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Agustín de Foxá 25, Bajo C, 28036 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34634467296" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://bjjmadrid.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Las Rozas de Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 5.0</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Lotus Club Las Rozas (Prego House)</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Juan Prego &amp; Equipo Lotus</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle Comunidad de Andalucía 33, Local 12, 28231 Las Rozas, Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Sábado</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34649372617" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://pregohouse.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Lotus Club Malasaña</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Rodrigo Paredes (Faixa Preta)</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Plaza del Conde de Toreno 2, 28015 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34641709939" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://bjjmadrid.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Lotus Club BJJ Madrid</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Lotus Club BJJ Madrid, 25, Bajo C, Calle de Agustín de Foxá, Castilla, Chamartín, Madrid, Comunidad de Madrid, 28036, España</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34653744437" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Lotus+Club+BJJ+Madrid+Madrid+Espa%C3%B1a" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Checkmat Madrid / Samurai Jiu Jitsu</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Juan Español 38, Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            
+            <a href="https://checkmatmadrid.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Mathias Ribeiro Team Madrid</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Prof. Mathias Ribeiro</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Gutenberg 7, 28014 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34914345518" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://mathiasribeiro.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Checkmat Madrid / Samurai</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Equipo Checkmat</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Juan Español 38, 28026 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34638822156" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://checkmatmadrid.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Lotus Club Madrid BJJ</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Tarragona 18, 28045 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34654911230" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/lotusclubmadrid/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Tenth Planet Madrid BJJ</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de la Palma 38, 28004 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34611458920" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/10thplanetmadrid/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">De La Riva BJJ Madrid</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Alcalá 211, 28028 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34622391044" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/delarivamadrid/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Carlson Gracie Madrid</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Bravo Murillo 150, 28020 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34670819211" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/carlsongraciemadrid/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">GFTeam Madrid BJJ</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Paseo de las Delicias 65, 28045 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34649128734" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/gfteammadrid/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Madrid</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Roger Gracie Academy Madrid</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Ríos Rosas 36, 28003 Madrid</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34682441092" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/rogergraciemadrid/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Alcobendas</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Gracie Barra Alcobendas</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado GB</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de la Libertad 32, 28100 Alcobendas</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34635781420" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/gbalcobendas/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Móstoles</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Atos Jiu-Jitsu Móstoles</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle de Cristo 24, 28931 Móstoles</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34671893210" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/atosmadrid/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-5">Próximos Torneos de BJJ en Madrid</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">IBJJF</span>
+              <span class="text-xs text-slate-300">📅 2026-11-28</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">Madrid Autumn International Open IBJJF Championship</h3>
+            <p class="text-xs text-slate-400 mb-3">📍 Pabellón Deportivo Europa (Leganés)</p>
+          </div>
+          <a href="https://ibjjf.com/events/championships" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300">Calendario Oficial ↗</a>
+        </div>
+        
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Smoothcomp</span>
+              <span class="text-xs text-slate-300">📅 2026-12-06</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">WN Pro Opens - Madrid</h3>
+            <p class="text-xs text-slate-400 mb-3">📍 Polideportivo Alcobendas, Madrid</p>
+          </div>
+          <a href="https://smoothcomp.com/es/events/upcoming?search=WN+Pro+Opens+Madrid&amp;countries=ES" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300">Calendario Oficial ↗</a>
+        </div>
+        
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Smoothcomp</span>
+              <span class="text-xs text-slate-300">📅 2026-12-13</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">All Stars BJJ Madrid</h3>
+            <p class="text-xs text-slate-400 mb-3">📍 Pabellón Deportivo Madrid</p>
+          </div>
+          <a href="https://allstarsbjj.smoothcomp.com/es/event/33644" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300">Calendario Oficial ↗</a>
+        </div>
+        
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Kimura Cup</span>
+              <span class="text-xs text-slate-300">📅 2027-01-31</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">Kimura Cup Madrid 2027</h3>
+            <p class="text-xs text-slate-400 mb-3">📍 Ciudad Deportiva Príncipe Felipe (Arganda del Rey)</p>
+          </div>
+          <a href="https://kimuracup.smoothcomp.com/es/event/35753" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300">Calendario Oficial ↗</a>
+        </div>
+        
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Polaris / Smoothcomp</span>
+              <span class="text-xs text-slate-300">📅 2027-02-20</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">Polaris Open Spain - Madrid</h3>
+            <p class="text-xs text-slate-400 mb-3">📍 Centro Deportivo Amorós, Madrid</p>
+          </div>
+          <a href="https://polaris.smoothcomp.com/es/event/36137" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300">Calendario Oficial ↗</a>
+        </div>
+        
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">IBJJF</span>
+              <span class="text-xs text-slate-300">📅 2027-03-27</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">Madrid Spring International Open IBJJF Championship</h3>
+            <p class="text-xs text-slate-400 mb-3">📍 Polideportivo Municipal Gallur</p>
+          </div>
+          <a href="https://ibjjf.com/events/championships" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300">Calendario Oficial ↗</a>
+        </div>
+        
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">Grappling Industries</span>
+              <span class="text-xs text-slate-300">📅 2027-05-22</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">Grappling Industries Madrid (Round Robin)</h3>
+            <p class="text-xs text-slate-400 mb-3">📍 Pabellón Deportivo Madrid</p>
+          </div>
+          <a href="https://grapplingindustries.smoothcomp.com/es/event/34939" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:text-amber-300">Calendario Oficial ↗</a>
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 mb-10">
+      <h2 class="text-lg font-bold text-white mb-3">Preguntas frecuentes sobre entrenar BJJ en Madrid</h2>
+      <div class="space-y-3 text-sm text-slate-400">
+        <p><strong class="text-slate-200">¿Puedo probar una clase gratis?</strong> La mayoría de las academias de Madrid en nuestro directorio ofrecen una primera clase de prueba sin compromiso para principiantes.</p>
+        <p><strong class="text-slate-200">¿Necesito kimono (Gi) el primer día?</strong> No hace falta comprar un Gi antes de empezar; muchas escuelas prestan kimono o te permiten probar en clase de No-Gi (Grappling) con ropa deportiva.</p>
+        <p><strong class="text-slate-200">¿Falta tu academia en Madrid?</strong> <a href="/" class="text-amber-400 underline">Envíanos los datos gratis desde la portada de JIU-JITSU.ES</a>.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-slate-800 pt-8">
+      <h3 class="text-sm font-bold text-slate-300 mb-3">Explorar otras ciudades de España:</h3>
+      <div class="flex flex-wrap gap-2">
+        <a href="/barcelona/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Barcelona</a><a href="/valencia/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Valencia</a><a href="/sevilla/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Sevilla</a><a href="/malaga/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Málaga</a>
+        <a href="/" class="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs font-bold text-amber-400 hover:bg-amber-500/20 transition">Ver mapa completo de España →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    © 2026 JIU-JITSU.ES — Directorio Oficial de Jiu-Jitsu Brasileño y Grappling en España
+  </footer>
+
+  <script>
+    const marcadores = [{"nombre": "Lotus Club BJJ España (Madrid Principal)", "lat": 40.47043, "lng": -3.68576, "direccion": "Calle de Agustín de Foxá 25, Bajo C, 28036 Madrid"}, {"nombre": "Lotus Club Las Rozas (Prego House)", "lat": 40.4915, "lng": -3.8723, "direccion": "Calle Comunidad de Andalucía 33, Local 12, 28231 Las Rozas, Madrid"}, {"nombre": "Lotus Club Malasaña", "lat": 40.4251, "lng": -3.7082, "direccion": "Plaza del Conde de Toreno 2, 28015 Madrid"}, {"nombre": "Lotus Club BJJ Madrid", "lat": 40.4704265, "lng": -3.6857607, "direccion": "Lotus Club BJJ Madrid, 25, Bajo C, Calle de Agustín de Foxá, Castilla, Chamartín, Madrid, Comunidad de Madrid, 28036, España"}, {"nombre": "Checkmat Madrid / Samurai Jiu Jitsu", "lat": 40.3879, "lng": -3.7011, "direccion": "Calle de Juan Español 38, Madrid"}, {"nombre": "Mathias Ribeiro Team Madrid", "lat": 40.4055, "lng": -3.6766, "direccion": "Calle de Gutenberg 7, 28014 Madrid"}, {"nombre": "Checkmat Madrid / Samurai", "lat": 40.3879, "lng": -3.7011, "direccion": "Calle de Juan Español 38, 28026 Madrid"}, {"nombre": "Lotus Club Madrid BJJ", "lat": 40.4015, "lng": -3.6935, "direccion": "Calle de Tarragona 18, 28045 Madrid"}, {"nombre": "Tenth Planet Madrid BJJ", "lat": 40.4265, "lng": -3.7042, "direccion": "Calle de la Palma 38, 28004 Madrid"}, {"nombre": "De La Riva BJJ Madrid", "lat": 40.429, "lng": -3.662, "direccion": "Calle de Alcalá 211, 28028 Madrid"}, {"nombre": "Carlson Gracie Madrid", "lat": 40.451, "lng": -3.703, "direccion": "Calle de Bravo Murillo 150, 28020 Madrid"}, {"nombre": "GFTeam Madrid BJJ", "lat": 40.3995, "lng": -3.694, "direccion": "Paseo de las Delicias 65, 28045 Madrid"}, {"nombre": "Roger Gracie Academy Madrid", "lat": 40.4422, "lng": -3.6995, "direccion": "Calle de Ríos Rosas 36, 28003 Madrid"}, {"nombre": "Gracie Barra Alcobendas", "lat": 40.5458, "lng": -3.642, "direccion": "Calle de la Libertad 32, 28100 Alcobendas"}, {"nombre": "Atos Jiu-Jitsu Móstoles", "lat": 40.3228, "lng": -3.8645, "direccion": "Calle de Cristo 24, 28931 Móstoles"}];
+    const map = L.map('mapa-ciudad').setView([40.4168, -3.7038], 11);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OpenStreetMap © CARTO'
+    }).addTo(map);
+    marcadores.forEach(m => {
+      L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<b>${m.nombre}</b><br>${m.direccion}`);
+    });
+  </script>
+</body>
+</html>

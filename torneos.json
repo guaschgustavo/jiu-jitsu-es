@@ -131,7 +131,7 @@
       "Gi",
       "No-Gi"
     ],
-    "enlace": "https://dbjj.smoothcomp.com/es/event/34473"
+    "enlace": "https://smoothcomp.com/es/event/34473"
   },
   {
     "id": "sc-bcn-challenge-winter-2026",
@@ -425,6 +425,19 @@
     "enlace": "https://smoothcomp.com/es/event/35839"
   },
   {
+    "id": "sc-auto-36018",
+    "nombre": "LLEIDA CHALLENGE 2027",
+    "fecha": "2027-02-14",
+    "ciudad": "Lleida",
+    "recinto": "Lleida (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/36018"
+  },
+  {
     "id": "sc-auto-36243",
     "nombre": "OPEN VILLANUEVA DEL RIO SEGURA",
     "fecha": "2027-02-20",
@@ -451,6 +464,32 @@
     "enlace": "https://kimuracup.smoothcomp.com/es/event/36550"
   },
   {
+    "id": "sc-auto-36802",
+    "nombre": "XVIII CAMPEONATO DE ESPAÑA 2027",
+    "fecha": "2027-02-28",
+    "ciudad": "Guadalajara",
+    "recinto": "Guadalajara (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://aejjb.smoothcomp.com/es/event/36802"
+  },
+  {
+    "id": "sc-auto-36798",
+    "nombre": "CASTILLA Y LEÓN BJJ CUP GI & NO-GI 2027",
+    "fecha": "2027-03-13",
+    "ciudad": "León",
+    "recinto": "León (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://spainbjjtour.smoothcomp.com/es/event/36798"
+  },
+  {
     "id": "sc-auto-35896",
     "nombre": "TACTICAL SUBMISSION",
     "fecha": "2027-04-10",
@@ -462,6 +501,19 @@
       "No-Gi"
     ],
     "enlace": "https://smoothcomp.com/es/event/35896"
+  },
+  {
+    "id": "sc-auto-36666",
+    "nombre": "YAMATO CHAMPIONSHIP",
+    "fecha": "2027-04-10",
+    "ciudad": "Barcelona",
+    "recinto": "Barcelona (Smoothcomp Oficial)",
+    "circuito": "Smoothcomp",
+    "modalidades": [
+      "Gi",
+      "No-Gi"
+    ],
+    "enlace": "https://smoothcomp.com/es/event/36666"
   },
   {
     "id": "sc-auto-36595",

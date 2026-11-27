@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academias de Jiu-Jitsu Brasileño (BJJ) en Málaga | Mapa y Clases</title>
+  <meta name="description" content="Directorio de academias de BJJ en Málaga, Marbella, Torremolinos y Fuengirola. Encuentra clases de Gi, No-Gi, MMA y competición cerca de ti.">
+  <link rel="canonical" href="https://jiu-jitsu.es/malaga/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Academias de Jiu-Jitsu Brasileño en Málaga", "url": "https://jiu-jitsu.es/malaga/", "numberOfItems": 5, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Lilius Barnatt Martial Arts (LBMA)", "url": "https://liliusbarnatt.com"}, {"@type": "ListItem", "position": 2, "name": "Roger Gracie Academy Málaga", "url": "https://www.instagram.com/rogergraciemalaga/"}, {"@type": "ListItem", "position": 3, "name": "Roger Gracie Marbella", "url": "https://rogergraciemarbella.com"}, {"@type": "ListItem", "position": 4, "name": "Gracie Barra Fuengirola", "url": "https://www.instagram.com/gbfuengirola/"}, {"@type": "ListItem", "position": 5, "name": "Asociación Jiu-Jitsu Antequerana", "url": "https://www.instagram.com/bjjantequera/"}]}</script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+  <header class="border-b border-slate-800 bg-slate-950/90 sticky top-0 z-50 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-black tracking-tight text-white">JIU-JITSU<span class="text-sky-400">.ES</span></a>
+      <nav class="flex items-center gap-4 text-xs sm:text-sm font-semibold text-slate-300">
+        <a href="/" class="hover:text-amber-400 transition">Directorio España</a>
+        <a href="/#torneos" class="hover:text-amber-400 transition">Torneos</a>
+        <a href="/#calculadora" class="hover:text-amber-400 transition">Pesos IBJJF</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 flex-1 w-full">
+    <nav class="text-xs text-slate-400 mb-4">
+      <a href="/" class="hover:text-amber-400">Inicio</a> / <span class="text-slate-200">Academias BJJ en Málaga</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-3">
+      Academias de Jiu-Jitsu Brasileño (BJJ) en <span class="text-amber-400">Málaga</span>
+    </h1>
+    <p class="text-slate-400 text-sm sm:text-base max-w-3xl mb-8">
+      Encuentra dónde entrenar Gi, No-Gi y Grappling en Málaga y su área metropolitana. Actualmente listamos <strong class="text-white">5 academias verificadas</strong> con ubicación exacta y contacto directo.
+    </p>
+
+    <section class="mb-10">
+      <div id="mapa-ciudad" class="w-full h-80 sm:h-96 rounded-2xl border border-slate-800 z-10"></div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-5">Listado de Academias en Málaga</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Torremolinos (Málaga)</span>
+              <span class="text-xs font-semibold text-amber-400">★ 5.0</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Lilius Barnatt Martial Arts (LBMA)</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Santeri Lilius</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle Antonio Alcaide Sánchez 3, El Pinillo, 29620 Torremolinos, Málaga</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">MMA</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34603716005" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://liliusbarnatt.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Málaga</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Roger Gracie Academy Málaga</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Camino de San Rafael 49, 29006 Málaga</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34620845190" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/rogergraciemalaga/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Marbella</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Roger Gracie Marbella</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Bulevar Alfonso de Hohenlohe, 29602 Marbella</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34639114870" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://rogergraciemarbella.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Fuengirola</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Gracie Barra Fuengirola</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado GB</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Avenida de Mijas 28, 29640 Fuengirola</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34677451290" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/gbfuengirola/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+        <article class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Antequera</span>
+              <span class="text-xs font-semibold text-amber-400">★ 4.9</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Asociación Jiu-Jitsu Antequerana</h3>
+            <p class="text-xs text-slate-400 mb-2">🥋 Coach: Instructor Certificado</p>
+            <p class="text-xs text-slate-400 mb-3">📍 Calle Infante Don Fernando 40, 29200 Antequera</p>
+            <p class="text-xs text-slate-500 mb-3">🕒 Lunes a Viernes: Mañanas y Tardes | Sábados: Open Mat</p>
+            <div class="flex flex-wrap gap-1.5 mb-4"><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">No-Gi</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Kids</span><span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Competición</span></div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <a href="https://wa.me/34651238940" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">WhatsApp</a>
+            <a href="https://www.instagram.com/bjjantequera/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold border border-slate-700 transition">Web / Info ↗</a>
+          </div>
+        </article>
+        
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-5">Próximos Torneos de BJJ en Málaga</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <p class="text-sm text-slate-400 col-span-full">No hay torneos confirmados próximamente en Málaga. <a href="/#torneos" class="text-amber-400 underline">Ver los 29 torneos en toda España →</a></p>
+      </div>
+    </section>
+
+    <section class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 mb-10">
+      <h2 class="text-lg font-bold text-white mb-3">Preguntas frecuentes sobre entrenar BJJ en Málaga</h2>
+      <div class="space-y-3 text-sm text-slate-400">
+        <p><strong class="text-slate-200">¿Puedo probar una clase gratis?</strong> La mayoría de las academias de Málaga en nuestro directorio ofrecen una primera clase de prueba sin compromiso para principiantes.</p>
+        <p><strong class="text-slate-200">¿Necesito kimono (Gi) el primer día?</strong> No hace falta comprar un Gi antes de empezar; muchas escuelas prestan kimono o te permiten probar en clase de No-Gi (Grappling) con ropa deportiva.</p>
+        <p><strong class="text-slate-200">¿Falta tu academia en Málaga?</strong> <a href="/" class="text-amber-400 underline">Envíanos los datos gratis desde la portada de JIU-JITSU.ES</a>.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-slate-800 pt-8">
+      <h3 class="text-sm font-bold text-slate-300 mb-3">Explorar otras ciudades de España:</h3>
+      <div class="flex flex-wrap gap-2">
+        <a href="/madrid/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Madrid</a><a href="/barcelona/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Barcelona</a><a href="/valencia/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Valencia</a><a href="/sevilla/" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-xs font-semibold text-slate-300 hover:text-amber-400 transition">BJJ en Sevilla</a>
+        <a href="/" class="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs font-bold text-amber-400 hover:bg-amber-500/20 transition">Ver mapa completo de España →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    © 2026 JIU-JITSU.ES — Directorio Oficial de Jiu-Jitsu Brasileño y Grappling en España
+  </footer>
+
+  <script>
+    const marcadores = [{"nombre": "Lilius Barnatt Martial Arts (LBMA)", "lat": 36.6138, "lng": -4.5126, "direccion": "Calle Antonio Alcaide Sánchez 3, El Pinillo, 29620 Torremolinos, Málaga"}, {"nombre": "Roger Gracie Academy Málaga", "lat": 36.708, "lng": -4.449, "direccion": "Camino de San Rafael 49, 29006 Málaga"}, {"nombre": "Roger Gracie Marbella", "lat": 36.51, "lng": -4.885, "direccion": "Bulevar Alfonso de Hohenlohe, 29602 Marbella"}, {"nombre": "Gracie Barra Fuengirola", "lat": 36.544, "lng": -4.6265, "direccion": "Avenida de Mijas 28, 29640 Fuengirola"}, {"nombre": "Asociación Jiu-Jitsu Antequerana", "lat": 37.0195, "lng": -4.5615, "direccion": "Calle Infante Don Fernando 40, 29200 Antequera"}];
+    const map = L.map('mapa-ciudad').setView([36.7213, -4.4214], 10);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OpenStreetMap © CARTO'
+    }).addTo(map);
+    marcadores.forEach(m => {
+      L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<b>${m.nombre}</b><br>${m.direccion}`);
+    });
+  </script>
+</body>
+</html>
