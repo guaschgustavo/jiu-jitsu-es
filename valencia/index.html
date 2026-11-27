@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Academias de Jiu-Jitsu Brasileño en Valencia", "url": "https://jiu-jitsu.es/valencia/", "numberOfItems": 5, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Gracie Barra Valencia (Camins al Grau)", "url": "https://graciebarravalenciagrau.com"}, {"@type": "ListItem", "position": 2, "name": "Ases Jiu Jitsu Valencia", "url": "https://asesbjj.com"}, {"@type": "ListItem", "position": 3, "name": "Checkmat Valencia BJJ", "url": "https://www.instagram.com/checkmatvalencia/"}, {"@type": "ListItem", "position": 4, "name": "Roger Gracie Valencia", "url": "https://www.instagram.com/rogergracievalencia/"}, {"@type": "ListItem", "position": 5, "name": "Fight Ground Jiu-Jitsu Academy", "url": "https://www.instagram.com/fightgroundbjj/"}]}</script>
+  <style>
+    .leaflet-tile-pane { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
@@ -181,8 +184,8 @@
   <script>
     const marcadores = [{"nombre": "Gracie Barra Valencia (Camins al Grau)", "lat": 39.4665, "lng": -0.3472, "direccion": "Carrer del Mestre Valls 3, Camins al Grau, 46021 València"}, {"nombre": "Ases Jiu Jitsu Valencia", "lat": 39.4715, "lng": -0.4025, "direccion": "Carrer de la Democràcia 62, 46018 Valencia"}, {"nombre": "Checkmat Valencia BJJ", "lat": 39.469, "lng": -0.398, "direccion": "Avinguda del Cid 85, 46018 Valencia"}, {"nombre": "Roger Gracie Valencia", "lat": 39.4685, "lng": -0.3715, "direccion": "Carrer de Colón 50, 46004 Valencia"}, {"nombre": "Fight Ground Jiu-Jitsu Academy", "lat": 39.482, "lng": -0.443, "direccion": "Avinguda de Sant Onofre 32, 46930 Quart de Poblet"}];
     const map = L.map('mapa-ciudad').setView([39.4699, -0.3763], 12);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap © CARTO'
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     marcadores.forEach(m => {
       L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<b>${m.nombre}</b><br>${m.direccion}`);

@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Academias de Jiu-Jitsu Brasileño en Málaga", "url": "https://jiu-jitsu.es/malaga/", "numberOfItems": 5, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Lilius Barnatt Martial Arts (LBMA)", "url": "https://liliusbarnatt.com"}, {"@type": "ListItem", "position": 2, "name": "Roger Gracie Academy Málaga", "url": "https://www.instagram.com/rogergraciemalaga/"}, {"@type": "ListItem", "position": 3, "name": "Roger Gracie Marbella", "url": "https://rogergraciemarbella.com"}, {"@type": "ListItem", "position": 4, "name": "Gracie Barra Fuengirola", "url": "https://www.instagram.com/gbfuengirola/"}, {"@type": "ListItem", "position": 5, "name": "Asociación Jiu-Jitsu Antequerana", "url": "https://www.instagram.com/bjjantequera/"}]}</script>
+  <style>
+    .leaflet-tile-pane { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
@@ -169,8 +172,8 @@
   <script>
     const marcadores = [{"nombre": "Lilius Barnatt Martial Arts (LBMA)", "lat": 36.6138, "lng": -4.5126, "direccion": "Calle Antonio Alcaide Sánchez 3, El Pinillo, 29620 Torremolinos, Málaga"}, {"nombre": "Roger Gracie Academy Málaga", "lat": 36.708, "lng": -4.449, "direccion": "Camino de San Rafael 49, 29006 Málaga"}, {"nombre": "Roger Gracie Marbella", "lat": 36.51, "lng": -4.885, "direccion": "Bulevar Alfonso de Hohenlohe, 29602 Marbella"}, {"nombre": "Gracie Barra Fuengirola", "lat": 36.544, "lng": -4.6265, "direccion": "Avenida de Mijas 28, 29640 Fuengirola"}, {"nombre": "Asociación Jiu-Jitsu Antequerana", "lat": 37.0195, "lng": -4.5615, "direccion": "Calle Infante Don Fernando 40, 29200 Antequera"}];
     const map = L.map('mapa-ciudad').setView([36.7213, -4.4214], 10);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap © CARTO'
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     marcadores.forEach(m => {
       L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<b>${m.nombre}</b><br>${m.direccion}`);

@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Academias de Jiu-Jitsu Brasileño en Sevilla", "url": "https://jiu-jitsu.es/sevilla/", "numberOfItems": 3, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Gracie Barra Sevilla", "url": "https://www.graciebarrasevilla.com"}, {"@type": "ListItem", "position": 2, "name": "Sutemi Academy BJJ Sevilla", "url": "https://www.instagram.com/sutemiacademy/"}, {"@type": "ListItem", "position": 3, "name": "Checkmat Sevilla BJJ", "url": "https://www.instagram.com/checkmatsevilla/"}]}</script>
+  <style>
+    .leaflet-tile-pane { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
@@ -145,8 +148,8 @@
   <script>
     const marcadores = [{"nombre": "Gracie Barra Sevilla", "lat": 37.3752, "lng": -6.0021, "direccion": "Calle Virgen de Begoña 6, 41011 Sevilla"}, {"nombre": "Sutemi Academy BJJ Sevilla", "lat": 37.418, "lng": -5.971, "direccion": "Calle Astronomía 1, 41015 Sevilla"}, {"nombre": "Checkmat Sevilla BJJ", "lat": 37.3825, "lng": -5.972, "direccion": "Avenida de Eduardo Dato 45, 41005 Sevilla"}];
     const map = L.map('mapa-ciudad').setView([37.3891, -5.9845], 12);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap © CARTO'
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     marcadores.forEach(m => {
       L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<b>${m.nombre}</b><br>${m.direccion}`);

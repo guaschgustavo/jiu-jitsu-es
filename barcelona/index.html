@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Academias de Jiu-Jitsu Brasileño en Barcelona", "url": "https://jiu-jitsu.es/barcelona/", "numberOfItems": 12, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Templum Barcelona BJJ", "url": "https://templumbcn.com"}, {"@type": "ListItem", "position": 2, "name": "Tenth Planet - Jiu jitsu", "url": "https://bio.site/10pbcn"}, {"@type": "ListItem", "position": 3, "name": "Atos BJJ Barcelona", "url": "https://atosbarcelona.com"}, {"@type": "ListItem", "position": 4, "name": "Aranha Jiu Jitsu Barcelona", "url": "https://www.instagram.com/aranhabarcelona/"}, {"@type": "ListItem", "position": 5, "name": "Anaconda BJJ Barcelona", "url": "https://anacondabjj.com"}, {"@type": "ListItem", "position": 6, "name": "Templum BCN Jiu Jitsu", "url": "https://templumbcn.com"}, {"@type": "ListItem", "position": 7, "name": "GFTeam Barcelona BJJ", "url": "https://www.instagram.com/gfteambarcelona/"}, {"@type": "ListItem", "position": 8, "name": "Tenth Planet Barcelona", "url": "https://www.instagram.com/10thplanetbarcelona/"}, {"@type": "ListItem", "position": 9, "name": "Roger Gracie Barcelona", "url": "https://www.instagram.com/rogergraciebcn/"}, {"@type": "ListItem", "position": 10, "name": "Academia Badalona Jiu-Jitsu", "url": "https://www.instagram.com/badalonabjj/"}, {"@type": "ListItem", "position": 11, "name": "Checkmat Sabadell BJJ", "url": "https://www.instagram.com/checkmatsabadell/"}, {"@type": "ListItem", "position": 12, "name": "Gracie Barra Terrassa", "url": "https://www.instagram.com/gbterrassa/"}]}</script>
+  <style>
+    .leaflet-tile-pane { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
@@ -367,8 +370,8 @@
   <script>
     const marcadores = [{"nombre": "Templum Barcelona BJJ", "lat": 41.380215, "lng": 2.148102, "direccion": "Carrer d'Entença 113, 08015 Barcelona"}, {"nombre": "Tenth Planet - Jiu jitsu", "lat": 41.399808, "lng": 2.156878, "direccion": "Tenth Planet - Jiu jitsu, Carrer de Sant Pere Màrtir, la Vila de Gràcia, Gràcia, Barcelona, Barcelonés, Barcelona, Cataluña, 08012, España"}, {"nombre": "Atos BJJ Barcelona", "lat": 41.3965, "lng": 2.1965, "direccion": "Carrer de Pujades 77, 08005 Barcelona"}, {"nombre": "Aranha Jiu Jitsu Barcelona", "lat": 41.3755, "lng": 2.131, "direccion": "Carrer de Sants 180, 08028 Barcelona"}, {"nombre": "Anaconda BJJ Barcelona", "lat": 41.4042, "lng": 2.1715, "direccion": "Carrer de Còrsega 520, 08025 Barcelona"}, {"nombre": "Templum BCN Jiu Jitsu", "lat": 41.3812, "lng": 2.1485, "direccion": "Carrer d'Entença 113, 08015 Barcelona"}, {"nombre": "GFTeam Barcelona BJJ", "lat": 41.403, "lng": 2.174, "direccion": "Carrer de Mallorca 410, 08013 Barcelona"}, {"nombre": "Tenth Planet Barcelona", "lat": 41.401, "lng": 2.199, "direccion": "Carrer de Pere IV 120, 08005 Barcelona"}, {"nombre": "Roger Gracie Barcelona", "lat": 41.3935, "lng": 2.1558, "direccion": "Carrer d'Aribau 140, 08036 Barcelona"}, {"nombre": "Academia Badalona Jiu-Jitsu", "lat": 41.4485, "lng": 2.2475, "direccion": "Carrer del Mar 85, 08911 Badalona"}, {"nombre": "Checkmat Sabadell BJJ", "lat": 41.5432, "lng": 2.1095, "direccion": "Rambla de Sabadell 90, 08201 Sabadell"}, {"nombre": "Gracie Barra Terrassa", "lat": 41.563, "lng": 2.0085, "direccion": "Carrer de Galileu 140, 08224 Terrassa"}];
     const map = L.map('mapa-ciudad').setView([41.3874, 2.1686], 11);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap © CARTO'
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     marcadores.forEach(m => {
       L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<b>${m.nombre}</b><br>${m.direccion}`);
