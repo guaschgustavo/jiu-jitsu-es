@@ -200,6 +200,9 @@ def generar_html_ciudad(cfg, academias_ciudad, torneos_ciudad):
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="application/ld+json">{schema_json}</script>
+  <style>
+    .leaflet-tile-pane {{ filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }}
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
@@ -269,8 +272,8 @@ def generar_html_ciudad(cfg, academias_ciudad, torneos_ciudad):
   <script>
     const marcadores = {json.dumps(marcadores, ensure_ascii=False)};
     const map = L.map('mapa-ciudad').setView([{cfg["lat"]}, {cfg["lng"]}], {cfg["zoom"]});
-    L.tileLayer('https://{{s}}.basemaps.cartocdn.com/dark_all/{{z}}/{{x}}/{{y}}{{r}}.png', {{
-      attribution: '© OpenStreetMap © CARTO'
+    L.tileLayer('https://tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png', {{
+      attribution: '© OpenStreetMap contributors'
     }}).addTo(map);
     marcadores.forEach(m => {{
       L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<b>${{m.nombre}}</b><br>${{m.direccion}}`);
