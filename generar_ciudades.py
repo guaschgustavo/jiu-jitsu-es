@@ -200,12 +200,12 @@ def generar_html_ciudad(cfg, academias_ciudad, torneos_ciudad):
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="application/ld+json">{schema_json}</script>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+<body style="font-family: 'Inter', sans-serif;" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
   <header class="border-b border-slate-800 bg-slate-950/90 sticky top-0 z-50 backdrop-blur">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <a href="/" class="flex flex-col items-center leading-none group">
         <span style="font-family: 'Oswald', sans-serif;" class="text-3xl font-bold tracking-tight text-white">JIU-JITSU<span class="text-sky-500">.ES</span></span>
         <span class="text-[10px] font-semibold tracking-[0.22em] text-slate-400 uppercase mt-1">COMUNIDAD ONLINE</span>
