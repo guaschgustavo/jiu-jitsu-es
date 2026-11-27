@@ -26,10 +26,13 @@ jobs:
       - name: Ejecutar scraper de Smoothcomp
         run: python actualizar_smoothcomp.py
 
+      - name: Generar páginas SEO por ciudad
+        run: python generar_ciudades.py
+
       - name: Guardar cambios en torneos.json e index.html
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action Bot"
-          git add torneos.json index.html
+          git add torneos.json index.html sitemap.xml madrid barcelona valencia sevilla malaga
           git diff --staged --quiet || git commit -m "Auto-update: Torneos BJJ con enlaces directos"
           git push
